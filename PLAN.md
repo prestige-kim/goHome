@@ -117,7 +117,7 @@ UI는 공공 API URL을 직접 알지 않는다. `TransitAPIClient` 프로토콜
 - [x] 실시간 도착 API 클라이언트 골격 구성
 - [ ] 전체 Xcode 설치 후 Simulator 빌드
 - [ ] Personal Team 선택 후 실제 iPhone 실행
-- [ ] GitHub 원격 저장소 연결
+- [x] GitHub 원격 저장소 연결
 
 완료 조건: 앱이 iPhone에서 실행되고 위치 권한 상태와 개발용 가까운 역이 표시된다.
 

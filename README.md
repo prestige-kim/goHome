@@ -45,7 +45,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 3. `GoHome.xcodeproj`를 Xcode로 엽니다.
 
-4. `GoHome` 타깃의 Signing & Capabilities에서 본인의 Personal Team을 선택합니다.
+4. `GoHome` 타깃의 Signing & Capabilities에서 본인의 Personal Team을 선택합니다. 기본 번들 ID는 `com.prestigekim.GoHome`이며, 등록 충돌이 나면 본인만의 값으로 변경합니다.
 
 5. 연결된 iPhone을 실행 대상으로 선택해 Run합니다.
 
