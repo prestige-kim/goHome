@@ -34,16 +34,40 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.timeoutInterval = 15
 
-        let (data, response) = try await session.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200..<300).contains(httpResponse.statusCode) else {
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch let error as URLError where error.code == .cancelled {
+            throw CancellationError()
+        } catch {
+            throw TransitAPIError.workerUnavailable
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw TransitAPIError.invalidResponse
         }
 
-        let payload = try JSONDecoder().decode(SeoulArrivalResponse.self, from: data)
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            throw error(for: httpResponse.statusCode, data: data)
+        }
 
-        if let error = payload.errorMessage, error.code != "INFO-000" {
-            throw TransitAPIError.server(code: error.code, message: error.message)
+        let payload: SeoulArrivalResponse
+        do {
+            payload = try JSONDecoder().decode(SeoulArrivalResponse.self, from: data)
+        } catch {
+            throw TransitAPIError.invalidResponse
+        }
+
+        guard let apiMessage = payload.apiMessage else {
+            throw TransitAPIError.invalidResponse
+        }
+
+        if apiMessage.code != "INFO-000" {
+            if Self.isRateLimitMessage(apiMessage.message) {
+                throw TransitAPIError.rateLimitExceeded
+            }
+            throw TransitAPIError.seoulAPI(code: apiMessage.code, message: apiMessage.message)
         }
 
         let stationIDs = Set(station.seoulStationIDs.values)
@@ -68,11 +92,69 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
             )
         }
     }
+
+    private func error(for statusCode: Int, data: Data) -> TransitAPIError {
+        let proxyError = (try? JSONDecoder().decode(ProxyErrorResponse.self, from: data))?.error
+
+        switch statusCode {
+        case 401, 403:
+            return .invalidProxyToken
+        case 429:
+            return .rateLimitExceeded
+        case 500 where proxyError == "missing_seoul_api_key" || proxyError == "missing_client_token":
+            return .workerConfiguration
+        case 502 where proxyError == "upstream_http_error" ||
+            proxyError == "upstream_unavailable" ||
+            proxyError == "invalid_upstream_response":
+            return .seoulAPIUnavailable
+        case 500...599:
+            return .workerUnavailable
+        default:
+            return .invalidResponse
+        }
+    }
+
+    private static func isRateLimitMessage(_ message: String) -> Bool {
+        let normalized = message.lowercased()
+        return ["호출 한도", "요청 한도", "일일 한도", "초과", "rate limit", "quota"]
+            .contains { normalized.contains($0) }
+    }
 }
 
 private struct SeoulArrivalResponse: Decodable {
     let errorMessage: SeoulAPIMessage?
+    let result: SeoulAPIResult?
     let realtimeArrivalList: [SeoulArrivalDTO]?
+
+    var apiMessage: SeoulAPIMessage? {
+        if let errorMessage {
+            return errorMessage
+        }
+        if let result {
+            return SeoulAPIMessage(code: result.code, message: result.message)
+        }
+        return nil
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case errorMessage
+        case result = "RESULT"
+        case realtimeArrivalList
+    }
+}
+
+private struct SeoulAPIResult: Decodable {
+    let code: String
+    let message: String
+
+    enum CodingKeys: String, CodingKey {
+        case code = "CODE"
+        case message = "MESSAGE"
+    }
+}
+
+private struct ProxyErrorResponse: Decodable {
+    let error: String
 }
 
 private struct SeoulAPIMessage: Decodable {

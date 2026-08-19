@@ -2,6 +2,7 @@ import CoreLocation
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
@@ -9,11 +10,16 @@ struct HomeView: View {
             List {
                 locationSection
                 nearbyStationSection
+                stationSearchSection
                 arrivalSection
             }
             .navigationTitle("GoHome")
             .task {
                 viewModel.start()
+            }
+            .task(id: automaticRefreshID) {
+                guard scenePhase == .active else { return }
+                await viewModel.runAutomaticArrivalRefresh()
             }
             .refreshable {
                 viewModel.refreshLocation()
@@ -46,9 +52,13 @@ struct HomeView: View {
         Section("가까운 역") {
             if viewModel.nearbyStations.isEmpty {
                 ContentUnavailableView(
-                    "위치를 기다리는 중",
+                    locationUnavailable ? "위치 없이 역 찾기" : "위치를 기다리는 중",
                     systemImage: "tram",
-                    description: Text("위치 권한을 허용하면 가까운 역을 계산합니다.")
+                    description: Text(
+                        locationUnavailable
+                            ? "아래 검색창에서 이용할 역을 직접 선택할 수 있습니다."
+                            : "위치 권한을 허용하면 가까운 역을 계산합니다."
+                    )
                 )
             } else {
                 ForEach(viewModel.nearbyStations) { nearby in
@@ -79,6 +89,49 @@ struct HomeView: View {
     }
 
     @ViewBuilder
+    private var stationSearchSection: some View {
+        Section {
+            TextField("역명 또는 노선명", text: $viewModel.stationSearchText)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+
+            if !viewModel.stationSearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                if viewModel.stationSearchResults.isEmpty {
+                    Text("일치하는 지원 역이 없습니다.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(viewModel.stationSearchResults) { station in
+                        Button {
+                            viewModel.select(station)
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("\(station.name)역")
+                                        .font(.headline)
+                                    Text(station.lineNames.joined(separator: " · "))
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                if viewModel.selectedStation?.id == station.id {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color.accentColor)
+                                }
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        } header: {
+            Text("역 직접 찾기")
+        } footer: {
+            Text("위치 권한이 없거나 서울 밖에 있어도 서울시 실시간 API 지원 역을 선택할 수 있습니다.")
+        }
+    }
+
+    @ViewBuilder
     private var arrivalSection: some View {
         Section {
             if let station = viewModel.selectedStation {
@@ -101,7 +154,15 @@ struct HomeView: View {
             if let arrivalMessage = viewModel.arrivalMessage {
                 Text(arrivalMessage)
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(
+                        viewModel.isShowingLastSuccessfulData ? Color.orange : Color.secondary
+                    )
+            }
+
+            if viewModel.isShowingLastSuccessfulData {
+                Label("새 요청에 실패해 마지막 정상 데이터를 표시하고 있습니다.", systemImage: "clock.arrow.circlepath")
+                    .font(.footnote)
+                    .foregroundStyle(.orange)
             }
 
             ForEach(viewModel.arrivals) { arrival in
@@ -135,6 +196,9 @@ struct HomeView: View {
                 if let receivedAt = viewModel.latestArrivalReceivedAt {
                     Text("데이터 기준 \(receivedAt.formatted(date: .omitted, time: .standard))")
                 }
+                if let refreshedAt = viewModel.lastSuccessfulArrivalRefreshAt {
+                    Text("마지막 정상 갱신 \(refreshedAt.formatted(date: .omitted, time: .standard))")
+                }
                 if viewModel.hasStaleArrivalData {
                     Text("2분 이상 지난 도착정보가 포함되어 있습니다.")
                         .foregroundStyle(.orange)
@@ -158,7 +222,10 @@ struct HomeView: View {
         case .notDetermined: return "권한 확인 전"
         case .restricted: return "위치 사용 제한"
         case .denied: return "위치 권한 거부됨"
-        case .authorizedAlways, .authorizedWhenInUse: return "위치 사용 허용됨"
+        case .authorizedAlways, .authorizedWhenInUse:
+            return viewModel.accuracyAuthorization == .reducedAccuracy
+                ? "위치 사용 허용됨 · 대략적"
+                : "위치 사용 허용됨 · 정확함"
         @unknown default: return "알 수 없는 상태"
         }
     }
@@ -168,6 +235,17 @@ struct HomeView: View {
             return "\(Int(distance.rounded()))m"
         }
         return String(format: "%.1fkm", distance / 1_000)
+    }
+
+    private var automaticRefreshID: String {
+        let lifecycle = scenePhase == .active ? "active" : "inactive"
+        return "\(lifecycle):\(viewModel.selectedStation?.id ?? "no-station")"
+    }
+
+    private var locationUnavailable: Bool {
+        viewModel.authorizationStatus == .denied ||
+            viewModel.authorizationStatus == .restricted ||
+            viewModel.locationMessage != nil
     }
 }
 

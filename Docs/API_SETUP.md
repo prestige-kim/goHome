@@ -72,7 +72,10 @@ http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/
 - 호선별 첫차·막차: https://www.data.go.kr/data/15056647/openapi.do
 - Phase 4에서 방향·종착역별 막차를 구현할 때 사용한다.
 
-서울시 실시간 지하철 OpenAPI는 기본적으로 하루 최대 1,000회 요청 제한이 안내되어 있다. 개인 사용 단계에서는 앱이 전면에 있을 때만 요청하고 30~45초 간격을 유지한다.
+서울시 실시간 지하철 OpenAPI는 기본적으로 하루 최대 1,000회 요청 제한이 안내되어 있다. 개인
+사용 단계에서는 선택 역을 앱 전면에서만 40초 간격으로 요청한다. 백그라운드 전환 시 자동 갱신을
+취소하며, 수동 요청이 진행 중이거나 같은 역의 최근 요청 후 40초가 지나지 않았으면 자동 요청을
+중복 실행하지 않는다.
 
 ## 2. 공공데이터포털 키
 
@@ -99,6 +102,20 @@ http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/
 2. Xcode를 완전히 종료했다가 프로젝트 다시 열기
 3. GoHome 타깃의 Debug 빌드 실행
 4. 앱에서 위치 권한 허용
-5. 역 선택 후 `도착정보 불러오기` 실행
+5. 역 선택 후 첫 자동 조회 또는 `도착정보 불러오기` 실행
+
+## 5. 앱의 오류 안내
+
+앱은 다음 상태를 서로 다른 메시지로 표시한다.
+
+- `TRANSIT_PROXY_BASE_URL` 또는 `TRANSIT_PROXY_CLIENT_TOKEN` 누락: 앱 인증 설정 안내
+- Worker의 HTTP 401/403: 호출 토큰 불일치 안내
+- HTTP 429 또는 서울시 응답의 한도 초과 메시지: 호출 한도 안내
+- Worker 5xx·연결 실패·시간 초과: Worker 연결 장애 안내
+- Worker가 분류한 원본 연결 실패: 서울시 실시간 API 연결 장애 안내
+- 서울시 `errorMessage`/`RESULT`의 비정상 코드: 코드와 원본 메시지를 포함한 서울시 API 오류
+
+오류가 발생해도 같은 역의 마지막 정상 도착 목록은 유지한다. 서울시 `recptnDt`가 현재보다 2분
+이상 오래됐거나 수신시각이 없으면 오래된 데이터 경고를 표시한다.
 
 인증키를 GitHub Issue, 커밋, 스크린샷 또는 채팅에 붙여 넣지 않는다.

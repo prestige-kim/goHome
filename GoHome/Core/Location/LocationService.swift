@@ -1,9 +1,11 @@
+import Combine
 import CoreLocation
 import Foundation
 
 @MainActor
 final class LocationService: NSObject, ObservableObject {
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
+    @Published private(set) var accuracyAuthorization: CLAccuracyAuthorization
     @Published private(set) var location: CLLocation?
     @Published private(set) var errorMessage: String?
 
@@ -13,6 +15,7 @@ final class LocationService: NSObject, ObservableObject {
         let manager = CLLocationManager()
         self.manager = manager
         authorizationStatus = manager.authorizationStatus
+        accuracyAuthorization = manager.accuracyAuthorization
         super.init()
 
         manager.delegate = self
@@ -21,7 +24,7 @@ final class LocationService: NSObject, ObservableObject {
 
     func requestAccessAndLocation() {
         guard CLLocationManager.locationServicesEnabled() else {
-            errorMessage = "기기의 위치 서비스가 꺼져 있습니다."
+            errorMessage = "기기의 위치 서비스가 꺼져 있습니다. 역을 직접 검색해 주세요."
             return
         }
 
@@ -31,7 +34,7 @@ final class LocationService: NSObject, ObservableObject {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.requestLocation()
         case .denied, .restricted:
-            errorMessage = "가까운 역을 찾으려면 설정에서 위치 권한을 허용해 주세요."
+            errorMessage = "가까운 역을 찾으려면 설정에서 위치 권한을 허용하거나 역을 직접 검색해 주세요."
         @unknown default:
             errorMessage = "위치 권한 상태를 확인할 수 없습니다."
         }
@@ -46,19 +49,27 @@ final class LocationService: NSObject, ObservableObject {
 extension LocationService: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
+        accuracyAuthorization = manager.accuracyAuthorization
 
-        if manager.authorizationStatus == .authorizedAlways ||
-            manager.authorizationStatus == .authorizedWhenInUse {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            errorMessage = nil
             manager.requestLocation()
+        case .denied, .restricted:
+            errorMessage = "가까운 역을 찾으려면 설정에서 위치 권한을 허용하거나 역을 직접 검색해 주세요."
+        case .notDetermined:
+            break
+        @unknown default:
+            errorMessage = "위치 권한 상태를 확인할 수 없습니다."
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.last
         errorMessage = nil
+        location = locations.last
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        errorMessage = "현재 위치를 가져오지 못했습니다. 잠시 후 다시 시도해 주세요."
+        errorMessage = "현재 위치를 가져오지 못했습니다. 다시 시도하거나 역을 직접 검색해 주세요."
     }
 }

@@ -50,6 +50,36 @@ test("arrival endpoint validates station input", async () => {
   assert.deepEqual(await response.json(), { error: "invalid_station" });
 });
 
+test("arrival endpoint reports missing worker secrets", async () => {
+  const handler = createHandler(() => {
+    throw new Error("upstream should not be called");
+  });
+  const response = await handler(
+    new Request("https://proxy.example/v1/arrivals?station=시청"),
+    {},
+  );
+
+  assert.equal(response.status, 500);
+  assert.deepEqual(await response.json(), { error: "missing_seoul_api_key" });
+});
+
+test("arrival endpoint rejects unsupported methods and routes", async () => {
+  const methodResponse = await worker.fetch(
+    new Request("https://proxy.example/health", { method: "POST" }),
+    {},
+  );
+  const routeResponse = await worker.fetch(
+    new Request("https://proxy.example/v1/positions"),
+    {},
+  );
+
+  assert.equal(methodResponse.status, 405);
+  assert.equal(methodResponse.headers.get("allow"), "GET");
+  assert.deepEqual(await methodResponse.json(), { error: "method_not_allowed" });
+  assert.equal(routeResponse.status, 404);
+  assert.deepEqual(await routeResponse.json(), { error: "not_found" });
+});
+
 test("arrival endpoint proxies only the fixed Seoul API operation", async () => {
   let requestedURL;
   const upstreamPayload = {
@@ -90,4 +120,30 @@ test("upstream failures do not expose the upstream URL or key", async () => {
   assert.equal(response.status, 502);
   assert.equal(body.includes(environment.SEOUL_API_KEY), false);
   assert.deepEqual(JSON.parse(body), { error: "upstream_unavailable" });
+});
+
+test("upstream rate limits are preserved without exposing details", async () => {
+  const handler = createHandler(() => Promise.resolve(
+    new Response("rate limited", { status: 429 }),
+  ));
+  const response = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    environment,
+  );
+
+  assert.equal(response.status, 429);
+  assert.deepEqual(await response.json(), { error: "upstream_rate_limited" });
+});
+
+test("invalid upstream JSON is returned as a sanitized Seoul API failure", async () => {
+  const handler = createHandler(() => Promise.resolve(
+    new Response("<html>temporary error</html>", { status: 200 }),
+  ));
+  const response = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    environment,
+  );
+
+  assert.equal(response.status, 502);
+  assert.deepEqual(await response.json(), { error: "invalid_upstream_response" });
 });

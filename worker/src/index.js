@@ -47,12 +47,20 @@ export function createHandler(fetchUpstream = fetch) {
         signal: AbortSignal.timeout(8_000),
       });
 
+      if (upstreamResponse.status === 429) {
+        return jsonResponse({ error: "upstream_rate_limited" }, 429);
+      }
+
       if (!upstreamResponse.ok) {
         return jsonResponse({ error: "upstream_http_error" }, 502);
       }
 
       const body = await upstreamResponse.text();
-      JSON.parse(body);
+      try {
+        JSON.parse(body);
+      } catch {
+        return jsonResponse({ error: "invalid_upstream_response" }, 502);
+      }
 
       return new Response(body, { status: 200, headers: JSON_HEADERS });
     } catch {
