@@ -50,6 +50,19 @@ final class DirectSeoulTransitAPIClientTests: XCTestCase {
         XCTAssertNil(position.remainingStationCount)
     }
 
+    func testPositionResponseKeepsLatestSnapshotPerTrainNumber() async throws {
+        URLProtocolStub.requestHandler = successResponse(
+            #"{"errorMessage":{"code":"INFO-000","message":"정상 처리되었습니다."},"realtimePositionList":[{"subwayId":"1001","subwayNm":"1호선","statnId":"1001000130","statnNm":"종각","trainNo":"0471","recptnDt":"2026-08-19 16:24:13","updnLine":"1","statnTid":"1001080144","statnTnm":"서동탄","trainSttus":"1","directAt":"0","lstcarAt":"0"},{"subwayId":"1001","subwayNm":"1호선","statnId":"1001000130","statnNm":"종각","trainNo":"0471","recptnDt":"2026-08-19 16:26:21","updnLine":"1","statnTid":"1001080144","statnTnm":"서동탄","trainSttus":"2","directAt":"0","lstcarAt":"0"},{"subwayId":"1001","subwayNm":"1호선","statnId":"1001000132","statnNm":"시청","trainNo":"1937","recptnDt":"2026-08-19 16:25:45","updnLine":"1","statnTid":"1001080141","statnTnm":"천안","trainSttus":"1","directAt":"1","lstcarAt":"0"}]}"#
+        )
+
+        let positions = try await makeClient().positions(on: "1호선")
+
+        XCTAssertEqual(positions.count, 2)
+        let latest = try XCTUnwrap(positions.first { $0.trainNumber == "0471" })
+        XCTAssertEqual(latest.status, .departed)
+        XCTAssertEqual(latest.currentStation, "종각")
+    }
+
     func testWorkerHTTPFailuresAreClassified() async {
         let cases: [(Int, String, TransitAPIError)] = [
             (401, #"{"error":"unauthorized"}"#, .invalidProxyToken),
@@ -143,6 +156,27 @@ final class DirectSeoulTransitAPIClientTests: XCTestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+    }
+}
+
+@MainActor
+final class LocationServiceTests: XCTestCase {
+    func testTransientUnknownErrorDoesNotReplaceSuccessfulLocation() {
+        let service = LocationService()
+        let manager = CLLocationManager()
+        service.locationManager(
+            manager,
+            didUpdateLocations: [CLLocation(latitude: 37.5665, longitude: 126.9780)]
+        )
+
+        let transientError = NSError(
+            domain: kCLErrorDomain,
+            code: CLError.Code.locationUnknown.rawValue
+        )
+        service.locationManager(manager, didFailWithError: transientError)
+
+        XCTAssertNotNil(service.location)
+        XCTAssertNil(service.errorMessage)
     }
 }
 

@@ -150,7 +150,8 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
             throw TransitAPIError.seoulAPI(code: apiMessage.code, message: apiMessage.message)
         }
 
-        return (payload.realtimePositionList ?? []).map { item in
+        let latestPositions = Self.latestPositionItems(payload.realtimePositionList ?? [])
+        return latestPositions.map { item in
             TrainPosition(
                 id: [item.subwayId, item.trainNo, item.recptnDt]
                     .compactMap { $0 }
@@ -196,6 +197,43 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
         let normalized = message.lowercased()
         return ["호출 한도", "요청 한도", "일일 한도", "초과", "rate limit", "quota"]
             .contains { normalized.contains($0) }
+    }
+
+    private static func latestPositionItems(
+        _ items: [SeoulPositionDTO]
+    ) -> [SeoulPositionDTO] {
+        var latestByTrain: [String: (firstIndex: Int, item: SeoulPositionDTO)] = [:]
+        var unidentified: [(index: Int, item: SeoulPositionDTO)] = []
+
+        for (index, item) in items.enumerated() {
+            guard let trainNumber = item.trainNo?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  !trainNumber.isEmpty else {
+                unidentified.append((index, item))
+                continue
+            }
+
+            let lineIdentifier = item.subwayId ?? item.subwayNm ?? "unknown-line"
+            let key = "\(lineIdentifier)|\(trainNumber)"
+            guard let existing = latestByTrain[key] else {
+                latestByTrain[key] = (index, item)
+                continue
+            }
+
+            let existingDate = existing.item.receivedDate
+            let candidateDate = item.receivedDate
+            let shouldReplace = switch (existingDate, candidateDate) {
+            case (nil, _): true
+            case (_, nil): false
+            case let (existingDate?, candidateDate?): candidateDate >= existingDate
+            }
+            if shouldReplace {
+                latestByTrain[key] = (existing.firstIndex, item)
+            }
+        }
+
+        return (latestByTrain.values.map { ($0.firstIndex, $0.item) } + unidentified)
+            .sorted { $0.0 < $1.0 }
+            .map(\.1)
     }
 }
 

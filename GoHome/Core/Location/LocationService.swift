@@ -65,6 +65,13 @@ extension LocationService: @preconcurrency CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let locationError = error as NSError
+        if location != nil,
+           locationError.domain == kCLErrorDomain,
+           locationError.code == CLError.Code.locationUnknown.rawValue {
+            return
+        }
+
         errorMessage = "현재 위치를 가져오지 못했습니다. 다시 시도하거나 역을 직접 검색해 주세요."
     }
 }

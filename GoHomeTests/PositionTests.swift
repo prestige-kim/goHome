@@ -134,3 +134,43 @@ final class TrainPositionFreshnessTests: XCTestCase {
         XCTAssertTrue(position.isStale(comparedTo: receivedAt.addingTimeInterval(121)))
     }
 }
+
+final class TrainPositionDisplayPolicyTests: XCTestCase {
+    func testSelectKeepsNearestThreePerLineAndDirection() {
+        let positions = [
+            makePosition(number: "4", line: "1호선", direction: .upOrInner, remaining: 4),
+            makePosition(number: "1", line: "1호선", direction: .upOrInner, remaining: 1),
+            makePosition(number: "2", line: "1호선", direction: .upOrInner, remaining: 2),
+            makePosition(number: "3", line: "1호선", direction: .upOrInner, remaining: 3),
+            makePosition(number: "5", line: "1호선", direction: .downOrOuter, remaining: 5),
+            makePosition(number: "6", line: "2호선", direction: .upOrInner, remaining: 6),
+        ]
+
+        let selected = TrainPositionDisplayPolicy.select(from: positions)
+
+        XCTAssertEqual(selected.map(\.trainNumber), ["1", "2", "3", "5", "6"])
+    }
+
+    private func makePosition(
+        number: String,
+        line: String,
+        direction: TrainDirection,
+        remaining: Int
+    ) -> TrainPosition {
+        TrainPosition(
+            id: number,
+            lineName: line,
+            stationID: "station-\(number)",
+            currentStation: "현재역",
+            trainNumber: number,
+            direction: direction,
+            destinationStationID: "terminal",
+            destination: "종착",
+            status: .arrived,
+            serviceType: .regular,
+            isLastTrain: false,
+            receivedAt: Date(),
+            remainingStationCount: remaining
+        )
+    }
+}

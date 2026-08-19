@@ -67,6 +67,14 @@ final class HomeViewModel: ObservableObject {
         isLoadingArrivals || isLoadingPositions
     }
 
+    var displayedPositions: [TrainPosition] {
+        TrainPositionDisplayPolicy.select(from: positions)
+    }
+
+    var isPositionListLimited: Bool {
+        displayedPositions.count < positions.count
+    }
+
     init(
         locationService: LocationService? = nil,
         stationRepository: StationRepository = BundledStationRepository(),

@@ -229,7 +229,7 @@ struct HomeView: View {
                 .foregroundStyle(.orange)
             }
 
-            ForEach(viewModel.positions) { position in
+            ForEach(viewModel.displayedPositions) { position in
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Text(position.lineName)
@@ -283,6 +283,9 @@ struct HomeView: View {
                 if viewModel.hasStalePositionData {
                     Text("2분 이상 지난 열차 위치가 포함되어 있습니다.")
                         .foregroundStyle(.orange)
+                }
+                if viewModel.isPositionListLimited {
+                    Text("각 노선·방향별 가까운 열차를 최대 3대까지 표시합니다.")
                 }
                 Text("GPS 좌표가 아니라 서울시가 제공한 현재 역과 진입·도착·출발 상태를 기준으로 계산한 정보입니다.")
             }

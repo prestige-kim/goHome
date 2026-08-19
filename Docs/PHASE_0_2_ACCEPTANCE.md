@@ -8,7 +8,7 @@
 - Worker 실제 종단간 호출: 시청역 `INFO-000` 확인
 - iOS 소스 구문 파싱과 Xcode 프로젝트·Info.plist 형식 검사: 통과
 - Xcode 26.6·iPhone 17 Pro Simulator Debug 빌드: 통과
-- Simulator `GoHomeTests` 30개: 전체 통과
+- Simulator `GoHomeTests` 33개: 전체 통과
 - 실제 iPhone·역 전광판 비교: 기기와 현장 검증 필요
 
 아래 세 승인 관문을 모두 통과한 뒤에만 Phase 0–2를 최종 100% 완료로 판정한다.
@@ -64,7 +64,7 @@ xcodebuild \
 | 항목 | 결과 | 날짜 | 메모 |
 |---|---|---|---|
 | Simulator 빌드 | 통과 | 2026-08-19 | Xcode 26.6, iPhone 17 Pro Simulator |
-| GoHomeTests | 통과 | 2026-08-19 | 30개 전체 통과 |
+| GoHomeTests | 통과 | 2026-08-19 | 33개 전체 통과 |
 | 실제 iPhone 실행 | 대기 |  |  |
 | 위치 시나리오 | 대기 |  |  |
 | 전광판 비교 | 대기 |  |  |

@@ -73,6 +73,35 @@ struct TrainPosition: Identifiable, Equatable, Sendable {
     }
 }
 
+enum TrainPositionDisplayPolicy {
+    static let maximumPerLineAndDirection = 3
+
+    static func select(
+        from positions: [TrainPosition],
+        maximumPerLineAndDirection maximum: Int = maximumPerLineAndDirection
+    ) -> [TrainPosition] {
+        guard maximum > 0 else { return [] }
+
+        let sorted = positions.sorted {
+            let lhsCount = $0.remainingStationCount ?? .max
+            let rhsCount = $1.remainingStationCount ?? .max
+            if lhsCount != rhsCount { return lhsCount < rhsCount }
+            if $0.lineName != $1.lineName { return $0.lineName < $1.lineName }
+            if $0.directionText != $1.directionText { return $0.directionText < $1.directionText }
+            return $0.trainNumber < $1.trainNumber
+        }
+
+        var countsByGroup: [String: Int] = [:]
+        return sorted.filter { position in
+            let key = "\(position.lineName)|\(position.directionText)"
+            let count = countsByGroup[key, default: 0]
+            guard count < maximum else { return false }
+            countsByGroup[key] = count + 1
+            return true
+        }
+    }
+}
+
 struct LineRouteBundle: Decodable, Sendable {
     let lines: [LineRouteNetwork]
 }

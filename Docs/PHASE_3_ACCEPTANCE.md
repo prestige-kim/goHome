@@ -18,8 +18,11 @@ Phase 3 실시간 열차 위치의 코드·정적 데이터·Worker 구현은 �
 - [x] Swift 소스 전체 `swiftc -parse` 통과
 - [x] Xcode 프로젝트 파일 `plutil -lint` 통과
 - [x] Xcode 26.6·iPhone 17 Pro Simulator Debug 빌드 통과
-- [x] Simulator `GoHomeTests` 30개 전체 통과
+- [x] Simulator `GoHomeTests` 33개 전체 통과
+- [x] 1호선 실응답 81행·72개 열차 중 중복 열차번호 9개 관측 및 최신 수신시각 선택 검증
 - [x] Simulator에서 서울시청 가상 위치 기준 가까운 역과 실제 Worker 도착정보 표시 확인
+- [x] 시청역 1·2호선 위치 UI에서 현재 역·상태·방향·종착역·급행·남은 역 수 확인
+- [x] 노선·방향별 가까운 열차 최대 3대 제한과 GPS 좌표 아님 안내의 접근성 텍스트 확인
 
 이전에 Command Line Tools compiler와 SDK 버전 차이로 실행하지 못했던 전체 타입 검사는 실제
 Xcode 빌드와 XCTest 통과로 대체 검증했다.
