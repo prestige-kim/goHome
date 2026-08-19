@@ -101,7 +101,8 @@ iOS 단위 테스트는 `GoHomeTests` 타깃에 거리·번들 검증과 도착�
 Phase 0–2의 Simulator·실기기·전광판 최종
 검증 절차는 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md)를 따릅니다.
 Phase 3의 미실행 iOS 검증은 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에
-분리되어 있습니다.
+분리되어 있습니다. Xcode 26.6의 iPhone 17 Pro Simulator에서는 전면 약 40초 자동 갱신,
+백그라운드 중지, 전면 복귀 직후 재개까지 확인했습니다.
 
 ## 무료 개인 기기 테스트의 제한
 

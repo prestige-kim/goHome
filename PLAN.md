@@ -110,8 +110,9 @@ UI는 공공 API URL을 직접 알지 않는다. `TransitAPIClient` 프로토콜
 ## 7. 개발 단계
 
 Phase 0–3의 코드·구성 구현 항목은 완료했다. Xcode 26.6의 iPhone 17 Pro Simulator 빌드와
-`GoHomeTests` 전체 검증도 통과했다. 실제 iPhone과 역 전광판이 필요한 승인 관문은 아직 남아
-있으며, 통과 전에는 해당 Phase를 최종 100% 완료로 표시하지 않는다. Phase 0–2 세부 검증표는
+`GoHomeTests` 전체 검증, 전면 자동 갱신·백그라운드 중지·복귀 재개도 통과했다. 실제 iPhone과
+역 전광판이 필요한 승인 관문은 아직 남아 있으며, 통과 전에는 해당 Phase를 최종 100% 완료로
+표시하지 않는다. Phase 0–2 세부 검증표는
 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md), Phase 3 검증표는
 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에 정리한다.
 
@@ -189,6 +190,7 @@ Phase 0–2의 코드·구성 구현 항목은 31/31로 완료했다. 다만 실
 - [x] 위치 오류 시 노선별 마지막 정상 데이터·기준시각·오래된 상태 유지
 - [x] Worker 회귀 테스트·정적 데이터 검증·Swift 위치 테스트 추가
 - [x] 전체 Xcode에서 Simulator 빌드와 `GoHomeTests` 전체 통과
+- [x] Simulator에서 전면 40초 갱신·백그라운드 중지·복귀 재개 확인
 - [ ] 실제 iPhone에서 전면/백그라운드 갱신과 위치 UI 확인
 - [ ] 실제 역 전광판과 현재 역·방향·남은 역 수 비교
 
