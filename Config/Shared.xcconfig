@@ -1,0 +1,7 @@
+// Shared non-secret build settings.
+// Local secrets are optional so the project still builds before configuration.
+
+SEOUL_API_KEY =
+PUBLIC_DATA_API_KEY =
+
+#include? "Secrets.xcconfig"

@@ -1,0 +1,23 @@
+[
+    {
+        "id": "seoul-1-4",
+        "name": "서울",
+        "latitude": 37.556878,
+        "longitude": 126.972578,
+        "lineNames": ["1호선", "4호선"]
+    },
+    {
+        "id": "city-hall-1-2",
+        "name": "시청",
+        "latitude": 37.565682,
+        "longitude": 126.976849,
+        "lineNames": ["1호선", "2호선"]
+    },
+    {
+        "id": "jonggak-1",
+        "name": "종각",
+        "latitude": 37.570175,
+        "longitude": 126.983226,
+        "lineNames": ["1호선"]
+    }
+]

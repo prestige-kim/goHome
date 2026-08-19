@@ -1,0 +1,64 @@
+import CoreLocation
+import Foundation
+
+@MainActor
+final class LocationService: NSObject, ObservableObject {
+    @Published private(set) var authorizationStatus: CLAuthorizationStatus
+    @Published private(set) var location: CLLocation?
+    @Published private(set) var errorMessage: String?
+
+    private let manager: CLLocationManager
+
+    override init() {
+        let manager = CLLocationManager()
+        self.manager = manager
+        authorizationStatus = manager.authorizationStatus
+        super.init()
+
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+    }
+
+    func requestAccessAndLocation() {
+        guard CLLocationManager.locationServicesEnabled() else {
+            errorMessage = "기기의 위치 서비스가 꺼져 있습니다."
+            return
+        }
+
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.requestLocation()
+        case .denied, .restricted:
+            errorMessage = "가까운 역을 찾으려면 설정에서 위치 권한을 허용해 주세요."
+        @unknown default:
+            errorMessage = "위치 권한 상태를 확인할 수 없습니다."
+        }
+    }
+
+    func refreshLocation() {
+        errorMessage = nil
+        requestAccessAndLocation()
+    }
+}
+
+extension LocationService: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
+
+        if manager.authorizationStatus == .authorizedAlways ||
+            manager.authorizationStatus == .authorizedWhenInUse {
+            manager.requestLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations.last
+        errorMessage = nil
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        errorMessage = "현재 위치를 가져오지 못했습니다. 잠시 후 다시 시도해 주세요."
+    }
+}
