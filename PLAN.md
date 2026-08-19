@@ -109,18 +109,19 @@ UI는 공공 API URL을 직접 알지 않는다. `TransitAPIClient` 프로토콜
 
 ## 7. 개발 단계
 
-Phase 0–3의 코드·구성 구현 항목은 완료했다. 실제 실행 증명이 필요한 승인 관문은 전체 Xcode와
-iPhone을 사용할 수 있을 때 확인하며, 통과 전에는 해당 Phase를 최종 100% 완료로 표시하지
-않는다. Phase 0–2 세부 검증표는 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md),
-Phase 3 검증표는 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에 정리한다.
+Phase 0–3의 코드·구성 구현 항목은 완료했다. Xcode 26.6의 iPhone 17 Pro Simulator 빌드와
+`GoHomeTests` 전체 검증도 통과했다. 실제 iPhone과 역 전광판이 필요한 승인 관문은 아직 남아
+있으며, 통과 전에는 해당 Phase를 최종 100% 완료로 표시하지 않는다. Phase 0–2 세부 검증표는
+[`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md), Phase 3 검증표는
+[`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에 정리한다.
 
 Phase 0–2의 코드·구성 구현 항목은 31/31로 완료했다. 다만 실제 실행 증명이 필요한 아래 세
 승인 관문은 전체 Xcode와 iPhone을 사용할 수 있을 때 확인하며, 통과 전에는 Phase 0–2 전체를
 최종 100% 완료로 표시하지 않는다.
 
-1. Simulator 빌드와 `GoHomeTests` 전체 통과
-2. Personal Team 실제 iPhone 실행 및 정확·대략적·거부·지원 범위 밖 위치 시나리오 확인
-3. 실제 역 전광판과 앱의 방향·열차 순서 비교
+1. [x] Simulator 빌드와 `GoHomeTests` 전체 통과
+2. [ ] Personal Team 실제 iPhone 실행 및 정확·대략적·거부·지원 범위 밖 위치 시나리오 확인
+3. [ ] 실제 역 전광판과 앱의 방향·열차 순서 비교
 
 세부 검증표는 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md)에 정리한다.
 
@@ -132,7 +133,7 @@ Phase 0–2의 코드·구성 구현 항목은 31/31로 완료했다. 다만 실
 - [x] 비밀키용 `xcconfig`와 `.gitignore` 구성
 - [x] 가까운 역 계산 골격 구성
 - [x] 실시간 도착 API 클라이언트 골격 구성
-- [ ] 전체 Xcode 설치 후 Simulator 빌드
+- [x] 전체 Xcode 설치 후 Simulator 빌드
 - [ ] Personal Team 선택 후 실제 iPhone 실행
 - [x] GitHub 원격 저장소 연결
 
@@ -186,7 +187,7 @@ Phase 0–2의 코드·구성 구현 항목은 31/31로 완료했다. 다만 실
 - [x] 도착·위치정보를 하나의 전면 자동 갱신 주기와 중복 방지 상태로 통합
 - [x] 위치 오류 시 노선별 마지막 정상 데이터·기준시각·오래된 상태 유지
 - [x] Worker 회귀 테스트·정적 데이터 검증·Swift 위치 테스트 추가
-- [ ] 전체 Xcode에서 Simulator 빌드와 `GoHomeTests` 전체 통과
+- [x] 전체 Xcode에서 Simulator 빌드와 `GoHomeTests` 전체 통과
 - [ ] 실제 iPhone에서 전면/백그라운드 갱신과 위치 UI 확인
 - [ ] 실제 역 전광판과 현재 역·방향·남은 역 수 비교
 

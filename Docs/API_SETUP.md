@@ -8,10 +8,13 @@ Worker를 호출한다. `PUBLIC_DATA_API_KEY`는 막차의 공휴일 판정 기�
 
 ```xcconfig
 SEOUL_API_KEY = 발급받은_서울시_키
-TRANSIT_PROXY_BASE_URL = https://gohome-transit-proxy.<계정>.workers.dev
+TRANSIT_PROXY_BASE_URL = https:/$()/gohome-transit-proxy.<계정>.workers.dev
 TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
 PUBLIC_DATA_API_KEY = 발급받은_공공데이터포털_Encoding_키
 ```
+
+`.xcconfig`에서 `//`는 주석으로 처리되므로 Worker URL은 `https:/$()/` 형식으로 적는다.
+빌드된 `Info.plist`에는 정상적인 `https://` URL로 치환된다.
 
 Worker 배포 절차는 [WORKER_SETUP.md](WORKER_SETUP.md)를 따른다.
 

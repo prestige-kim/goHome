@@ -17,18 +17,21 @@ Phase 3 실시간 열차 위치의 코드·정적 데이터·Worker 구현은 �
 - [x] 지선·분기·순환선·GTX-A 미연결 구간과 원거리 오연결 자동 검증
 - [x] Swift 소스 전체 `swiftc -parse` 통과
 - [x] Xcode 프로젝트 파일 `plutil -lint` 통과
+- [x] Xcode 26.6·iPhone 17 Pro Simulator Debug 빌드 통과
+- [x] Simulator `GoHomeTests` 30개 전체 통과
+- [x] Simulator에서 서울시청 가상 위치 기준 가까운 역과 실제 Worker 도착정보 표시 확인
 
-`swiftc -typecheck`는 Command Line Tools compiler와 SDK 버전이 서로 달라 실행되지 않았다.
-이는 코드 통과로 기록하지 않으며 아래 전체 Xcode 승인 항목으로 넘긴다.
+이전에 Command Line Tools compiler와 SDK 버전 차이로 실행하지 못했던 전체 타입 검사는 실제
+Xcode 빌드와 XCTest 통과로 대체 검증했다.
 
 ## 전체 Xcode 승인 검증
 
-- [ ] iOS 17 이상 Simulator에서 `GoHome` Debug 빌드 성공
-- [ ] `GoHomeTests` 전체 통과
-- [ ] 위치 DTO 0/1/2/3, 일반/급행/특급, 막차 표시 테스트 통과
-- [ ] 선형·분기·2호선 순환·종착역 제한의 남은 역 수 테스트 통과
-- [ ] 동시 수동/자동 갱신이 도착·위치 요청을 중복 실행하지 않음
-- [ ] 위치 요청 실패 후 노선별 마지막 정상 데이터와 오래된 상태 유지
+- [x] iOS 17 이상 Simulator에서 `GoHome` Debug 빌드 성공
+- [x] `GoHomeTests` 전체 통과
+- [x] 위치 DTO 0/1/2/3, 일반/급행/특급, 막차 표시 테스트 통과
+- [x] 선형·분기·2호선 순환·종착역 제한의 남은 역 수 테스트 통과
+- [x] 동시 수동/자동 갱신이 도착·위치 요청을 중복 실행하지 않음
+- [x] 위치 요청 실패 후 노선별 마지막 정상 데이터와 오래된 상태 유지
 
 ## 실제 iPhone·역 현장 승인 검증
 

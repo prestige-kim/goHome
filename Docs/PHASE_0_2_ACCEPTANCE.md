@@ -7,15 +7,17 @@
 - 역 번들 검증: 563개 물리 역·696개 노선별 ID·19개 노선 통과
 - Worker 실제 종단간 호출: 시청역 `INFO-000` 확인
 - iOS 소스 구문 파싱과 Xcode 프로젝트·Info.plist 형식 검사: 통과
-- Simulator·iOS XCTest·실제 iPhone·역 전광판 비교: 전체 Xcode/기기 사용 시 검증 필요
+- Xcode 26.6·iPhone 17 Pro Simulator Debug 빌드: 통과
+- Simulator `GoHomeTests` 30개: 전체 통과
+- 실제 iPhone·역 전광판 비교: 기기와 현장 검증 필요
 
 아래 세 승인 관문을 모두 통과한 뒤에만 Phase 0–2를 최종 100% 완료로 판정한다.
 
 ## 승인 관문 A — Simulator와 단위 테스트
 
-- [ ] `GoHome` scheme이 iOS 17 이상 Simulator용으로 빌드된다.
-- [ ] `GoHomeTests`의 기존 테스트와 Phase 1·2 신규 테스트가 모두 통과한다.
-- [ ] 앱이 시작되고 위치 권한 요청 전 화면과 수동 역 검색 화면이 표시된다.
+- [x] `GoHome` scheme이 iOS 17 이상 Simulator용으로 빌드된다.
+- [x] `GoHomeTests`의 기존 테스트와 Phase 1·2 신규 테스트가 모두 통과한다.
+- [x] 앱이 시작되고 위치 상태와 수동 역 검색 화면이 표시된다.
 - [ ] 비밀 설정이 비어 있어도 앱은 시작되며 도착정보만 설정 안내를 표시한다.
 
 명령줄 검증이 가능한 전체 Xcode 환경에서는 다음 빌드부터 실행한다.
@@ -61,8 +63,8 @@ xcodebuild \
 
 | 항목 | 결과 | 날짜 | 메모 |
 |---|---|---|---|
-| Simulator 빌드 | 대기 |  |  |
-| GoHomeTests | 대기 |  |  |
+| Simulator 빌드 | 통과 | 2026-08-19 | Xcode 26.6, iPhone 17 Pro Simulator |
+| GoHomeTests | 통과 | 2026-08-19 | 30개 전체 통과 |
 | 실제 iPhone 실행 | 대기 |  |  |
 | 위치 시나리오 | 대기 |  |  |
 | 전광판 비교 | 대기 |  |  |

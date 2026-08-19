@@ -55,10 +55,13 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
    ```xcconfig
    SEOUL_API_KEY = 발급받은_인증키
-   TRANSIT_PROXY_BASE_URL = https://gohome-transit-proxy.<계정>.workers.dev
+   TRANSIT_PROXY_BASE_URL = https:/$()/gohome-transit-proxy.<계정>.workers.dev
    TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
    PUBLIC_DATA_API_KEY = 발급받은_인증키
    ```
+
+   `.xcconfig`에서는 `//`가 주석으로 해석되므로 Worker URL의 슬래시는 반드시
+   `https:/$()/` 형식으로 작성합니다. 빌드된 앱에는 `https://`로 전달됩니다.
 
 3. `GoHome.xcodeproj`를 Xcode로 엽니다.
 

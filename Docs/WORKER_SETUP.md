@@ -65,9 +65,12 @@ Cloudflare Workers Free 플랜은 기본 제공되며 현재 개인 개발 단�
 `Config/Secrets.xcconfig`에 배포 주소와 같은 개인용 토큰을 추가한다.
 
 ```xcconfig
-TRANSIT_PROXY_BASE_URL = https://gohome-transit-proxy.<계정>.workers.dev
+TRANSIT_PROXY_BASE_URL = https:/$()/gohome-transit-proxy.<계정>.workers.dev
 TRANSIT_PROXY_CLIENT_TOKEN = 위에서_생성한_GOHOME_CLIENT_TOKEN
 ```
+
+`.xcconfig`에서는 `//`가 주석이므로 `https:/$()/` 형식을 유지한다. 앱 번들에는
+정상적인 `https://` URL로 들어간다.
 
 `SEOUL_API_KEY`는 로컬 API 점검 스크립트를 위해 남겨도 되지만 iOS 앱의 `Info.plist`에는 더
 이상 포함되지 않는다. `TRANSIT_PROXY_CLIENT_TOKEN`은 개인 테스트의 무단 호출 방지용이며,
