@@ -7,6 +7,7 @@ require "uri"
 PROJECT_ROOT = File.expand_path("..", __dir__)
 SECRETS_PATH = File.join(PROJECT_ROOT, "Config", "Secrets.xcconfig")
 DEFAULT_STATION = "시청"
+DEFAULT_LINE = "2호선"
 
 def abort_with(message)
   warn "오류: #{message}"
@@ -45,6 +46,8 @@ base_url = read_setting(contents, "TRANSIT_PROXY_BASE_URL")
 client_token = read_setting(contents, "TRANSIT_PROXY_CLIENT_TOKEN")
 station = ARGV.first.to_s.strip
 station = DEFAULT_STATION if station.empty?
+line_name = ARGV[1].to_s.strip
+line_name = DEFAULT_LINE if line_name.empty?
 
 abort_with("TRANSIT_PROXY_BASE_URL이 비어 있습니다.") if base_url.empty?
 abort_with("TRANSIT_PROXY_CLIENT_TOKEN이 비어 있습니다.") if client_token.empty?
@@ -73,11 +76,42 @@ status_code = api_status["code"] || api_status["CODE"] || "확인 불가"
 status_message = api_status["message"] || api_status["MESSAGE"] || "확인 불가"
 arrivals = arrival_payload.fetch("realtimeArrivalList", [])
 
+position_uri = URI.join(base_url.delete_suffix("/") + "/", "v1/positions")
+position_uri.query = URI.encode_www_form(line: line_name)
+position_response, position_payload = get_json(
+  position_uri,
+  authorization: "Bearer #{client_token}"
+)
+unless position_response.is_a?(Net::HTTPSuccess)
+  abort_with("열차 위치 중계 실패 (HTTP #{position_response.code})")
+end
+
+position_api_status = position_payload["errorMessage"] || position_payload["RESULT"] || {}
+position_status_code = position_api_status["code"] || position_api_status["CODE"] || "확인 불가"
+position_status_message = position_api_status["message"] || position_api_status["MESSAGE"] || "확인 불가"
+positions = position_payload.fetch("realtimePositionList", [])
+position_fields = positions.flat_map(&:keys).uniq.sort
+expected_position_fields = %w[
+  subwayId subwayNm statnId statnNm trainNo lastRecptnDt recptnDt
+  updnLine statnTid statnTnm trainSttus directAt lstcarAt
+]
+missing_position_fields = expected_position_fields - position_fields
+position_status_counts = positions.each_with_object(Hash.new(0)) do |position, counts|
+  counts[position["trainSttus"] || "없음"] += 1
+end
+
 puts "Cloudflare Worker 종단간 점검"
 puts "- HTTPS 상태: 정상"
 puts "- 토큰 인증: 정상"
 puts "- 조회역: #{station}"
 puts "- 서울시 API 상태: #{status_code} / #{status_message}"
 puts "- 도착정보 건수: #{arrivals.length}"
+puts "- 위치 조회 노선: #{line_name}"
+puts "- 위치 API 상태: #{position_status_code} / #{position_status_message}"
+puts "- 열차 위치 건수: #{positions.length}"
+puts "- 위치 DTO 필드: #{missing_position_fields.empty? ? '모두 확인됨' : "미확인 #{missing_position_fields.join(', ')}"}"
+puts "- 위치 상태 코드별 건수: #{position_status_counts.sort.to_h}"
 
-exit(status_code == "INFO-000" && !arrivals.empty? ? 0 : 2)
+success = status_code == "INFO-000" && !arrivals.empty? &&
+  position_status_code == "INFO-000" && !positions.empty?
+exit(success ? 0 : 2)

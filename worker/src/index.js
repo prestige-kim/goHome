@@ -3,6 +3,11 @@ const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store",
 };
+const SUPPORTED_LINES = new Set([
+  "1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선",
+  "경의중앙선", "공항철도", "경춘선", "수인분당선", "신분당선", "경강선",
+  "우이신설선", "서해선", "신림선", "GTX-A",
+]);
 
 export function createHandler(fetchUpstream = fetch) {
   return async function handleRequest(request, env) {
@@ -18,7 +23,7 @@ export function createHandler(fetchUpstream = fetch) {
       });
     }
 
-    if (url.pathname !== "/v1/arrivals") {
+    if (url.pathname !== "/v1/arrivals" && url.pathname !== "/v1/positions") {
       return jsonResponse({ error: "not_found" }, 404);
     }
 
@@ -33,12 +38,20 @@ export function createHandler(fetchUpstream = fetch) {
       });
     }
 
-    const station = normalizeStation(url.searchParams.get("station"));
-    if (!station) {
-      return jsonResponse({ error: "invalid_station" }, 400);
+    let upstreamURL;
+    if (url.pathname === "/v1/arrivals") {
+      const station = normalizeStation(url.searchParams.get("station"));
+      if (!station) {
+        return jsonResponse({ error: "invalid_station" }, 400);
+      }
+      upstreamURL = buildArrivalURL(env.SEOUL_API_KEY, station);
+    } else {
+      const line = normalizeLine(url.searchParams.get("line"));
+      if (!line) {
+        return jsonResponse({ error: "invalid_line" }, 400);
+      }
+      upstreamURL = buildPositionURL(env.SEOUL_API_KEY, line);
     }
-
-    const upstreamURL = buildArrivalURL(env.SEOUL_API_KEY, station);
 
     try {
       const upstreamResponse = await fetchUpstream(upstreamURL, {
@@ -87,10 +100,21 @@ function normalizeStation(value) {
   return station;
 }
 
+function normalizeLine(value) {
+  const line = value?.trim();
+  return line && SUPPORTED_LINES.has(line) ? line : null;
+}
+
 function buildArrivalURL(apiKey, station) {
   const keySegment = encodeURIComponent(apiKey);
   const stationSegment = encodeURIComponent(station);
   return `${SEOUL_SUBWAY_API_ORIGIN}/api/subway/${keySegment}/json/realtimeStationArrival/0/20/${stationSegment}`;
+}
+
+function buildPositionURL(apiKey, line) {
+  const keySegment = encodeURIComponent(apiKey);
+  const lineSegment = encodeURIComponent(line);
+  return `${SEOUL_SUBWAY_API_ORIGIN}/api/subway/${keySegment}/json/realtimePosition/0/100/${lineSegment}`;
 }
 
 function jsonResponse(payload, status = 200, extraHeaders = {}) {
