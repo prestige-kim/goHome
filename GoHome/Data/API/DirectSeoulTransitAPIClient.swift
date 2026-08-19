@@ -1,27 +1,40 @@
 import Foundation
 
 struct DirectSeoulTransitAPIClient: TransitAPIClient {
-    private let apiKey: String?
+    private let baseURL: URL?
+    private let clientToken: String?
     private let session: URLSession
 
-    init(apiKey: String?, session: URLSession = .shared) {
-        self.apiKey = apiKey
+    init(baseURL: URL?, clientToken: String?, session: URLSession = .shared) {
+        self.baseURL = baseURL
+        self.clientToken = clientToken
         self.session = session
     }
 
     func arrivals(at station: Station) async throws -> [TrainArrival] {
-        guard let apiKey, !apiKey.isEmpty else {
-            throw TransitAPIError.missingAPIKey
+        guard let baseURL,
+              baseURL.scheme?.lowercased() == "https",
+              let clientToken,
+              !clientToken.isEmpty else {
+            throw TransitAPIError.missingProxyConfiguration
         }
 
-        guard let encodedStation = station.name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
-              let url = URL(
-                string: "https://swopenapi.seoul.go.kr/api/subway/\(apiKey)/json/realtimeStationArrival/0/20/\(encodedStation)"
-              ) else {
+        let endpoint = baseURL.appendingPathComponent("v1/arrivals")
+        guard var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false) else {
+            throw TransitAPIError.invalidURL
+        }
+        components.queryItems = [URLQueryItem(name: "station", value: station.apiName)]
+        guard let url = components.url else {
             throw TransitAPIError.invalidURL
         }
 
-        let (data, response) = try await session.data(from: url)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(clientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.timeoutInterval = 15
+
+        let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {
             throw TransitAPIError.invalidResponse
@@ -33,9 +46,14 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
             throw TransitAPIError.server(code: error.code, message: error.message)
         }
 
-        return (payload.realtimeArrivalList ?? []).map { item in
+        let stationIDs = Set(station.seoulStationIDs.values)
+        let matchingArrivals = (payload.realtimeArrivalList ?? []).filter { item in
+            stationIDs.isEmpty || item.statnId.map(stationIDs.contains) == true
+        }
+
+        return matchingArrivals.map { item in
             TrainArrival(
-                id: [item.subwayId, item.trainLineNm, item.btrainNo, item.recptnDt]
+                id: [item.statnId, item.subwayId, item.ordkey, item.btrainNo, item.recptnDt]
                     .compactMap { $0 }
                     .joined(separator: "-"),
                 lineName: item.subwayName,
@@ -43,7 +61,10 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
                 destination: item.destination,
                 remainingSeconds: item.barvlDt.flatMap(Int.init),
                 message: item.arvlMsg2 ?? "도착정보 없음",
-                receivedAt: item.recptnDt ?? ""
+                status: item.arrivalStatus,
+                isExpress: item.btrainSttus == "급행" || item.trainLineNm?.contains("(급행)") == true,
+                isLastTrain: item.lstcarAt == "1",
+                receivedAt: item.receivedDate
             )
         }
     }
@@ -68,11 +89,16 @@ private struct SeoulArrivalDTO: Decodable {
     let subwayId: String?
     let updnLine: String?
     let trainLineNm: String?
+    let statnId: String?
     let statnNm: String?
     let barvlDt: String?
     let arvlMsg2: String?
+    let arvlCd: String?
     let btrainNo: String?
     let bstatnNm: String?
+    let btrainSttus: String?
+    let lstcarAt: String?
+    let ordkey: String?
     let recptnDt: String?
 
     var subwayName: String {
@@ -91,7 +117,10 @@ private struct SeoulArrivalDTO: Decodable {
         case "1067": return "경춘선"
         case "1075": return "수인분당선"
         case "1077": return "신분당선"
+        case "1081": return "경강선"
         case "1092": return "우이신설선"
+        case "1093": return "서해선"
+        case "1094": return "신림선"
         case "1032": return "GTX-A"
         default: return subwayId ?? "노선 정보 없음"
         }
@@ -102,5 +131,29 @@ private struct SeoulArrivalDTO: Decodable {
             return bstatnNm + "행"
         }
         return trainLineNm ?? "종착역 정보 없음"
+    }
+
+    var arrivalStatus: TrainArrivalStatus {
+        switch arvlCd {
+        case "0": return .approaching
+        case "1": return .arrived
+        case "2": return .departed
+        case "3": return .departedPreviousStation
+        case "4": return .approachingPreviousStation
+        case "5": return .arrivedPreviousStation
+        case "99": return .inTransit
+        default: return .unknown
+        }
+    }
+
+    var receivedDate: Date? {
+        guard let recptnDt else { return nil }
+
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: recptnDt)
     }
 }

@@ -8,12 +8,15 @@
 
 - SwiftUI 기반 iOS 17+ 앱 골격
 - 앱 사용 중 위치 권한 요청
-- 번들 역 좌표를 이용한 가까운 역 계산
-- 서울시 실시간 도착정보 API 클라이언트
+- 서울 실시간 API 지원 범위 563개 역을 이용한 가까운 역 상위 3개 계산
+- Cloudflare Worker HTTPS 중계를 사용하는 실시간 도착정보 API 클라이언트
 - API 키를 Git에서 제외하는 `xcconfig` 구성
-- 핵심 거리 계산 단위 테스트
+- 역 데이터 생성·검증 스크립트와 핵심 거리 계산 단위 테스트
 
-`stations.seed.json`에는 프로젝트가 실행되는지만 확인하기 위한 서울 도심 3개 역만 들어 있습니다. 실제 사용 전 국가철도공단 도시광역철도 역사정보로 교체해야 합니다.
+`stations.seed.json`은 파일명이 초기 골격의 흔적을 유지하고 있지만, 현재는 19개 지원 노선의
+563개 물리 역과 696개 노선별 역 ID를 포함한 전체 번들입니다. 국가철도공단 좌표와 서울시
+실시간 도착 지원 역 목록을 결합해 생성하며, 재생성 방법은
+[`DataSources/README.md`](DataSources/README.md)에 정리되어 있습니다.
 
 ## 요구사항
 
@@ -36,10 +39,13 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
    cp Config/Secrets.xcconfig.example Config/Secrets.xcconfig
    ```
 
-2. `Config/Secrets.xcconfig`의 값을 채웁니다.
+2. `Config/Secrets.xcconfig`의 값을 채웁니다. 서울시 키는 로컬 API 점검용이고, 앱에서는
+   배포된 Worker 주소와 개인용 호출 토큰을 사용합니다.
 
    ```xcconfig
    SEOUL_API_KEY = 발급받은_인증키
+   TRANSIT_PROXY_BASE_URL = https://gohome-transit-proxy.<계정>.workers.dev
+   TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
    PUBLIC_DATA_API_KEY = 발급받은_인증키
    ```
 
@@ -57,18 +63,10 @@ API 키가 비어 있어도 위치와 가까운 역 계산 화면까지는 실�
 
 ## 원격 저장소 연결
 
-GitHub에서 빈 저장소를 만든 후 다음 명령으로 연결할 수 있습니다.
-
-```sh
-git remote add origin <GITHUB_REPOSITORY_URL>
-git add .
-git commit -m "chore: bootstrap GoHome iOS project"
-git push -u origin main
-```
-
-아직 원격 주소가 없으므로 이 저장소에는 `origin`이 설정되어 있지 않습니다.
+이 프로젝트의 `origin`은 `https://github.com/prestige-kim/goHome.git`에 연결되어 있습니다.
 
 ## 문서
 
 - [개발 계획](PLAN.md)
 - [API 키 발급 및 주소](Docs/API_SETUP.md)
+- [Cloudflare Worker 설정](Docs/WORKER_SETUP.md)

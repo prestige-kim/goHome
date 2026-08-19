@@ -1,13 +1,19 @@
 # API 키 발급 및 요청 주소
 
-현재 앱 실행에 즉시 필요한 키는 `SEOUL_API_KEY` 하나다. `PUBLIC_DATA_API_KEY`는 막차의 공휴일 판정 기능을 구현하는 Phase 4에서 사용한다.
+서울시 원본 응답을 로컬에서 점검할 때는 `SEOUL_API_KEY`를 사용한다. 실제 앱은 원본 키를
+포함하지 않고 `TRANSIT_PROXY_BASE_URL`과 `TRANSIT_PROXY_CLIENT_TOKEN`으로 Cloudflare
+Worker를 호출한다. `PUBLIC_DATA_API_KEY`는 막차의 공휴일 판정 기능을 구현하는 Phase 4에서 사용한다.
 
 키는 `Config/Secrets.xcconfig`에만 저장한다. 이 파일은 `.gitignore`에 포함되어 GitHub에 올라가지 않는다. 값에 따옴표를 붙이지 않는다.
 
 ```xcconfig
 SEOUL_API_KEY = 발급받은_서울시_키
+TRANSIT_PROXY_BASE_URL = https://gohome-transit-proxy.<계정>.workers.dev
+TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
 PUBLIC_DATA_API_KEY = 발급받은_공공데이터포털_Encoding_키
 ```
+
+Worker 배포 절차는 [WORKER_SETUP.md](WORKER_SETUP.md)를 따른다.
 
 ## 1. 서울 열린데이터광장 키
 
@@ -21,13 +27,28 @@ PUBLIC_DATA_API_KEY = 발급받은_공공데이터포털_Encoding_키
 ### 실시간 역 도착정보
 
 - 데이터셋: https://www.data.go.kr/data/15058052/openapi.do
-- 현재 앱에서 사용하는 요청 형식:
+- 서울시가 공식 문서에서 안내하는 요청 형식:
 
 ```text
-https://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimeStationArrival/0/20/{역명}
+http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimeStationArrival/0/20/{역명}
 ```
 
 예시에서 `{역명}`에는 `서울`, `시청`, `강남`처럼 `역`을 제외한 이름을 URL 인코딩해 넣는다.
+
+> 주의: 2026-08-19 확인 기준 `swopenapi.seoul.go.kr`은 HTTPS 연결을 제공하지 않고,
+> 공식 샘플도 HTTP를 사용한다. 따라서 키와 응답이 전송 구간에서 암호화되지 않는다.
+> 실제 앱은 배포된 Cloudflare Worker HTTPS 중계를 통해서만 이 원본 API를 호출한다.
+> 아래 로컬 직접 호출 스크립트는 원본 키와 응답 형식을 점검하는 개발 도구로만 사용한다.
+
+Xcode 없이 로컬에서 키와 응답을 1회 점검하려면 아래 명령을 사용한다. 응답은 Git에서
+제외된 `tmp/api-samples/`에 저장된다. 이 명령은 HTTP 전송 위험을 이해한 경우에만 실행한다.
+
+```sh
+ruby scripts/check_seoul_api.rb --allow-insecure-http 시청
+```
+
+2026-08-19 시청역 점검에서 `INFO-000` 정상 응답과 도착정보 14건을 확인했다. 기존 DTO 필드와
+급행(`btrainSttus`), 막차(`lstcarAt`), 상태 코드(`arvlCd`), 기준시각(`recptnDt`)의 타입도 확인했다.
 
 ### 실시간 열차 위치
 
@@ -35,7 +56,7 @@ https://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimeStationArr
 - 추후 사용할 요청 형식:
 
 ```text
-https://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/100/{호선명}
+http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/100/{호선명}
 ```
 
 `{호선명}` 예시는 `1호선`, `2호선`, `수인분당선`이다. 이 API는 실제 GPS 좌표가 아니라 현재 역과 진입·도착·출발 상태를 제공한다.
@@ -67,7 +88,10 @@ https://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0
 - 전국도시철도역사정보표준데이터: https://www.data.go.kr/data/15013205/standard.do
 - 국가철도공단 도시광역철도 역사정보: https://www.data.go.kr/data/15093755/fileData.do
 
-Phase 1에서 원본 XLSX를 내려받아 서울 및 실시간 지원 구간만 JSON으로 변환하고, 현재의 `GoHome/Resources/stations.seed.json`을 교체한다.
+원본 XLSX와 서울시 실시간 지원 역 목록은 `DataSources/raw/`에 버전 고정해 두었다.
+`scripts/build_station_bundle.py`가 지원 구간만 선별하고 역명·환승역·역 ID를 정규화해
+`GoHome/Resources/stations.seed.json`을 생성한다. 현재 번들은 563개 물리 역과 696개
+노선별 역 ID를 포함한다. `scripts/validate_station_bundle.py`로 결과를 독립 검증할 수 있다.
 
 ## 4. 키 확인 순서
 

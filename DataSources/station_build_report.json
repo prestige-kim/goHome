@@ -1,0 +1,49 @@
+{
+  "stationCount": 563,
+  "sourceStationLineCount": 696,
+  "lineCounts": {
+    "1호선": 102,
+    "2호선": 51,
+    "3호선": 44,
+    "4호선": 48,
+    "5호선": 56,
+    "6호선": 39,
+    "7호선": 53,
+    "8호선": 24,
+    "9호선": 38,
+    "경의중앙선": 57,
+    "경춘선": 25,
+    "수인분당선": 63,
+    "신분당선": 16,
+    "공항철도": 14,
+    "경강선": 12,
+    "서해선": 21,
+    "우이신설선": 13,
+    "신림선": 11,
+    "GTX-A": 9
+  },
+  "sameNameDifferentLocation": [
+    "양평"
+  ],
+  "gtxCoordinateOverrides": {
+    "운정중앙": "https://rail.blue/railroad/logis/stationinfo.aspx?id=4821890",
+    "킨텍스": "https://rail.blue/railroad/logis/stationinfo.aspx?id=4821891"
+  },
+  "physicalStationCoordinateOverrides": {
+    "이촌": {
+      "latitude": 37.522476,
+      "longitude": 126.973816,
+      "reason": "KRIC 경원선 좌표 채택; 동일 환승역의 4호선 좌표 이상치 보정"
+    }
+  },
+  "distinctSameNameStations": [
+    "신촌",
+    "양평"
+  ],
+  "sources": {
+    "kric": "kric_metro_stations_20260630.xlsx",
+    "seoulRealtimeSupport": "seoul_realtime_arrival_stations_20260804.xlsx",
+    "kricGtxA": "kric_gtx_a_stations_20240715.xlsx"
+  },
+  "clusterDistanceMeters": 850.0
+}

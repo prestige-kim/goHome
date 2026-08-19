@@ -1,8 +1,15 @@
 import Foundation
 
 enum AppConfiguration {
-    static var seoulAPIKey: String? {
-        value(for: "SeoulAPIKey")
+    static var transitProxyBaseURL: URL? {
+        guard let rawValue = value(for: "TransitProxyBaseURL") else {
+            return nil
+        }
+        return URL(string: rawValue)
+    }
+
+    static var transitProxyClientToken: String? {
+        value(for: "TransitProxyClientToken")
     }
 
     static var publicDataAPIKey: String? {

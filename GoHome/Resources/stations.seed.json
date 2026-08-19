@@ -1,23 +1,9409 @@
 [
-    {
-        "id": "seoul-1-4",
-        "name": "서울",
-        "latitude": 37.556878,
-        "longitude": 126.972578,
-        "lineNames": ["1호선", "4호선"]
+  {
+    "id": "seoul-1092004703",
+    "name": "4.19 민주묘지",
+    "apiName": "4.19 민주묘지",
+    "latitude": 37.64954,
+    "longitude": 127.01371,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004703"
     },
-    {
-        "id": "city-hall-1-2",
-        "name": "시청",
-        "latitude": 37.565682,
-        "longitude": 126.976849,
-        "lineNames": ["1호선", "2호선"]
-    },
-    {
-        "id": "jonggak-1",
-        "name": "종각",
-        "latitude": 37.570175,
-        "longitude": 126.983226,
-        "lineNames": ["1호선"]
+    "subwayIDs": {
+      "우이신설선": "1092"
     }
+  },
+  {
+    "id": "seoul-1001000109",
+    "name": "가능",
+    "apiName": "가능",
+    "latitude": 37.748362,
+    "longitude": 127.044251,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000109"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000350",
+    "name": "가락시장",
+    "apiName": "가락시장",
+    "latitude": 37.492661,
+    "longitude": 127.1179895,
+    "lineNames": [
+      "3호선",
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000350",
+      "8호선": "1008000817"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1001080142",
+    "name": "가산디지털단지",
+    "apiName": "가산디지털단지",
+    "latitude": 37.480972,
+    "longitude": 126.882666,
+    "lineNames": [
+      "1호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080142",
+      "7호선": "1007000746"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1009000907",
+    "name": "가양",
+    "apiName": "가양",
+    "latitude": 37.561111,
+    "longitude": 126.855078,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000907"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1092004704",
+    "name": "가오리",
+    "apiName": "가오리",
+    "latitude": 37.64162,
+    "longitude": 127.01681,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004704"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1063075315",
+    "name": "가좌",
+    "apiName": "가좌",
+    "latitude": 37.568611,
+    "longitude": 126.914841,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075315"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1075075223",
+    "name": "가천대",
+    "apiName": "가천대",
+    "latitude": 37.448784,
+    "longitude": 127.126677,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075223"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1067080134",
+    "name": "가평",
+    "apiName": "가평",
+    "latitude": 37.814515,
+    "longitude": 127.510693,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080134"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1001000155",
+    "name": "간석",
+    "apiName": "간석",
+    "latitude": 37.464689,
+    "longitude": 126.693408,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000155"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1067080123",
+    "name": "갈매",
+    "apiName": "갈매",
+    "latitude": 37.634135,
+    "longitude": 127.114803,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080123"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1002000222",
+    "name": "강남",
+    "apiName": "강남",
+    "latitude": 37.4977177,
+    "longitude": 127.0279145,
+    "lineNames": [
+      "2호선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000222",
+      "신분당선": "1077000687"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1007000730",
+    "name": "강남구청",
+    "apiName": "강남구청",
+    "latitude": 37.5168785,
+    "longitude": 127.0413975,
+    "lineNames": [
+      "7호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000730",
+      "수인분당선": "1075075213"
+    },
+    "subwayIDs": {
+      "7호선": "1007",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000548",
+    "name": "강동",
+    "apiName": "강동",
+    "latitude": 37.53581,
+    "longitude": 127.13249,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000548"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1008000812",
+    "name": "강동구청",
+    "apiName": "강동구청",
+    "latitude": 37.530348,
+    "longitude": 127.120461,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000812"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1063075319",
+    "name": "강매",
+    "apiName": "강매",
+    "latitude": 37.612396,
+    "longitude": 126.844537,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075319"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1002000214",
+    "name": "강변",
+    "apiName": "강변",
+    "latitude": 37.535161,
+    "longitude": 127.094684,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000214"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1005000554",
+    "name": "강일",
+    "apiName": "강일",
+    "latitude": 37.557521,
+    "longitude": 127.176018,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000554"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1067080137",
+    "name": "강촌",
+    "apiName": "강촌",
+    "latitude": 37.805728,
+    "longitude": 127.634054,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080137"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1005080553",
+    "name": "개롱",
+    "apiName": "개롱",
+    "latitude": 37.498097,
+    "longitude": 127.134817,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080553"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001000143",
+    "name": "개봉",
+    "apiName": "개봉",
+    "latitude": 37.494698,
+    "longitude": 126.858504,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000143"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1075075219",
+    "name": "개포동",
+    "apiName": "개포동",
+    "latitude": 37.489112,
+    "longitude": 127.066027,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075219"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1009000901",
+    "name": "개화",
+    "apiName": "개화",
+    "latitude": 37.578591,
+    "longitude": 126.797833,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000901"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1005000511",
+    "name": "개화산",
+    "apiName": "개화산",
+    "latitude": 37.572458,
+    "longitude": 126.806838,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000511"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005080554",
+    "name": "거여",
+    "apiName": "거여",
+    "latitude": 37.493208,
+    "longitude": 127.143983,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080554"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1002000212",
+    "name": "건대입구",
+    "apiName": "건대입구",
+    "latitude": 37.540645,
+    "longitude": 127.070167,
+    "lineNames": [
+      "2호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000212",
+      "7호선": "1007000727"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1065006507",
+    "name": "검암",
+    "apiName": "검암",
+    "latitude": 37.5691555,
+    "longitude": 126.6735357,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006507"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1081037413",
+    "name": "경기광주",
+    "apiName": "경기광주",
+    "latitude": 37.398974,
+    "longitude": 127.253201,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037413"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1004000436",
+    "name": "경마공원",
+    "apiName": "경마공원",
+    "latitude": 37.443987,
+    "longitude": 127.007899,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000436"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1003000327",
+    "name": "경복궁",
+    "apiName": "경복궁",
+    "latitude": 37.575844,
+    "longitude": 126.973576,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000327"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1003000351",
+    "name": "경찰병원",
+    "apiName": "경찰병원",
+    "latitude": 37.495754,
+    "longitude": 127.124198,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000351"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1065006506",
+    "name": "계양",
+    "apiName": "계양",
+    "latitude": 37.571769,
+    "longitude": 126.736319,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006506"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1005000552",
+    "name": "고덕",
+    "apiName": "고덕",
+    "latitude": 37.555002,
+    "longitude": 127.154214,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000552"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1006000640",
+    "name": "고려대",
+    "apiName": "고려대",
+    "latitude": 37.59034,
+    "longitude": 127.03626,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000640"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1075075246",
+    "name": "고색",
+    "apiName": "고색",
+    "latitude": 37.249829,
+    "longitude": 126.9805899,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075246"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000339",
+    "name": "고속터미널",
+    "apiName": "고속터미널",
+    "latitude": 37.5047577,
+    "longitude": 127.0046717,
+    "lineNames": [
+      "3호선",
+      "7호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000339",
+      "7호선": "1007000734",
+      "9호선": "1009000923"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "7호선": "1007",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1004000451",
+    "name": "고잔",
+    "apiName": "고잔",
+    "latitude": 37.316821,
+    "longitude": 126.823094,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000451",
+      "수인분당선": "1075075253"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1063075323",
+    "name": "곡산",
+    "apiName": "곡산",
+    "latitude": 37.645729,
+    "longitude": 126.801877,
+    "lineNames": [
+      "경의중앙선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075323",
+      "서해선": "1093004004"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1081037415",
+    "name": "곤지암",
+    "apiName": "곤지암",
+    "latitude": 37.350525,
+    "longitude": 127.346186,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037415"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1005000529",
+    "name": "공덕",
+    "apiName": "공덕",
+    "latitude": 37.5432546,
+    "longitude": 126.9516214,
+    "lineNames": [
+      "5호선",
+      "6호선",
+      "경의중앙선",
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000529",
+      "6호선": "1006000626",
+      "경의중앙선": "1063075312",
+      "공항철도": "1065006502"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "6호선": "1006",
+      "경의중앙선": "1063",
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1007000716",
+    "name": "공릉(서울산업대입구)",
+    "apiName": "공릉(서울산업대입구)",
+    "latitude": 37.625642,
+    "longitude": 127.072969,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000716"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1009000903",
+    "name": "공항시장",
+    "apiName": "공항시장",
+    "latitude": 37.563726,
+    "longitude": 126.810678,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000903"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1065006509",
+    "name": "공항화물청사",
+    "apiName": "공항화물청사",
+    "latitude": 37.4590261,
+    "longitude": 126.4774333,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006509"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1004000438",
+    "name": "과천",
+    "apiName": "과천",
+    "latitude": 37.432805,
+    "longitude": 126.996404,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000438"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1001080146",
+    "name": "관악",
+    "apiName": "관악",
+    "latitude": 37.419578,
+    "longitude": 126.908476,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080146"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1094000411",
+    "name": "관악산",
+    "apiName": "관악산",
+    "latitude": 37.469169,
+    "longitude": 126.9449548,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000411"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1077006819",
+    "name": "광교",
+    "apiName": "광교",
+    "latitude": 37.3017347,
+    "longitude": 127.0448561,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006819"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1077006818",
+    "name": "광교중앙",
+    "apiName": "광교중앙",
+    "latitude": 37.2877375,
+    "longitude": 127.052625,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006818"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1005000546",
+    "name": "광나루(장신대)",
+    "apiName": "광나루(장신대)",
+    "latitude": 37.545301,
+    "longitude": 127.103478,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000546"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001075410",
+    "name": "광명",
+    "apiName": "광명",
+    "latitude": 37.415995,
+    "longitude": 126.884523,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001075410"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000748",
+    "name": "광명사거리",
+    "apiName": "광명사거리",
+    "latitude": 37.47927,
+    "longitude": 126.854854,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000748"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001000119",
+    "name": "광운대",
+    "apiName": "광운대",
+    "latitude": 37.6236025,
+    "longitude": 127.0618925,
+    "lineNames": [
+      "1호선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000119",
+      "경춘선": "1067080119"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1005000533",
+    "name": "광화문",
+    "apiName": "광화문",
+    "latitude": 37.571645,
+    "longitude": 126.976568,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000533"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1006000624",
+    "name": "광흥창",
+    "apiName": "광흥창",
+    "latitude": 37.547464,
+    "longitude": 126.931971,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000624"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1002000223",
+    "name": "교대",
+    "apiName": "교대",
+    "latitude": 37.4935085,
+    "longitude": 127.0141135,
+    "lineNames": [
+      "2호선",
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000223",
+      "3호선": "1003000340"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1001000141",
+    "name": "구로",
+    "apiName": "구로",
+    "latitude": 37.503178,
+    "longitude": 126.882037,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000141"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000232",
+    "name": "구로디지털단지",
+    "apiName": "구로디지털단지",
+    "latitude": 37.4852931,
+    "longitude": 126.901456,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000232"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1075075218",
+    "name": "구룡",
+    "apiName": "구룡",
+    "latitude": 37.486985,
+    "longitude": 127.059496,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075218"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1008000807",
+    "name": "구리",
+    "apiName": "구리",
+    "latitude": 37.60291,
+    "longitude": 127.1420515,
+    "lineNames": [
+      "8호선",
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000807",
+      "경의중앙선": "1063075123"
+    },
+    "subwayIDs": {
+      "8호선": "1008",
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1009000921",
+    "name": "구반포",
+    "apiName": "구반포",
+    "latitude": 37.501389,
+    "longitude": 126.987222,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000921"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1006000615",
+    "name": "구산",
+    "apiName": "구산",
+    "latitude": 37.611196,
+    "longitude": 126.9172519,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000615"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1032000355",
+    "name": "구성",
+    "apiName": "구성",
+    "latitude": 37.299013,
+    "longitude": 127.105664,
+    "lineNames": [
+      "수인분당선",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075235",
+      "GTX-A": "1032000355"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1002000213",
+    "name": "구의",
+    "apiName": "구의",
+    "latitude": 37.537157,
+    "longitude": 127.0862124,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000213"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1001000142",
+    "name": "구일",
+    "apiName": "구일",
+    "latitude": 37.495973,
+    "longitude": 126.869201,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000142"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000320",
+    "name": "구파발",
+    "apiName": "구파발",
+    "latitude": 37.636612,
+    "longitude": 126.918827,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000320"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1063075132",
+    "name": "국수",
+    "apiName": "국수",
+    "latitude": 37.516171,
+    "longitude": 127.399402,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075132"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1009000914",
+    "name": "국회의사당",
+    "apiName": "국회의사당",
+    "latitude": 37.528105,
+    "longitude": 126.917874,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000914"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1005000544",
+    "name": "군자(능동)",
+    "apiName": "군자(능동)",
+    "latitude": 37.5571265,
+    "longitude": 127.0795215,
+    "lineNames": [
+      "5호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000544",
+      "7호선": "1007000725"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001080150",
+    "name": "군포",
+    "apiName": "군포",
+    "latitude": 37.353732,
+    "longitude": 126.948517,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080150"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1067080135",
+    "name": "굴봉산",
+    "apiName": "굴봉산",
+    "latitude": 37.832086,
+    "longitude": 127.557732,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080135"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1007000758",
+    "name": "굴포천",
+    "apiName": "굴포천",
+    "latitude": 37.50695,
+    "longitude": 126.731481,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000758"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1005000550",
+    "name": "굽은다리(강동구민회관앞)",
+    "apiName": "굽은다리(강동구민회관앞)",
+    "latitude": 37.545442,
+    "longitude": 127.142844,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000550"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1067080127",
+    "name": "금곡",
+    "apiName": "금곡",
+    "latitude": 37.637414,
+    "longitude": 127.207931,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080127"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1063075330",
+    "name": "금릉",
+    "apiName": "금릉",
+    "latitude": 37.751295,
+    "longitude": 126.765401,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075330"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001080149",
+    "name": "금정",
+    "apiName": "금정",
+    "latitude": 37.371957,
+    "longitude": 126.943511,
+    "lineNames": [
+      "1호선",
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080149",
+      "4호선": "1004000443"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1001080144",
+    "name": "금천구청",
+    "apiName": "금천구청",
+    "latitude": 37.45576,
+    "longitude": 126.894344,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080144"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075331",
+    "name": "금촌",
+    "apiName": "금촌",
+    "latitude": 37.766106,
+    "longitude": 126.774515,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075331"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1003000334",
+    "name": "금호",
+    "apiName": "금호",
+    "latitude": 37.548269,
+    "longitude": 127.015785,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000334"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1075075237",
+    "name": "기흥",
+    "apiName": "기흥",
+    "latitude": 37.275657,
+    "longitude": 127.115944,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075237"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000549",
+    "name": "길동",
+    "apiName": "길동",
+    "latitude": 37.538022,
+    "longitude": 127.140085,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000549"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1004000417",
+    "name": "길음",
+    "apiName": "길음",
+    "latitude": 37.603387,
+    "longitude": 127.025053,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000417"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1067080138",
+    "name": "김유정",
+    "apiName": "김유정",
+    "latitude": 37.818475,
+    "longitude": 127.714302,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080138"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1005000512",
+    "name": "김포공항",
+    "apiName": "김포공항",
+    "latitude": 37.5621151,
+    "longitude": 126.8021265,
+    "lineNames": [
+      "5호선",
+      "9호선",
+      "공항철도",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000512",
+      "9호선": "1009000902",
+      "공항철도": "1065006505",
+      "서해선": "1093004007"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "9호선": "1009",
+      "공항철도": "1065",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1002002344",
+    "name": "까치산",
+    "apiName": "까치산",
+    "latitude": 37.5322,
+    "longitude": 126.84645,
+    "lineNames": [
+      "2호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002344",
+      "5호선": "1005000518"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1007000751",
+    "name": "까치울",
+    "apiName": "까치울",
+    "latitude": 37.506236,
+    "longitude": 126.81095,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000751"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1002000227",
+    "name": "낙성대",
+    "apiName": "낙성대",
+    "latitude": 37.47713,
+    "longitude": 126.963583,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000227"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1007000745",
+    "name": "남구로",
+    "apiName": "남구로",
+    "latitude": 37.486181,
+    "longitude": 126.887372,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000745"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1075075264",
+    "name": "남동인더스파크",
+    "apiName": "남동인더스파크",
+    "latitude": 37.407668,
+    "longitude": 126.695613,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075264"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000341",
+    "name": "남부터미널",
+    "apiName": "남부터미널",
+    "latitude": 37.48494,
+    "longitude": 127.016289,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000341"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1007000737",
+    "name": "남성",
+    "apiName": "남성",
+    "latitude": 37.484688,
+    "longitude": 126.971108,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000737"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001000134",
+    "name": "남영",
+    "apiName": "남영",
+    "latitude": 37.540597,
+    "longitude": 126.971171,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000134"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1008000821",
+    "name": "남위례",
+    "apiName": "남위례",
+    "latitude": 37.462839,
+    "longitude": 127.139047,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000821"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1067080139",
+    "name": "남춘천",
+    "apiName": "남춘천",
+    "latitude": 37.864071,
+    "longitude": 127.723761,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080139"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1004000434",
+    "name": "남태령",
+    "apiName": "남태령",
+    "latitude": 37.464339,
+    "longitude": 126.989081,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000434"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1008000823",
+    "name": "남한산성입구(성남법원,검찰청)",
+    "apiName": "남한산성입구(성남법원,검찰청)",
+    "latitude": 37.451568,
+    "longitude": 127.159845,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000823"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1007000735",
+    "name": "내방",
+    "apiName": "내방",
+    "latitude": 37.48764,
+    "longitude": 126.993541,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000735"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1009000918",
+    "name": "노들",
+    "apiName": "노들",
+    "latitude": 37.512726,
+    "longitude": 126.953096,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000918"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1001000136",
+    "name": "노량진",
+    "apiName": "노량진",
+    "latitude": 37.5138695,
+    "longitude": 126.941294,
+    "lineNames": [
+      "1호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000136",
+      "9호선": "1009000917"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1004000411",
+    "name": "노원",
+    "apiName": "노원",
+    "latitude": 37.655376,
+    "longitude": 127.061869,
+    "lineNames": [
+      "4호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000411",
+      "7호선": "1007000713"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1003000323",
+    "name": "녹번",
+    "apiName": "녹번",
+    "latitude": 37.600882,
+    "longitude": 126.935758,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000323"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1006000629",
+    "name": "녹사평",
+    "apiName": "녹사평",
+    "latitude": 37.53469,
+    "longitude": 126.98665,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000629"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001000108",
+    "name": "녹양",
+    "apiName": "녹양",
+    "latitude": 37.759416,
+    "longitude": 127.042272,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000108"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000117",
+    "name": "녹천",
+    "apiName": "녹천",
+    "latitude": 37.644599,
+    "longitude": 127.051406,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000117"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000732",
+    "name": "논현",
+    "apiName": "논현",
+    "latitude": 37.5111117,
+    "longitude": 127.0213754,
+    "lineNames": [
+      "7호선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000732",
+      "신분당선": "1077000685"
+    },
+    "subwayIDs": {
+      "7호선": "1007",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1063075321",
+    "name": "능곡",
+    "apiName": "능곡",
+    "latitude": 37.618741,
+    "longitude": 126.820745,
+    "lineNames": [
+      "경의중앙선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075321",
+      "서해선": "1093004006"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1004000454",
+    "name": "능길",
+    "apiName": "신길온천",
+    "latitude": 37.337488,
+    "longitude": 126.767306,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000454",
+      "수인분당선": "1075075256"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1008000805",
+    "name": "다산",
+    "apiName": "다산",
+    "latitude": 37.62437,
+    "longitude": 127.1498,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000805"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1008000824",
+    "name": "단대오거리",
+    "apiName": "단대오거리",
+    "latitude": 37.445057,
+    "longitude": 127.156735,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000824"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1093004018",
+    "name": "달미",
+    "apiName": "달미",
+    "latitude": 37.3490003,
+    "longitude": 126.809318,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004018"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1075075259",
+    "name": "달월",
+    "apiName": "달월",
+    "latitude": 37.379993,
+    "longitude": 126.745431,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075259"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000542",
+    "name": "답십리",
+    "apiName": "답십리",
+    "latitude": 37.566833,
+    "longitude": 127.05266,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000542"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1094000407",
+    "name": "당곡",
+    "apiName": "당곡",
+    "latitude": 37.4900391,
+    "longitude": 126.9275688,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000407"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1002000237",
+    "name": "당산",
+    "apiName": "당산",
+    "latitude": 37.5343255,
+    "longitude": 126.9024165,
+    "lineNames": [
+      "2호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000237",
+      "9호선": "1009000913"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1001080151",
+    "name": "당정",
+    "apiName": "당정",
+    "latitude": 37.34338,
+    "longitude": 126.948388,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080151"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000314",
+    "name": "대곡",
+    "apiName": "대곡",
+    "latitude": 37.631629,
+    "longitude": 126.8103507,
+    "lineNames": [
+      "3호선",
+      "경의중앙선",
+      "서해선",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000314",
+      "경의중앙선": "1063075322",
+      "서해선": "1093004005",
+      "GTX-A": "1032000348"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "경의중앙선": "1063",
+      "서해선": "1093",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1004000437",
+    "name": "대공원",
+    "apiName": "대공원",
+    "latitude": 37.435724,
+    "longitude": 127.006474,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000437"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1002000233",
+    "name": "대림",
+    "apiName": "대림",
+    "latitude": 37.4931333,
+    "longitude": 126.8959881,
+    "lineNames": [
+      "2호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000233",
+      "7호선": "1007000744"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1075075220",
+    "name": "대모산입구",
+    "apiName": "대모산입구",
+    "latitude": 37.491347,
+    "longitude": 127.072702,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075220"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001000137",
+    "name": "대방",
+    "apiName": "대방",
+    "latitude": 37.5131161,
+    "longitude": 126.9258619,
+    "lineNames": [
+      "1호선",
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000137",
+      "신림선": "1094000402"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1067080131",
+    "name": "대성리",
+    "apiName": "대성리",
+    "latitude": 37.683909,
+    "longitude": 127.379165,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080131"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1004000446",
+    "name": "대야미",
+    "apiName": "대야미",
+    "latitude": 37.328304,
+    "longitude": 126.917161,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000446"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1003000347",
+    "name": "대청",
+    "apiName": "대청",
+    "latitude": 37.493607,
+    "longitude": 127.079526,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000347"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1003000345",
+    "name": "대치",
+    "apiName": "대치",
+    "latitude": 37.494601,
+    "longitude": 127.063449,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000345"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1003000309",
+    "name": "대화",
+    "apiName": "대화",
+    "latitude": 37.675883,
+    "longitude": 126.747756,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000309"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1006000625",
+    "name": "대흥(서강대앞)",
+    "apiName": "대흥(서강대앞)",
+    "latitude": 37.547732,
+    "longitude": 126.942214,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000625"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001000106",
+    "name": "덕계",
+    "apiName": "덕계",
+    "latitude": 37.818761,
+    "longitude": 127.056676,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000106"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075126",
+    "name": "덕소",
+    "apiName": "덕소",
+    "latitude": 37.586892,
+    "longitude": 127.208835,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075126"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000105",
+    "name": "덕정",
+    "apiName": "덕정",
+    "latitude": 37.843216,
+    "longitude": 127.061511,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000105"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000344",
+    "name": "도곡",
+    "apiName": "도곡",
+    "latitude": 37.4910215,
+    "longitude": 127.0555435,
+    "lineNames": [
+      "3호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000344",
+      "수인분당선": "1075075217"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1063075124",
+    "name": "도농",
+    "apiName": "도농",
+    "latitude": 37.608756,
+    "longitude": 127.161105,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075124"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1002002341",
+    "name": "도림천",
+    "apiName": "도림천",
+    "latitude": 37.5145589,
+    "longitude": 126.882586,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002341"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1001000114",
+    "name": "도봉",
+    "apiName": "도봉",
+    "latitude": 37.679441,
+    "longitude": 127.045521,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000114"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000113",
+    "name": "도봉산",
+    "apiName": "도봉산",
+    "latitude": 37.689367,
+    "longitude": 127.0462975,
+    "lineNames": [
+      "1호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000113",
+      "7호선": "1007000710"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1063075127",
+    "name": "도심",
+    "apiName": "도심",
+    "latitude": 37.579628,
+    "longitude": 127.222798,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075127"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000159",
+    "name": "도원",
+    "apiName": "도원",
+    "latitude": 37.468604,
+    "longitude": 126.642824,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000159"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000157",
+    "name": "도화",
+    "apiName": "도화",
+    "latitude": 37.466154,
+    "longitude": 126.66846,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000157"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000326",
+    "name": "독립문",
+    "apiName": "독립문",
+    "latitude": 37.574534,
+    "longitude": 126.957902,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000326"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1006000613",
+    "name": "독바위",
+    "apiName": "독바위",
+    "latitude": 37.618413,
+    "longitude": 126.933035,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000613"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001080143",
+    "name": "독산",
+    "apiName": "독산",
+    "latitude": 37.465994,
+    "longitude": 126.889508,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080143"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1006000643",
+    "name": "돌곶이",
+    "apiName": "돌곶이",
+    "latitude": 37.610522,
+    "longitude": 127.056419,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000643"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1008000806",
+    "name": "동구릉",
+    "apiName": "동구릉",
+    "latitude": 37.610556,
+    "longitude": 127.135056,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000806"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1001000128",
+    "name": "동대문",
+    "apiName": "동대문",
+    "latitude": 37.571318,
+    "longitude": 127.00997,
+    "lineNames": [
+      "1호선",
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000128",
+      "4호선": "1004000421"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1002000205",
+    "name": "동대문역사문화공원",
+    "apiName": "동대문역사문화공원",
+    "latitude": 37.565144,
+    "longitude": 127.007407,
+    "lineNames": [
+      "2호선",
+      "4호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000205",
+      "4호선": "1004000422",
+      "5호선": "1005000536"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "4호선": "1004",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1003000332",
+    "name": "동대입구",
+    "apiName": "동대입구",
+    "latitude": 37.55906,
+    "longitude": 127.005273,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000332"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1001000101",
+    "name": "동두천",
+    "apiName": "동두천",
+    "latitude": 37.927569,
+    "longitude": 127.054825,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000101"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000103",
+    "name": "동두천중앙",
+    "apiName": "동두천중앙",
+    "latitude": 37.901818,
+    "longitude": 127.056528,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000103"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000127",
+    "name": "동묘앞",
+    "apiName": "동묘앞",
+    "latitude": 37.57277,
+    "longitude": 127.0160625,
+    "lineNames": [
+      "1호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000127",
+      "6호선": "1006000636"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001000154",
+    "name": "동암",
+    "apiName": "동암",
+    "latitude": 37.470835,
+    "longitude": 126.703016,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000154"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000160",
+    "name": "동인천",
+    "apiName": "동인천",
+    "latitude": 37.475414,
+    "longitude": 126.632598,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000160"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1004000431",
+    "name": "동작",
+    "apiName": "동작",
+    "latitude": 37.5032225,
+    "longitude": 126.9792245,
+    "lineNames": [
+      "4호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000431",
+      "9호선": "1009000920"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1077006814",
+    "name": "동천",
+    "apiName": "동천",
+    "latitude": 37.3386841,
+    "longitude": 127.1027937,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006814"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1032000356",
+    "name": "동탄",
+    "apiName": "동탄",
+    "latitude": 37.2000668,
+    "longitude": 127.0957373,
+    "lineNames": [
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "GTX-A": "1032000356"
+    },
+    "subwayIDs": {
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1001080168",
+    "name": "두정",
+    "apiName": "두정",
+    "latitude": 36.833791,
+    "longitude": 127.148905,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080168"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1005080549",
+    "name": "둔촌동",
+    "apiName": "둔촌동",
+    "latitude": 37.527787,
+    "longitude": 127.136219,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080549"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1009000937",
+    "name": "둔촌오륜",
+    "apiName": "둔촌오륜",
+    "latitude": 37.519339,
+    "longitude": 127.138619,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000937"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1009000909",
+    "name": "등촌",
+    "apiName": "등촌",
+    "latitude": 37.551111,
+    "longitude": 126.864722,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000909"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1006000618",
+    "name": "디지털미디어시티",
+    "apiName": "디지털미디어시티",
+    "latitude": 37.5771332,
+    "longitude": 126.8999297,
+    "lineNames": [
+      "6호선",
+      "경의중앙선",
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000618",
+      "경의중앙선": "1063075316",
+      "공항철도": "1065006504"
+    },
+    "subwayIDs": {
+      "6호선": "1006",
+      "경의중앙선": "1063",
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1002000210",
+    "name": "뚝섬",
+    "apiName": "뚝섬",
+    "latitude": 37.54718,
+    "longitude": 127.047413,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000210"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1005000514",
+    "name": "마곡",
+    "apiName": "마곡",
+    "latitude": 37.55865,
+    "longitude": 126.837693,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000514"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1009000905",
+    "name": "마곡나루",
+    "apiName": "마곡나루",
+    "latitude": 37.5662681,
+    "longitude": 126.8276214,
+    "lineNames": [
+      "9호선",
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000905",
+      "공항철도": "1065065042"
+    },
+    "subwayIDs": {
+      "9호선": "1009",
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1003000312",
+    "name": "마두",
+    "apiName": "마두",
+    "latitude": 37.652185,
+    "longitude": 126.777641,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000312"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1007000712",
+    "name": "마들",
+    "apiName": "마들",
+    "latitude": 37.664985,
+    "longitude": 127.057701,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000712"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1067080130",
+    "name": "마석",
+    "apiName": "마석",
+    "latitude": 37.652328,
+    "longitude": 127.311713,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080130"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1005000541",
+    "name": "마장",
+    "apiName": "마장",
+    "latitude": 37.566066,
+    "longitude": 127.042921,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000541"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005080555",
+    "name": "마천",
+    "apiName": "마천",
+    "latitude": 37.494972,
+    "longitude": 127.152784,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080555"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005000528",
+    "name": "마포",
+    "apiName": "마포",
+    "latitude": 37.539718,
+    "longitude": 126.946043,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000528"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1006000620",
+    "name": "마포구청",
+    "apiName": "마포구청",
+    "latitude": 37.563529,
+    "longitude": 126.903356,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000620"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1063075121",
+    "name": "망우",
+    "apiName": "망우",
+    "latitude": 37.599638,
+    "longitude": 127.0921745,
+    "lineNames": [
+      "경의중앙선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075121",
+      "경춘선": "1067080121"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1006000621",
+    "name": "망원",
+    "apiName": "망원",
+    "latitude": 37.556031,
+    "longitude": 126.910129,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000621"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001000112",
+    "name": "망월사",
+    "apiName": "망월사",
+    "latitude": 37.710499,
+    "longitude": 127.047361,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000112"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1075075241",
+    "name": "망포",
+    "apiName": "망포",
+    "latitude": 37.245793,
+    "longitude": 127.057367,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075241"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075244",
+    "name": "매교",
+    "apiName": "매교",
+    "latitude": 37.265502,
+    "longitude": 127.015657,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075244"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000343",
+    "name": "매봉",
+    "apiName": "매봉",
+    "latitude": 37.487114,
+    "longitude": 127.046907,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000343"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1075075242",
+    "name": "매탄권선",
+    "apiName": "매탄권선",
+    "latitude": 37.252458,
+    "longitude": 127.040824,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075242"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1007000718",
+    "name": "먹골",
+    "apiName": "먹골",
+    "latitude": 37.610638,
+    "longitude": 127.077719,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000718"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000721",
+    "name": "면목",
+    "apiName": "면목",
+    "latitude": 37.588671,
+    "longitude": 127.087503,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000721"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1004000424",
+    "name": "명동",
+    "apiName": "명동",
+    "latitude": 37.560955,
+    "longitude": 126.986271,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000424"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1005000551",
+    "name": "명일",
+    "apiName": "명일",
+    "latitude": 37.551317,
+    "longitude": 127.144002,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000551"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001080148",
+    "name": "명학",
+    "apiName": "명학",
+    "latitude": 37.384435,
+    "longitude": 126.935579,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080148"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1008000827",
+    "name": "모란",
+    "apiName": "모란",
+    "latitude": 37.433056,
+    "longitude": 127.1294925,
+    "lineNames": [
+      "8호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000827",
+      "수인분당선": "1075075225"
+    },
+    "subwayIDs": {
+      "8호선": "1008",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000520",
+    "name": "목동",
+    "apiName": "목동",
+    "latitude": 37.526088,
+    "longitude": 126.864296,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000520"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1008000813",
+    "name": "몽촌토성(평화의문)",
+    "apiName": "몽촌토성(평화의문)",
+    "latitude": 37.517692,
+    "longitude": 127.11274,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000813"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1003000325",
+    "name": "무악재",
+    "apiName": "무악재",
+    "latitude": 37.582658,
+    "longitude": 126.950131,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000325"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1002000235",
+    "name": "문래",
+    "apiName": "문래",
+    "latitude": 37.517993,
+    "longitude": 126.894766,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000235"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1063075335",
+    "name": "문산",
+    "apiName": "문산",
+    "latitude": 37.854565,
+    "longitude": 126.787531,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075335"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1008000818",
+    "name": "문정",
+    "apiName": "문정",
+    "latitude": 37.485931,
+    "longitude": 127.122473,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000818"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1075075231",
+    "name": "미금",
+    "apiName": "미금",
+    "latitude": 37.3506307,
+    "longitude": 127.1089274,
+    "lineNames": [
+      "수인분당선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075231",
+      "신분당선": "1077006813"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1005000555",
+    "name": "미사",
+    "apiName": "미사",
+    "latitude": 37.56309,
+    "longitude": 127.192954,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000555"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1004000415",
+    "name": "미아",
+    "apiName": "미아",
+    "latitude": 37.626435,
+    "longitude": 127.026151,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000415"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1004000416",
+    "name": "미아사거리",
+    "apiName": "미아사거리",
+    "latitude": 37.613276,
+    "longitude": 127.030083,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000416"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1004000447",
+    "name": "반월",
+    "apiName": "반월",
+    "latitude": 37.312244,
+    "longitude": 126.903684,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000447"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1007000733",
+    "name": "반포",
+    "apiName": "반포",
+    "latitude": 37.508171,
+    "longitude": 127.011717,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000733"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1005000515",
+    "name": "발산",
+    "apiName": "발산",
+    "latitude": 37.558692,
+    "longitude": 126.837633,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000515"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1002000225",
+    "name": "방배",
+    "apiName": "방배",
+    "latitude": 37.481469,
+    "longitude": 126.997627,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000225"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1005080551",
+    "name": "방이",
+    "apiName": "방이",
+    "latitude": 37.508752,
+    "longitude": 127.126054,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080551"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001000115",
+    "name": "방학",
+    "apiName": "방학",
+    "latitude": 37.667471,
+    "longitude": 127.044295,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000115"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1005000510",
+    "name": "방화",
+    "apiName": "방화",
+    "latitude": 37.577669,
+    "longitude": 126.812822,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000510"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001080174",
+    "name": "배방",
+    "apiName": "배방",
+    "latitude": 36.777541,
+    "longitude": 127.052751,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080174"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075324",
+    "name": "백마",
+    "apiName": "백마",
+    "latitude": 37.658346,
+    "longitude": 126.794401,
+    "lineNames": [
+      "경의중앙선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075324",
+      "서해선": "1093004003"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1003000313",
+    "name": "백석",
+    "apiName": "백석",
+    "latitude": 37.642973,
+    "longitude": 126.788109,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000313"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1067080136",
+    "name": "백양리",
+    "apiName": "백양리",
+    "latitude": 37.830881,
+    "longitude": 127.589085,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080136"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1001000153",
+    "name": "백운",
+    "apiName": "백운",
+    "latitude": 37.483301,
+    "longitude": 126.707179,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000153"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1006000632",
+    "name": "버티고개",
+    "apiName": "버티고개",
+    "latitude": 37.547933,
+    "longitude": 127.006948,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000632"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1004000442",
+    "name": "범계",
+    "apiName": "범계",
+    "latitude": 37.389783,
+    "longitude": 126.950752,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000442"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1008000804",
+    "name": "별내",
+    "apiName": "별내",
+    "latitude": 37.642369,
+    "longitude": 127.127254,
+    "lineNames": [
+      "8호선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000804",
+      "경춘선": "1067080124"
+    },
+    "subwayIDs": {
+      "8호선": "1008",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1001080157",
+    "name": "병점",
+    "apiName": "병점",
+    "latitude": 37.206821,
+    "longitude": 127.033268,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080157"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000742",
+    "name": "보라매",
+    "apiName": "보라매",
+    "latitude": 37.5001144,
+    "longitude": 126.9202989,
+    "lineNames": [
+      "7호선",
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000742",
+      "신림선": "1094000404"
+    },
+    "subwayIDs": {
+      "7호선": "1007",
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1094000405",
+    "name": "보라매공원",
+    "apiName": "보라매공원",
+    "latitude": 37.4952254,
+    "longitude": 126.9182588,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000405"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1094000406",
+    "name": "보라매병원",
+    "apiName": "보라매병원",
+    "latitude": 37.4929607,
+    "longitude": 126.923886,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000406"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1006000638",
+    "name": "보문",
+    "apiName": "보문",
+    "latitude": 37.585468,
+    "longitude": 127.019556,
+    "lineNames": [
+      "6호선",
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000638",
+      "우이신설선": "1092004712"
+    },
+    "subwayIDs": {
+      "6호선": "1006",
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1001000102",
+    "name": "보산",
+    "apiName": "보산",
+    "latitude": 37.914268,
+    "longitude": 127.057134,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000102"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1075075234",
+    "name": "보정",
+    "apiName": "보정",
+    "latitude": 37.31274,
+    "longitude": 127.108219,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075234"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1008000820",
+    "name": "복정",
+    "apiName": "복정",
+    "latitude": 37.4703845,
+    "longitude": 127.1266865,
+    "lineNames": [
+      "8호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000820",
+      "수인분당선": "1075075222"
+    },
+    "subwayIDs": {
+      "8호선": "1008",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001080170",
+    "name": "봉명",
+    "apiName": "봉명",
+    "latitude": 36.801578,
+    "longitude": 127.136319,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080170"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1009000929",
+    "name": "봉은사",
+    "apiName": "봉은사",
+    "latitude": 37.514219,
+    "longitude": 127.060245,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000929"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1002000229",
+    "name": "봉천",
+    "apiName": "봉천",
+    "latitude": 37.482416,
+    "longitude": 126.941696,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000229"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1006000647",
+    "name": "봉화산",
+    "apiName": "봉화산",
+    "latitude": 37.617429,
+    "longitude": 127.0912326,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000647"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001000151",
+    "name": "부개",
+    "apiName": "부개",
+    "latitude": 37.488479,
+    "longitude": 126.740549,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000151"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1081037418",
+    "name": "부발",
+    "apiName": "부발",
+    "latitude": 37.260411,
+    "longitude": 127.490303,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037418"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1001000148",
+    "name": "부천",
+    "apiName": "부천",
+    "latitude": 37.484066,
+    "longitude": 126.782779,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000148"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000755",
+    "name": "부천시청",
+    "apiName": "부천시청",
+    "latitude": 37.504611,
+    "longitude": 126.763561,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000755"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000752",
+    "name": "부천종합운동장",
+    "apiName": "부천종합운동장",
+    "latitude": 37.5056165,
+    "longitude": 126.797424,
+    "lineNames": [
+      "7호선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000752",
+      "서해선": "1093004009"
+    },
+    "subwayIDs": {
+      "7호선": "1007",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1001000152",
+    "name": "부평",
+    "apiName": "부평",
+    "latitude": 37.489457,
+    "longitude": 126.724584,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000152"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000759",
+    "name": "부평구청",
+    "apiName": "부평구청",
+    "latitude": 37.507523,
+    "longitude": 126.721356,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000759"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1092004709",
+    "name": "북한산보국문",
+    "apiName": "북한산보국문",
+    "latitude": 37.61233,
+    "longitude": 127.00816,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004709"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1092004701",
+    "name": "북한산우이",
+    "apiName": "북한산우이",
+    "latitude": 37.66284,
+    "longitude": 127.01272,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004701"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1003000322",
+    "name": "불광",
+    "apiName": "불광",
+    "latitude": 37.6105365,
+    "longitude": 126.9298435,
+    "lineNames": [
+      "3호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000322",
+      "6호선": "1006000612"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1004000409",
+    "name": "불암산",
+    "apiName": "불암산",
+    "latitude": 37.67009,
+    "longitude": 127.079004,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000409"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1007000722",
+    "name": "사가정",
+    "apiName": "사가정",
+    "latitude": 37.580912,
+    "longitude": 127.088502,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000722"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1002000226",
+    "name": "사당",
+    "apiName": "사당",
+    "latitude": 37.4763995,
+    "longitude": 126.9816335,
+    "lineNames": [
+      "2호선",
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000226",
+      "4호선": "1004000433"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1067080126",
+    "name": "사릉",
+    "apiName": "사릉",
+    "latitude": 37.651145,
+    "longitude": 127.176839,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080126"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1075075250",
+    "name": "사리",
+    "apiName": "사리",
+    "latitude": 37.290809,
+    "longitude": 126.857172,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075250"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1009000924",
+    "name": "사평",
+    "apiName": "사평",
+    "latitude": 37.504161,
+    "longitude": 127.015219,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000924"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1007000760",
+    "name": "산곡",
+    "apiName": "산곡",
+    "latitude": 37.508547,
+    "longitude": 126.70351,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000760"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1004000444",
+    "name": "산본",
+    "apiName": "산본",
+    "latitude": 37.358019,
+    "longitude": 126.932969,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000444"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1008000822",
+    "name": "산성",
+    "apiName": "산성",
+    "latitude": 37.456886,
+    "longitude": 127.149927,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000822"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1004000428",
+    "name": "삼각지",
+    "apiName": "삼각지",
+    "latitude": 37.53501,
+    "longitude": 126.973494,
+    "lineNames": [
+      "4호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000428",
+      "6호선": "1006000628"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1081037412",
+    "name": "삼동",
+    "apiName": "삼동",
+    "latitude": 37.408731,
+    "longitude": 127.203447,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037412"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1007000757",
+    "name": "삼산체육관",
+    "apiName": "삼산체육관",
+    "latitude": 37.506431,
+    "longitude": 126.742081,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000757"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1002000219",
+    "name": "삼성",
+    "apiName": "삼성",
+    "latitude": 37.508827,
+    "longitude": 127.063203,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000219"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1009000928",
+    "name": "삼성중앙",
+    "apiName": "삼성중앙",
+    "latitude": 37.513011,
+    "longitude": 127.053282,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000928"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1003000318",
+    "name": "삼송",
+    "apiName": "삼송",
+    "latitude": 37.653096,
+    "longitude": 126.895559,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000318"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1092004706",
+    "name": "삼양",
+    "apiName": "삼양",
+    "latitude": 37.62706,
+    "longitude": 127.01817,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004706"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1092004707",
+    "name": "삼양사거리",
+    "apiName": "삼양사거리",
+    "latitude": 37.62144,
+    "longitude": 127.02049,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004707"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1009000931",
+    "name": "삼전",
+    "apiName": "삼전",
+    "latitude": 37.504531,
+    "longitude": 127.087211,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000931"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1075075238",
+    "name": "상갈",
+    "apiName": "상갈",
+    "latitude": 37.261797,
+    "longitude": 127.108718,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075238"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1004000410",
+    "name": "상계",
+    "apiName": "상계",
+    "latitude": 37.660576,
+    "longitude": 127.073199,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000410"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1007000739",
+    "name": "상도(중앙대앞)",
+    "apiName": "상도(중앙대앞)",
+    "latitude": 37.50279,
+    "longitude": 126.947949,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000739"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000756",
+    "name": "상동",
+    "apiName": "상동",
+    "latitude": 37.505769,
+    "longitude": 126.753081,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000756"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1004000448",
+    "name": "상록수",
+    "apiName": "상록수",
+    "latitude": 37.302845,
+    "longitude": 126.866533,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000448"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1007000720",
+    "name": "상봉",
+    "apiName": "상봉",
+    "latitude": 37.5958937,
+    "longitude": 127.0857047,
+    "lineNames": [
+      "7호선",
+      "경의중앙선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000720",
+      "경의중앙선": "1063075120",
+      "경춘선": "1067080120"
+    },
+    "subwayIDs": {
+      "7호선": "1007",
+      "경의중앙선": "1063",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1006000623",
+    "name": "상수",
+    "apiName": "상수",
+    "latitude": 37.547704,
+    "longitude": 126.92292,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000623"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1002000207",
+    "name": "상왕십리",
+    "apiName": "상왕십리",
+    "latitude": 37.564444,
+    "longitude": 127.029322,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000207"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1006000642",
+    "name": "상월곡(한국과학기술연구원)",
+    "apiName": "상월곡(한국과학기술연구원)",
+    "latitude": 37.606392,
+    "longitude": 127.048509,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000642"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1005000553",
+    "name": "상일동",
+    "apiName": "상일동",
+    "latitude": 37.556714,
+    "longitude": 127.166381,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000553"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1067080133",
+    "name": "상천",
+    "apiName": "상천",
+    "latitude": 37.770305,
+    "longitude": 127.4542,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080133"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1077006817",
+    "name": "상현",
+    "apiName": "상현",
+    "latitude": 37.2986853,
+    "longitude": 127.0695799,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006817"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1006000616",
+    "name": "새절(신사)",
+    "apiName": "새절(신사)",
+    "latitude": 37.591148,
+    "longitude": 126.913613,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000616"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1009000916",
+    "name": "샛강",
+    "apiName": "샛강",
+    "latitude": 37.51726,
+    "longitude": 126.928902,
+    "lineNames": [
+      "9호선",
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000916",
+      "신림선": "1094000401"
+    },
+    "subwayIDs": {
+      "9호선": "1009",
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1063075313",
+    "name": "서강대",
+    "apiName": "서강대",
+    "latitude": 37.552132,
+    "longitude": 126.935389,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075313"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1005000532",
+    "name": "서대문",
+    "apiName": "서대문",
+    "latitude": 37.565812,
+    "longitude": 126.966639,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000532"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001801571",
+    "name": "서동탄",
+    "apiName": "서동탄",
+    "latitude": 37.195675,
+    "longitude": 127.051893,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001801571"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075112",
+    "name": "서빙고",
+    "apiName": "서빙고",
+    "latitude": 37.51961,
+    "longitude": 126.988358,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075112"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000133",
+    "name": "서울",
+    "apiName": "서울",
+    "latitude": 37.5546882,
+    "longitude": 126.9714901,
+    "lineNames": [
+      "1호선",
+      "4호선",
+      "경의중앙선",
+      "공항철도",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000133",
+      "4호선": "1004000426",
+      "경의중앙선": "1063080313",
+      "공항철도": "1065006501",
+      "GTX-A": "1032000351"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "4호선": "1004",
+      "경의중앙선": "1063",
+      "공항철도": "1065",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1094000410",
+    "name": "서울대벤처타운",
+    "apiName": "서울대벤처타운",
+    "latitude": 37.4720407,
+    "longitude": 126.9339766,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000410"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1002000228",
+    "name": "서울대입구",
+    "apiName": "서울대입구",
+    "latitude": 37.481233,
+    "longitude": 126.952745,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000228"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1075075211",
+    "name": "서울숲",
+    "apiName": "서울숲",
+    "latitude": 37.543647,
+    "longitude": 127.044686,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075211"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1094000403",
+    "name": "서울지방병무청",
+    "apiName": "서울지방병무청",
+    "latitude": 37.5060469,
+    "longitude": 126.9227834,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000403"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1094000409",
+    "name": "서원",
+    "apiName": "서원",
+    "latitude": 37.4782734,
+    "longitude": 126.9332282,
+    "lineNames": [
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "신림선": "1094000409"
+    },
+    "subwayIDs": {
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1001080163",
+    "name": "서정리",
+    "apiName": "서정리",
+    "latitude": 37.056459,
+    "longitude": 127.052844,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080163"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000224",
+    "name": "서초",
+    "apiName": "서초",
+    "latitude": 37.49191,
+    "longitude": 127.007685,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000224"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1075075228",
+    "name": "서현",
+    "apiName": "서현",
+    "latitude": 37.384931,
+    "longitude": 127.123249,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075228"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001000120",
+    "name": "석계",
+    "apiName": "석계",
+    "latitude": 37.6150715,
+    "longitude": 127.065758,
+    "lineNames": [
+      "1호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000120",
+      "6호선": "1006000644"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1007000761",
+    "name": "석남",
+    "apiName": "석남",
+    "latitude": 37.506208,
+    "longitude": 126.676213,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000761"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001080145",
+    "name": "석수",
+    "apiName": "석수",
+    "latitude": 37.435161,
+    "longitude": 126.902233,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080145"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1008000815",
+    "name": "석촌",
+    "apiName": "석촌",
+    "latitude": 37.505237,
+    "longitude": 127.1069695,
+    "lineNames": [
+      "8호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000815",
+      "9호선": "1009000933"
+    },
+    "subwayIDs": {
+      "8호선": "1008",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1009000932",
+    "name": "석촌고분",
+    "apiName": "석촌고분",
+    "latitude": 37.502439,
+    "longitude": 127.096611,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000932"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1002000220",
+    "name": "선릉",
+    "apiName": "선릉",
+    "latitude": 37.504368,
+    "longitude": 127.0485575,
+    "lineNames": [
+      "2호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000220",
+      "수인분당선": "1075075215"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1004000435",
+    "name": "선바위",
+    "apiName": "선바위",
+    "latitude": 37.451854,
+    "longitude": 127.002164,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000435"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1093004019",
+    "name": "선부",
+    "apiName": "선부",
+    "latitude": 37.33459,
+    "longitude": 126.81,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004019"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1009000912",
+    "name": "선유도",
+    "apiName": "선유도",
+    "latitude": 37.537778,
+    "longitude": 126.893889,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000912"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1009000927",
+    "name": "선정릉",
+    "apiName": "선정릉",
+    "latitude": 37.5105275,
+    "longitude": 127.0437381,
+    "lineNames": [
+      "9호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000927",
+      "수인분당선": "1075075214"
+    },
+    "subwayIDs": {
+      "9호선": "1009",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001080153",
+    "name": "성균관대",
+    "apiName": "성균관대",
+    "latitude": 37.300344,
+    "longitude": 126.970861,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080153"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1032000354",
+    "name": "성남",
+    "apiName": "성남",
+    "latitude": 37.394709,
+    "longitude": 127.11949,
+    "lineNames": [
+      "경강선",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037410",
+      "GTX-A": "1032000354"
+    },
+    "subwayIDs": {
+      "경강선": "1081",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1077006816",
+    "name": "성복",
+    "apiName": "성복",
+    "latitude": 37.3140425,
+    "longitude": 127.0807578,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006816"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1002000211",
+    "name": "성수",
+    "apiName": "성수",
+    "latitude": 37.544628,
+    "longitude": 127.055983,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000211"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1004000418",
+    "name": "성신여대입구",
+    "apiName": "성신여대입구",
+    "latitude": 37.592676,
+    "longitude": 127.016734,
+    "lineNames": [
+      "4호선",
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000418",
+      "우이신설선": "1092004711"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1001080166",
+    "name": "성환",
+    "apiName": "성환",
+    "latitude": 36.915781,
+    "longitude": 127.127007,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080166"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080156",
+    "name": "세류",
+    "apiName": "세류",
+    "latitude": 37.244102,
+    "longitude": 127.013772,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080156"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080158",
+    "name": "세마",
+    "apiName": "세마",
+    "latitude": 37.187288,
+    "longitude": 127.043279,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080158"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1081037419",
+    "name": "세종대왕릉",
+    "apiName": "세종왕릉",
+    "latitude": 37.293636,
+    "longitude": 127.570764,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037419"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1075075261",
+    "name": "소래포구",
+    "apiName": "소래포구",
+    "latitude": 37.400963,
+    "longitude": 126.733533,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075261"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001000147",
+    "name": "소사",
+    "apiName": "소사",
+    "latitude": 37.482755,
+    "longitude": 126.7953597,
+    "lineNames": [
+      "1호선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000147",
+      "서해선": "1093004010"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1093004011",
+    "name": "소새울",
+    "apiName": "소새울",
+    "latitude": 37.4685046,
+    "longitude": 126.797228,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004011"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1001000100",
+    "name": "소요산",
+    "apiName": "소요산",
+    "latitude": 37.948608,
+    "longitude": 127.061007,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000100"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1092004702",
+    "name": "솔밭공원",
+    "apiName": "솔밭공원",
+    "latitude": 37.65607,
+    "longitude": 127.01326,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004702"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1092004708",
+    "name": "솔샘",
+    "apiName": "솔샘",
+    "latitude": 37.62037,
+    "longitude": 127.01357,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004708"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1001000150",
+    "name": "송내",
+    "apiName": "송내",
+    "latitude": 37.487626,
+    "longitude": 126.753045,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000150"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1075075267",
+    "name": "송도",
+    "apiName": "송도",
+    "latitude": 37.429714,
+    "longitude": 126.654486,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075267"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000513",
+    "name": "송정",
+    "apiName": "송정",
+    "latitude": 37.561201,
+    "longitude": 126.812052,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000513"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001080162",
+    "name": "송탄",
+    "apiName": "송탄",
+    "latitude": 37.075376,
+    "longitude": 127.054397,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080162"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1008000816",
+    "name": "송파",
+    "apiName": "송파",
+    "latitude": 37.49978,
+    "longitude": 127.11212,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000816"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1009000934",
+    "name": "송파나루",
+    "apiName": "송파나루",
+    "latitude": 37.51055,
+    "longitude": 127.112451,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000934"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1075075229",
+    "name": "수내",
+    "apiName": "수내",
+    "latitude": 37.378435,
+    "longitude": 127.114216,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075229"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1007000711",
+    "name": "수락산",
+    "apiName": "수락산",
+    "latitude": 37.677804,
+    "longitude": 127.055314,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000711"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1004000445",
+    "name": "수리산",
+    "apiName": "수리산",
+    "latitude": 37.350297,
+    "longitude": 126.925537,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000445"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1063075317",
+    "name": "수색",
+    "apiName": "수색",
+    "latitude": 37.580855,
+    "longitude": 126.895681,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075317"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1003000349",
+    "name": "수서",
+    "apiName": "수서",
+    "latitude": 37.4875665,
+    "longitude": 127.101521,
+    "lineNames": [
+      "3호선",
+      "수인분당선",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000349",
+      "수인분당선": "1075075221",
+      "GTX-A": "1032000353"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "수인분당선": "1075",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1001080155",
+    "name": "수원",
+    "apiName": "수원",
+    "latitude": 37.266162,
+    "longitude": 126.9999515,
+    "lineNames": [
+      "1호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080155",
+      "수인분당선": "1075075245"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075243",
+    "name": "수원시청",
+    "apiName": "수원시청",
+    "latitude": 37.261941,
+    "longitude": 127.030736,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075243"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1004000414",
+    "name": "수유",
+    "apiName": "수유",
+    "latitude": 37.637727,
+    "longitude": 127.025371,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000414"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1077006815",
+    "name": "수지구청",
+    "apiName": "수지구청",
+    "latitude": 37.323009,
+    "longitude": 127.0955813,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006815"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1008000826",
+    "name": "수진",
+    "apiName": "수진",
+    "latitude": 37.437575,
+    "longitude": 127.140936,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000826"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1004000427",
+    "name": "숙대입구",
+    "apiName": "숙대입구",
+    "latitude": 37.5447834,
+    "longitude": 126.9721,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000427"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1007000738",
+    "name": "숭실대입구(살피재)",
+    "apiName": "숭실대입구(살피재)",
+    "latitude": 37.496258,
+    "longitude": 126.953649,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000738"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1075075269",
+    "name": "숭의",
+    "apiName": "숭의",
+    "latitude": 37.460891,
+    "longitude": 126.638035,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075269"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1093004021",
+    "name": "시우",
+    "apiName": "시우",
+    "latitude": 37.3130967,
+    "longitude": 126.795503,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004021"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1001000132",
+    "name": "시청",
+    "apiName": "시청",
+    "latitude": 37.5643725,
+    "longitude": 126.976239,
+    "lineNames": [
+      "1호선",
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000132",
+      "2호선": "1002000201"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1093004017",
+    "name": "시흥능곡",
+    "apiName": "시흥능곡",
+    "latitude": 37.3699903,
+    "longitude": 126.808594,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004017"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1093004012",
+    "name": "시흥대야",
+    "apiName": "시흥대야",
+    "latitude": 37.4504787,
+    "longitude": 126.793142,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004012"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1093004016",
+    "name": "시흥시청",
+    "apiName": "시흥시청",
+    "latitude": 37.3814109,
+    "longitude": 126.805946,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004016"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1075075236",
+    "name": "신갈",
+    "apiName": "신갈",
+    "latitude": 37.286127,
+    "longitude": 127.111311,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075236"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000538",
+    "name": "신금호",
+    "apiName": "신금호",
+    "latitude": 37.554504,
+    "longitude": 127.020403,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000538"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001000138",
+    "name": "신길",
+    "apiName": "신길",
+    "latitude": 37.517324,
+    "longitude": 126.9163145,
+    "lineNames": [
+      "1호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000138",
+      "5호선": "1005000525"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1006000648",
+    "name": "신내",
+    "apiName": "신내",
+    "latitude": 37.612713,
+    "longitude": 127.1038015,
+    "lineNames": [
+      "6호선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000648",
+      "경춘선": "1067080122"
+    },
+    "subwayIDs": {
+      "6호선": "1006",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1009000925",
+    "name": "신논현",
+    "apiName": "신논현",
+    "latitude": 37.5044997,
+    "longitude": 127.0244738,
+    "lineNames": [
+      "9호선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000925",
+      "신분당선": "1077000686"
+    },
+    "subwayIDs": {
+      "9호선": "1009",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1002002112",
+    "name": "신답",
+    "apiName": "신답",
+    "latitude": 37.569847,
+    "longitude": 127.047048,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002112"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1002000206",
+    "name": "신당",
+    "apiName": "신당",
+    "latitude": 37.5659245,
+    "longitude": 127.017792,
+    "lineNames": [
+      "2호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000206",
+      "6호선": "1006000635"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1002000231",
+    "name": "신대방",
+    "apiName": "신대방",
+    "latitude": 37.487604,
+    "longitude": 126.913479,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000231"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1007000741",
+    "name": "신대방삼거리",
+    "apiName": "신대방삼거리",
+    "latitude": 37.499717,
+    "longitude": 126.928218,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000741"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001000140",
+    "name": "신도림",
+    "apiName": "신도림",
+    "latitude": 37.508899,
+    "longitude": 126.8913675,
+    "lineNames": [
+      "1호선",
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000140",
+      "2호선": "1002000234"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1081037416",
+    "name": "신둔도예촌",
+    "apiName": "신둔도예촌",
+    "latitude": 37.315499,
+    "longitude": 127.405251,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037416"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1002000230",
+    "name": "신림",
+    "apiName": "신림",
+    "latitude": 37.4845534,
+    "longitude": 126.9295915,
+    "lineNames": [
+      "2호선",
+      "신림선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000230",
+      "신림선": "1094000408"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "신림선": "1094"
+    }
+  },
+  {
+    "id": "seoul-1009000911",
+    "name": "신목동",
+    "apiName": "신목동",
+    "latitude": 37.544167,
+    "longitude": 126.883056,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000911"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1009000922",
+    "name": "신반포",
+    "apiName": "신반포",
+    "latitude": 37.5035033,
+    "longitude": 126.996044,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000922"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1009000904",
+    "name": "신방화",
+    "apiName": "신방화",
+    "latitude": 37.5675,
+    "longitude": 126.816667,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000904"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1003000337",
+    "name": "신사",
+    "apiName": "신사",
+    "latitude": 37.5162816,
+    "longitude": 127.020004,
+    "lineNames": [
+      "3호선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000337",
+      "신분당선": "1077000684"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1001000126",
+    "name": "신설동",
+    "apiName": "신설동",
+    "latitude": 37.5757867,
+    "longitude": 127.024363,
+    "lineNames": [
+      "1호선",
+      "2호선",
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000126",
+      "2호선": "1002002114",
+      "우이신설선": "1092004713"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "2호선": "1002",
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1004000429",
+    "name": "신용산",
+    "apiName": "신용산",
+    "latitude": 37.52909,
+    "longitude": 126.96788,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000429"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1063075131",
+    "name": "신원",
+    "apiName": "신원",
+    "latitude": 37.525921,
+    "longitude": 127.372745,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075131"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000121",
+    "name": "신이문",
+    "apiName": "신이문",
+    "latitude": 37.601829,
+    "longitude": 127.067347,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000121"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1005000519",
+    "name": "신정(은행정)",
+    "apiName": "신정(은행정)",
+    "latitude": 37.525001,
+    "longitude": 126.856176,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000519"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1002002343",
+    "name": "신정네거리",
+    "apiName": "신정네거리",
+    "latitude": 37.520218,
+    "longitude": 126.852849,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002343"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1007000754",
+    "name": "신중동",
+    "apiName": "신중동",
+    "latitude": 37.503081,
+    "longitude": 126.776161,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000754"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001080176",
+    "name": "신창",
+    "apiName": "신창",
+    "latitude": 36.769213,
+    "longitude": 126.950129,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080176"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1093004013",
+    "name": "신천",
+    "apiName": "신천",
+    "latitude": 37.4391147,
+    "longitude": 126.786835,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004013"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1002000240",
+    "name": "신촌",
+    "apiName": "신촌",
+    "latitude": 37.555153,
+    "longitude": 126.93689,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000240"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1063080312",
+    "name": "신촌(경의중앙선)",
+    "apiName": "신촌(경의중앙선)",
+    "latitude": 37.559768,
+    "longitude": 126.942308,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063080312"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1075075270",
+    "name": "신포",
+    "apiName": "신포",
+    "latitude": 37.468442,
+    "longitude": 126.624509,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075270"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1007000743",
+    "name": "신풍",
+    "apiName": "신풍",
+    "latitude": 37.500107,
+    "longitude": 126.909806,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000743"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1093004014",
+    "name": "신현",
+    "apiName": "신현",
+    "latitude": 37.4091399,
+    "longitude": 126.78788,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004014"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1008000825",
+    "name": "신흥",
+    "apiName": "신흥",
+    "latitude": 37.440952,
+    "longitude": 127.14759,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000825"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1004000413",
+    "name": "쌍문",
+    "apiName": "쌍문",
+    "latitude": 37.648274,
+    "longitude": 127.034381,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000413"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1001080171",
+    "name": "쌍용(나사렛대)",
+    "apiName": "쌍용(나사렛대)",
+    "latitude": 36.793745,
+    "longitude": 127.121363,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080171"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080172",
+    "name": "아산",
+    "apiName": "아산",
+    "latitude": 36.792195,
+    "longitude": 127.104384,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080172"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075133",
+    "name": "아신",
+    "apiName": "아신",
+    "latitude": 37.513954,
+    "longitude": 127.443238,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075133"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1005000545",
+    "name": "아차산(어린이대공원후문)",
+    "apiName": "아차산(어린이대공원후문)",
+    "latitude": 37.552005,
+    "longitude": 127.089609,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000545"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1002000242",
+    "name": "아현",
+    "apiName": "아현",
+    "latitude": 37.557407,
+    "longitude": 126.956079,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000242"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1003000328",
+    "name": "안국",
+    "apiName": "안국",
+    "latitude": 37.576562,
+    "longitude": 126.98547,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000328"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1004000453",
+    "name": "안산",
+    "apiName": "안산",
+    "latitude": 37.327006,
+    "longitude": 126.788748,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000453",
+      "수인분당선": "1075075255"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1006000639",
+    "name": "안암(고대병원앞)",
+    "apiName": "안암(고대병원앞)",
+    "latitude": 37.586261,
+    "longitude": 127.02903,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000639"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001080147",
+    "name": "안양",
+    "apiName": "안양",
+    "latitude": 37.401929,
+    "longitude": 126.922647,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080147"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1008000810",
+    "name": "암사",
+    "apiName": "암사",
+    "latitude": 37.550127,
+    "longitude": 127.127521,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000810"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1008000809",
+    "name": "암사역사공원",
+    "apiName": "암사역사공원",
+    "latitude": 37.557167,
+    "longitude": 127.137556,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000809"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1003000336",
+    "name": "압구정",
+    "apiName": "압구정",
+    "latitude": 37.526169,
+    "longitude": 127.028502,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000336"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1075075212",
+    "name": "압구정로데오",
+    "apiName": "압구정로데오",
+    "latitude": 37.527385,
+    "longitude": 127.040555,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075212"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000530",
+    "name": "애오개",
+    "apiName": "애오개",
+    "latitude": 37.553592,
+    "longitude": 126.956733,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000530"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1063075328",
+    "name": "야당",
+    "apiName": "야당",
+    "latitude": 37.712749,
+    "longitude": 126.761535,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075328"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1075075249",
+    "name": "야목",
+    "apiName": "야목",
+    "latitude": 37.261211,
+    "longitude": 126.884029,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075249"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075226",
+    "name": "야탑",
+    "apiName": "야탑",
+    "latitude": 37.41132,
+    "longitude": 127.128661,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075226"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000333",
+    "name": "약수",
+    "apiName": "약수",
+    "latitude": 37.5543205,
+    "longitude": 127.0105475,
+    "lineNames": [
+      "3호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000333",
+      "6호선": "1006000633"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1063075130",
+    "name": "양수",
+    "apiName": "양수",
+    "latitude": 37.545998,
+    "longitude": 127.328948,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075130"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1063075122",
+    "name": "양원",
+    "apiName": "양원",
+    "latitude": 36.963729,
+    "longitude": 129.091321,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075122"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1003000342",
+    "name": "양재",
+    "apiName": "양재",
+    "latitude": 37.4845168,
+    "longitude": 127.0341647,
+    "lineNames": [
+      "3호선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000342",
+      "신분당선": "1077000688"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1077000689",
+    "name": "양재시민의숲",
+    "apiName": "양재시민의숲",
+    "latitude": 37.4709639,
+    "longitude": 127.0384203,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077000689"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1063075125",
+    "name": "양정",
+    "apiName": "양정",
+    "latitude": 37.604269,
+    "longitude": 127.194602,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075125"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000107",
+    "name": "양주",
+    "apiName": "양주",
+    "latitude": 37.774281,
+    "longitude": 127.044719,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000107"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002002342",
+    "name": "양천구청",
+    "apiName": "양천구청",
+    "latitude": 37.5123294,
+    "longitude": 126.865593,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002342"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1009000906",
+    "name": "양천향교",
+    "apiName": "양천향교",
+    "latitude": 37.568333,
+    "longitude": 126.841389,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000906"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1063075135",
+    "name": "양평",
+    "apiName": "양평",
+    "latitude": 37.492674,
+    "longitude": 127.491858,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075135"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1005000522",
+    "name": "양평",
+    "apiName": "양평",
+    "latitude": 37.525614,
+    "longitude": 126.886177,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000522"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1007000726",
+    "name": "어린이대공원(세종대)",
+    "apiName": "어린이대공원(세종대)",
+    "latitude": 37.547962,
+    "longitude": 127.07465,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000726"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1075075248",
+    "name": "어천",
+    "apiName": "어천",
+    "latitude": 37.250076,
+    "longitude": 126.908805,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075248"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1009000926",
+    "name": "언주",
+    "apiName": "언주",
+    "latitude": 37.507287,
+    "longitude": 127.033868,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000926"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1005000527",
+    "name": "여의나루",
+    "apiName": "여의나루",
+    "latitude": 37.527045,
+    "longitude": 126.932807,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000527"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005000526",
+    "name": "여의도",
+    "apiName": "여의도",
+    "latitude": 37.521711,
+    "longitude": 126.9242425,
+    "lineNames": [
+      "5호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000526",
+      "9호선": "1009000915"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1081037420",
+    "name": "여주",
+    "apiName": "여주",
+    "latitude": 37.282881,
+    "longitude": 127.628571,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037420"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1001000146",
+    "name": "역곡",
+    "apiName": "역곡",
+    "latitude": 37.48514,
+    "longitude": 126.811622,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000146"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000221",
+    "name": "역삼",
+    "apiName": "역삼",
+    "latitude": 37.500658,
+    "longitude": 127.03643,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000221"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1006000611",
+    "name": "역촌",
+    "apiName": "역촌",
+    "latitude": 37.60605,
+    "longitude": 126.922764,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000611"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1075075266",
+    "name": "연수",
+    "apiName": "연수",
+    "latitude": 37.417769,
+    "longitude": 126.678991,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075266"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000321",
+    "name": "연신내",
+    "apiName": "연신내",
+    "latitude": 37.618889,
+    "longitude": 126.920681,
+    "lineNames": [
+      "3호선",
+      "6호선",
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000321",
+      "6호선": "1006000614",
+      "GTX-A": "1032000350"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "6호선": "1006",
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1001001003",
+    "name": "연천",
+    "apiName": "연천",
+    "latitude": 38.100485,
+    "longitude": 127.07368,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001001003"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1009000910",
+    "name": "염창",
+    "apiName": "염창",
+    "latitude": 37.546944,
+    "longitude": 126.874722,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000910"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1001000139",
+    "name": "영등포",
+    "apiName": "영등포",
+    "latitude": 37.515756,
+    "longitude": 126.907411,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000139"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000236",
+    "name": "영등포구청",
+    "apiName": "영등포구청",
+    "latitude": 37.5249875,
+    "longitude": 126.8958245,
+    "lineNames": [
+      "2호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000236",
+      "5호선": "1005000523"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005000524",
+    "name": "영등포시장",
+    "apiName": "영등포시장",
+    "latitude": 37.52276,
+    "longitude": 126.905143,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000524"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1065065072",
+    "name": "영종",
+    "apiName": "영종",
+    "latitude": 37.5120981,
+    "longitude": 126.5242471,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065065072"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1075075240",
+    "name": "영통",
+    "apiName": "영통",
+    "latitude": 37.251521,
+    "longitude": 127.071341,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075240"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000352",
+    "name": "오금",
+    "apiName": "오금",
+    "latitude": 37.502258,
+    "longitude": 127.1280225,
+    "lineNames": [
+      "3호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000352",
+      "5호선": "1005080552"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001000144",
+    "name": "오류동",
+    "apiName": "오류동",
+    "latitude": 37.4944,
+    "longitude": 126.844551,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000144"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1075075232",
+    "name": "오리",
+    "apiName": "오리",
+    "latitude": 37.339832,
+    "longitude": 127.108985,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075232"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1005000521",
+    "name": "오목교(목동운동장앞)",
+    "apiName": "오목교(목동운동장앞)",
+    "latitude": 37.524557,
+    "longitude": 126.875049,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000521"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1075075247",
+    "name": "오목천",
+    "apiName": "오목천",
+    "latitude": 37.243011,
+    "longitude": 126.9636354,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075247"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1063075134",
+    "name": "오빈",
+    "apiName": "오빈",
+    "latitude": 37.506061,
+    "longitude": 127.474053,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075134"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001080160",
+    "name": "오산",
+    "apiName": "오산",
+    "latitude": 37.145472,
+    "longitude": 127.066708,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080160"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080159",
+    "name": "오산대",
+    "apiName": "오산대",
+    "latitude": 37.169401,
+    "longitude": 127.063081,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080159"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1004000456",
+    "name": "오이도",
+    "apiName": "오이도",
+    "latitude": 37.361773,
+    "longitude": 126.738437,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000456",
+      "수인분당선": "1075075258"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1003000335",
+    "name": "옥수",
+    "apiName": "옥수",
+    "latitude": 37.5410835,
+    "longitude": 127.0180005,
+    "lineNames": [
+      "3호선",
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000335",
+      "경의중앙선": "1063075114"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000145",
+    "name": "온수",
+    "apiName": "온수",
+    "latitude": 37.492163,
+    "longitude": 126.8233465,
+    "lineNames": [
+      "1호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000145",
+      "7호선": "1007000750"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001080175",
+    "name": "온양온천",
+    "apiName": "온양온천",
+    "latitude": 36.780419,
+    "longitude": 127.003707,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080175"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1005080550",
+    "name": "올림픽공원",
+    "apiName": "올림픽공원",
+    "latitude": 37.516164,
+    "longitude": 127.130645,
+    "lineNames": [
+      "5호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005080550",
+      "9호선": "1009000936"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1002000208",
+    "name": "왕십리",
+    "apiName": "왕십리",
+    "latitude": 37.5615894,
+    "longitude": 127.0378214,
+    "lineNames": [
+      "2호선",
+      "5호선",
+      "경의중앙선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000208",
+      "5호선": "1005000540",
+      "경의중앙선": "1063075116",
+      "수인분당선": "1075075210"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "5호선": "1005",
+      "경의중앙선": "1063",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001000122",
+    "name": "외대앞",
+    "apiName": "외대앞",
+    "latitude": 37.596157,
+    "longitude": 127.063572,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000122"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002002111",
+    "name": "용답",
+    "apiName": "용답",
+    "latitude": 37.562066,
+    "longitude": 127.0508786,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002111"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1002002113",
+    "name": "용두",
+    "apiName": "용두",
+    "latitude": 37.574012,
+    "longitude": 127.03811,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002002113"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1007000723",
+    "name": "용마산",
+    "apiName": "용마산",
+    "latitude": 37.573752,
+    "longitude": 127.086802,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000723"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1063075137",
+    "name": "용문",
+    "apiName": "용문",
+    "latitude": 37.482085,
+    "longitude": 127.594251,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075137"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000135",
+    "name": "용산",
+    "apiName": "용산",
+    "latitude": 37.52989,
+    "longitude": 126.964775,
+    "lineNames": [
+      "1호선",
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000135",
+      "경의중앙선": "1063075110"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1005000516",
+    "name": "우장산",
+    "apiName": "우장산",
+    "latitude": 37.548864,
+    "longitude": 126.83633,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000516"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1063075129",
+    "name": "운길산",
+    "apiName": "운길산",
+    "latitude": 37.554659,
+    "longitude": 127.310089,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075129"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1065006508",
+    "name": "운서",
+    "apiName": "운서",
+    "latitude": 37.4928446,
+    "longitude": 126.4936619,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006508"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1063075329",
+    "name": "운정",
+    "apiName": "운정",
+    "latitude": 37.725441,
+    "longitude": 126.767076,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075329"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1032000346",
+    "name": "운정중앙",
+    "apiName": "운정중앙",
+    "latitude": 37.7161458,
+    "longitude": 126.728092,
+    "lineNames": [
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "GTX-A": "1032000346"
+    },
+    "subwayIDs": {
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1063075336",
+    "name": "운천",
+    "apiName": "운천",
+    "latitude": 37.880008,
+    "longitude": 126.769713,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075336"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1003000316",
+    "name": "원당",
+    "apiName": "원당",
+    "latitude": 37.653103,
+    "longitude": 126.842891,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000316"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1063075136",
+    "name": "원덕",
+    "apiName": "원덕",
+    "latitude": 37.468585,
+    "longitude": 127.547468,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075136"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1093004022",
+    "name": "원시",
+    "apiName": "원시",
+    "latitude": 37.302654,
+    "longitude": 126.7867897,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004022"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1075075265",
+    "name": "원인재",
+    "apiName": "원인재",
+    "latitude": 37.412921,
+    "longitude": 126.686952,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075265"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1093004008",
+    "name": "원종",
+    "apiName": "원종",
+    "latitude": 37.5240628,
+    "longitude": 126.8048386,
+    "lineNames": [
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "서해선": "1093004008"
+    },
+    "subwayIDs": {
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1003000317",
+    "name": "원흥",
+    "apiName": "원흥",
+    "latitude": 37.650709,
+    "longitude": 126.873239,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000317"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1001000118",
+    "name": "월계",
+    "apiName": "월계",
+    "latitude": 37.633114,
+    "longitude": 127.058835,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000118"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1006000641",
+    "name": "월곡(동덕여대)",
+    "apiName": "월곡(동덕여대)",
+    "latitude": 37.60192,
+    "longitude": 127.041492,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000641"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1075075260",
+    "name": "월곶",
+    "apiName": "월곶",
+    "latitude": 37.39189,
+    "longitude": 126.742741,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075260"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1006000619",
+    "name": "월드컵경기장(성산)",
+    "apiName": "월드컵경기장(성산)",
+    "latitude": 37.569439,
+    "longitude": 126.899077,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000619"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1063075333",
+    "name": "월롱",
+    "apiName": "월롱",
+    "latitude": 37.796201,
+    "longitude": 126.792574,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075333"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1002000203",
+    "name": "을지로3가",
+    "apiName": "을지로3가",
+    "latitude": 37.5662955,
+    "longitude": 126.9917445,
+    "lineNames": [
+      "2호선",
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000203",
+      "3호선": "1003000330"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1002000204",
+    "name": "을지로4가",
+    "apiName": "을지로4가",
+    "latitude": 37.5669455,
+    "longitude": 126.9978745,
+    "lineNames": [
+      "2호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000204",
+      "5호선": "1005000535"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1002000202",
+    "name": "을지로입구",
+    "apiName": "을지로입구",
+    "latitude": 37.565998,
+    "longitude": 126.982569,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000202"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1063075115",
+    "name": "응봉",
+    "apiName": "응봉",
+    "latitude": 37.550433,
+    "longitude": 127.034824,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075115"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1006000610",
+    "name": "응암",
+    "apiName": "응암순환(상선)",
+    "latitude": 37.59859,
+    "longitude": 126.915583,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000610"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001080152",
+    "name": "의왕",
+    "apiName": "의왕",
+    "latitude": 37.320648,
+    "longitude": 126.948099,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080152"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000110",
+    "name": "의정부",
+    "apiName": "의정부",
+    "latitude": 37.73873,
+    "longitude": 127.045891,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000110"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000241",
+    "name": "이대",
+    "apiName": "이대",
+    "latitude": 37.556734,
+    "longitude": 126.945897,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000241"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1075075227",
+    "name": "이매",
+    "apiName": "이매",
+    "latitude": 37.395291,
+    "longitude": 127.12766,
+    "lineNames": [
+      "수인분당선",
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075227",
+      "경강선": "1081037411"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075",
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1081037417",
+    "name": "이천",
+    "apiName": "이천",
+    "latitude": 37.264222,
+    "longitude": 127.442135,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037417"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1004000430",
+    "name": "이촌",
+    "apiName": "이촌",
+    "latitude": 37.522476,
+    "longitude": 126.973816,
+    "lineNames": [
+      "4호선",
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000430",
+      "경의중앙선": "1063075111"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1006000630",
+    "name": "이태원",
+    "apiName": "이태원",
+    "latitude": 37.534485,
+    "longitude": 126.994369,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000630"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1004000440",
+    "name": "인덕원",
+    "apiName": "인덕원",
+    "latitude": 37.401901,
+    "longitude": 126.976718,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000440"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1001000161",
+    "name": "인천",
+    "apiName": "인천",
+    "latitude": 37.476364,
+    "longitude": 126.6171798,
+    "lineNames": [
+      "1호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000161",
+      "수인분당선": "1075075271"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1065006510",
+    "name": "인천공항1터미널",
+    "apiName": "인천공항1터미널",
+    "latitude": 37.4476067,
+    "longitude": 126.4523433,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006510"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1065006511",
+    "name": "인천공항2터미널",
+    "apiName": "인천공항2터미널",
+    "latitude": 37.46866,
+    "longitude": 126.433415,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065006511"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1075075262",
+    "name": "인천논현",
+    "apiName": "인천논현",
+    "latitude": 37.400641,
+    "longitude": 126.722495,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075262"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075268",
+    "name": "인하대",
+    "apiName": "인하대",
+    "latitude": 37.448191,
+    "longitude": 126.649832,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075268"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1063075326",
+    "name": "일산",
+    "apiName": "일산",
+    "latitude": 37.682231,
+    "longitude": 126.769521,
+    "lineNames": [
+      "경의중앙선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075326",
+      "서해선": "1093004001"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1003000348",
+    "name": "일원",
+    "apiName": "일원",
+    "latitude": 37.48389,
+    "longitude": 127.08416,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000348"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1063075337",
+    "name": "임진강",
+    "apiName": "임진강",
+    "latitude": 37.888364,
+    "longitude": 126.746777,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075337"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1007000728",
+    "name": "자양",
+    "apiName": "뚝섬유원지",
+    "latitude": 37.531558,
+    "longitude": 127.066714,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000728"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1002000216",
+    "name": "잠실",
+    "apiName": "잠실",
+    "latitude": 37.513977,
+    "longitude": 127.102198,
+    "lineNames": [
+      "2호선",
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000216",
+      "8호선": "1008000814"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1002000215",
+    "name": "잠실나루",
+    "apiName": "잠실나루",
+    "latitude": 37.520688,
+    "longitude": 127.103836,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000215"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1002000217",
+    "name": "잠실새내",
+    "apiName": "잠실새내",
+    "latitude": 37.511653,
+    "longitude": 127.086224,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000217"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1003000338",
+    "name": "잠원",
+    "apiName": "잠원",
+    "latitude": 37.512989,
+    "longitude": 127.011613,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000338"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1007000740",
+    "name": "장승배기",
+    "apiName": "장승배기",
+    "latitude": 37.504845,
+    "longitude": 126.939025,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000740"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000709",
+    "name": "장암",
+    "apiName": "장암",
+    "latitude": 37.70015,
+    "longitude": 127.053126,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000709"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1008000808",
+    "name": "장자호수공원",
+    "apiName": "장자호수공원",
+    "latitude": 37.587222,
+    "longitude": 127.13793,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000808"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1008000819",
+    "name": "장지",
+    "apiName": "장지",
+    "latitude": 37.478609,
+    "longitude": 127.126229,
+    "lineNames": [
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "8호선": "1008000819"
+    },
+    "subwayIDs": {
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1005000543",
+    "name": "장한평",
+    "apiName": "장한평",
+    "latitude": 37.561438,
+    "longitude": 127.064601,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000543"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001001002",
+    "name": "전곡",
+    "apiName": "전곡",
+    "latitude": 38.024041,
+    "longitude": 127.071913,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001001002"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1092004710",
+    "name": "정릉",
+    "apiName": "정릉",
+    "latitude": 37.60278,
+    "longitude": 127.01345,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004710"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1003000311",
+    "name": "정발산",
+    "apiName": "정발산",
+    "latitude": 37.659709,
+    "longitude": 126.773254,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000311"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1004000439",
+    "name": "정부과천청사",
+    "apiName": "정부과천청사",
+    "latitude": 37.426445,
+    "longitude": 126.989802,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000439"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1004000455",
+    "name": "정왕",
+    "apiName": "정왕",
+    "latitude": 37.351816,
+    "longitude": 126.742844,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000455",
+      "수인분당선": "1075075257"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075230",
+    "name": "정자",
+    "apiName": "정자",
+    "latitude": 37.3671236,
+    "longitude": 127.1082385,
+    "lineNames": [
+      "수인분당선",
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075230",
+      "신분당선": "1077006812"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075",
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1001000125",
+    "name": "제기동",
+    "apiName": "제기동",
+    "latitude": 37.578116,
+    "longitude": 127.034902,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000125"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000158",
+    "name": "제물포",
+    "apiName": "제물포",
+    "latitude": 37.466809,
+    "longitude": 126.657165,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000158"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000131",
+    "name": "종각",
+    "apiName": "종각",
+    "latitude": 37.570203,
+    "longitude": 126.983116,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000131"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000130",
+    "name": "종로3가",
+    "apiName": "종로3가",
+    "latitude": 37.571504,
+    "longitude": 126.9914597,
+    "lineNames": [
+      "1호선",
+      "3호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000130",
+      "3호선": "1003000329",
+      "5호선": "1005000534"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "3호선": "1003",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1001000129",
+    "name": "종로5가",
+    "apiName": "종로5가",
+    "latitude": 37.570971,
+    "longitude": 127.0019,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000129"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1002000218",
+    "name": "종합운동장",
+    "apiName": "종합운동장",
+    "latitude": 37.511142,
+    "longitude": 127.075379,
+    "lineNames": [
+      "2호선",
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000218",
+      "9호선": "1009000930"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1001000156",
+    "name": "주안",
+    "apiName": "주안",
+    "latitude": 37.465041,
+    "longitude": 126.680702,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000156"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000310",
+    "name": "주엽",
+    "apiName": "주엽",
+    "latitude": 37.670138,
+    "longitude": 126.761232,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000310"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1075075233",
+    "name": "죽전",
+    "apiName": "죽전",
+    "latitude": 37.324575,
+    "longitude": 127.107385,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075233"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1007000714",
+    "name": "중계",
+    "apiName": "중계",
+    "latitude": 37.645052,
+    "longitude": 127.064084,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000714"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000724",
+    "name": "중곡",
+    "apiName": "중곡",
+    "latitude": 37.565877,
+    "longitude": 127.084291,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000724"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1001000149",
+    "name": "중동",
+    "apiName": "중동",
+    "latitude": 37.486664,
+    "longitude": 126.764474,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000149"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075119",
+    "name": "중랑",
+    "apiName": "중랑",
+    "latitude": 37.594948,
+    "longitude": 127.076152,
+    "lineNames": [
+      "경의중앙선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075119",
+      "경춘선": "1067080118"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1004000450",
+    "name": "중앙",
+    "apiName": "중앙",
+    "latitude": 37.316055,
+    "longitude": 126.838532,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000450",
+      "수인분당선": "1075075252"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1009000938",
+    "name": "중앙보훈병원",
+    "apiName": "중앙보훈병원",
+    "latitude": 37.528807,
+    "longitude": 127.148488,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000938"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1007000719",
+    "name": "중화",
+    "apiName": "중화",
+    "latitude": 37.602604,
+    "longitude": 127.079254,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000719"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1009000908",
+    "name": "증미",
+    "apiName": "증미",
+    "latitude": 37.55785,
+    "longitude": 126.861067,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000908"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1006000617",
+    "name": "증산(명지대앞)",
+    "apiName": "증산(명지대앞)",
+    "latitude": 37.583989,
+    "longitude": 126.909785,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000617"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1003000319",
+    "name": "지축",
+    "apiName": "지축",
+    "latitude": 37.648151,
+    "longitude": 126.913751,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000319"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1063075138",
+    "name": "지평",
+    "apiName": "지평",
+    "latitude": 37.476496,
+    "longitude": 127.629681,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075138"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001000104",
+    "name": "지행",
+    "apiName": "지행",
+    "latitude": 37.892361,
+    "longitude": 127.055734,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000104"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080167",
+    "name": "직산",
+    "apiName": "직산",
+    "latitude": 36.870921,
+    "longitude": 127.143774,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080167"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080161",
+    "name": "진위",
+    "apiName": "진위",
+    "latitude": 37.109771,
+    "longitude": 127.062342,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080161"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001000116",
+    "name": "창동",
+    "apiName": "창동",
+    "latitude": 37.653248,
+    "longitude": 127.0479835,
+    "lineNames": [
+      "1호선",
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000116",
+      "4호선": "1004000412"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1006000637",
+    "name": "창신",
+    "apiName": "창신",
+    "latitude": 37.579772,
+    "longitude": 127.015246,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000637"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1067080129",
+    "name": "천마산",
+    "apiName": "천마산",
+    "latitude": 37.658995,
+    "longitude": 127.285731,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080129"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1001080169",
+    "name": "천안",
+    "apiName": "천안",
+    "latitude": 36.810238,
+    "longitude": 127.146417,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080169"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1007000749",
+    "name": "천왕",
+    "apiName": "천왕",
+    "latitude": 37.486699,
+    "longitude": 126.838684,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000749"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1005000547",
+    "name": "천호(풍납토성)",
+    "apiName": "천호(풍납토성)",
+    "latitude": 37.538243,
+    "longitude": 127.123359,
+    "lineNames": [
+      "5호선",
+      "8호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000547",
+      "8호선": "1008000811"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "8호선": "1008"
+    }
+  },
+  {
+    "id": "seoul-1007000747",
+    "name": "철산",
+    "apiName": "철산",
+    "latitude": 37.47616,
+    "longitude": 126.868217,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000747"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1077006810",
+    "name": "청계산입구",
+    "apiName": "청계산입구",
+    "latitude": 37.4487148,
+    "longitude": 127.0543396,
+    "lineNames": [
+      "신분당선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006810"
+    },
+    "subwayIDs": {
+      "신분당선": "1077"
+    }
+  },
+  {
+    "id": "seoul-1005000537",
+    "name": "청구",
+    "apiName": "청구",
+    "latitude": 37.560229,
+    "longitude": 127.013783,
+    "lineNames": [
+      "5호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000537",
+      "6호선": "1006000634"
+    },
+    "subwayIDs": {
+      "5호선": "1005",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1007000729",
+    "name": "청담",
+    "apiName": "청담",
+    "latitude": 37.519097,
+    "longitude": 127.051851,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000729"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1065065071",
+    "name": "청라국제도시",
+    "apiName": "청라국제도시",
+    "latitude": 37.556509,
+    "longitude": 126.624725,
+    "lineNames": [
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "공항철도": "1065065071"
+    },
+    "subwayIDs": {
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1001000124",
+    "name": "청량리",
+    "apiName": "청량리",
+    "latitude": 37.5802568,
+    "longitude": 127.0471401,
+    "lineNames": [
+      "1호선",
+      "경의중앙선",
+      "경춘선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000124",
+      "경의중앙선": "1063075117",
+      "경춘선": "1067080116",
+      "수인분당선": "1075075209"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "경의중앙선": "1063",
+      "경춘선": "1067",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1075075239",
+    "name": "청명",
+    "apiName": "청명",
+    "latitude": 37.259485,
+    "longitude": 127.078945,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075239"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1001001001",
+    "name": "청산",
+    "apiName": "청산",
+    "latitude": 37.995138,
+    "longitude": 127.074097,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001001001"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1067080132",
+    "name": "청평",
+    "apiName": "청평",
+    "latitude": 37.735484,
+    "longitude": 127.426541,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080132"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1081037414",
+    "name": "초월",
+    "apiName": "초월",
+    "latitude": 37.373389,
+    "longitude": 127.299996,
+    "lineNames": [
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "경강선": "1081037414"
+    },
+    "subwayIDs": {
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1004000452",
+    "name": "초지",
+    "apiName": "초지",
+    "latitude": 37.3204163,
+    "longitude": 126.8067843,
+    "lineNames": [
+      "4호선",
+      "수인분당선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000452",
+      "수인분당선": "1075075254",
+      "서해선": "1093004020"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1004000432",
+    "name": "총신대입구(이수)",
+    "apiName": "총신대입구(이수)",
+    "latitude": 37.4863895,
+    "longitude": 126.9820375,
+    "lineNames": [
+      "4호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000432",
+      "7호선": "1007000736"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1007000753",
+    "name": "춘의",
+    "apiName": "춘의",
+    "latitude": 37.50365,
+    "longitude": 126.787069,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000753"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1067080140",
+    "name": "춘천",
+    "apiName": "춘천",
+    "latitude": 37.884391,
+    "longitude": 127.716603,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080140"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1003000331",
+    "name": "충무로",
+    "apiName": "충무로",
+    "latitude": 37.561367,
+    "longitude": 126.994373,
+    "lineNames": [
+      "3호선",
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000331",
+      "4호선": "1004000423"
+    },
+    "subwayIDs": {
+      "3호선": "1003",
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1002000243",
+    "name": "충정로",
+    "apiName": "충정로",
+    "latitude": 37.5599015,
+    "longitude": 126.963619,
+    "lineNames": [
+      "2호선",
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000243",
+      "5호선": "1005000531"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1032000347",
+    "name": "킨텍스",
+    "apiName": "킨텍스",
+    "latitude": 37.6652047,
+    "longitude": 126.7483104,
+    "lineNames": [
+      "GTX-A"
+    ],
+    "seoulStationIDs": {
+      "GTX-A": "1032000347"
+    },
+    "subwayIDs": {
+      "GTX-A": "1032"
+    }
+  },
+  {
+    "id": "seoul-1063075327",
+    "name": "탄현",
+    "apiName": "탄현",
+    "latitude": 37.694114,
+    "longitude": 126.761075,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075327"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1001080173",
+    "name": "탕정",
+    "apiName": "탕정",
+    "latitude": 36.788272,
+    "longitude": 127.084446,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080173"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1006000645",
+    "name": "태릉입구",
+    "apiName": "태릉입구",
+    "latitude": 37.617919,
+    "longitude": 127.075051,
+    "lineNames": [
+      "6호선",
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000645",
+      "7호선": "1007000717"
+    },
+    "subwayIDs": {
+      "6호선": "1006",
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1075075224",
+    "name": "태평",
+    "apiName": "태평",
+    "latitude": 37.439842,
+    "longitude": 127.127746,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075224"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1067080125",
+    "name": "퇴계원",
+    "apiName": "퇴계원",
+    "latitude": 37.648316,
+    "longitude": 127.143858,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080125"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1063075334",
+    "name": "파주",
+    "apiName": "파주",
+    "latitude": 37.815391,
+    "longitude": 126.792426,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075334"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1077006811",
+    "name": "판교",
+    "apiName": "판교",
+    "latitude": 37.3952564,
+    "longitude": 127.1111729,
+    "lineNames": [
+      "신분당선",
+      "경강선"
+    ],
+    "seoulStationIDs": {
+      "신분당선": "1077006811",
+      "경강선": "1081037409"
+    },
+    "subwayIDs": {
+      "신분당선": "1077",
+      "경강선": "1081"
+    }
+  },
+  {
+    "id": "seoul-1063075128",
+    "name": "팔당",
+    "apiName": "팔당",
+    "latitude": 37.547321,
+    "longitude": 127.243896,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075128"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1067080128",
+    "name": "평내호평",
+    "apiName": "평내호평",
+    "latitude": 37.653229,
+    "longitude": 127.244452,
+    "lineNames": [
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "경춘선": "1067080128"
+    },
+    "subwayIDs": {
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1004000441",
+    "name": "평촌",
+    "apiName": "평촌",
+    "latitude": 37.394346,
+    "longitude": 126.963881,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000441"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1001080165",
+    "name": "평택",
+    "apiName": "평택",
+    "latitude": 36.990559,
+    "longitude": 127.085496,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080165"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1001080164",
+    "name": "평택지제",
+    "apiName": "지제",
+    "latitude": 37.018822,
+    "longitude": 127.070269,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080164"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1063075325",
+    "name": "풍산",
+    "apiName": "풍산",
+    "latitude": 37.672173,
+    "longitude": 126.786355,
+    "lineNames": [
+      "경의중앙선",
+      "서해선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075325",
+      "서해선": "1093004002"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063",
+      "서해선": "1093"
+    }
+  },
+  {
+    "id": "seoul-1007000715",
+    "name": "하계",
+    "apiName": "하계",
+    "latitude": 37.636363,
+    "longitude": 127.067999,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000715"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1005000558",
+    "name": "하남검단산",
+    "apiName": "하남검단산",
+    "latitude": 37.539729,
+    "longitude": 127.223427,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000558"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005000557",
+    "name": "하남시청",
+    "apiName": "하남시청",
+    "latitude": 37.541723,
+    "longitude": 127.206901,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000557"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1005000556",
+    "name": "하남풍산",
+    "apiName": "하남풍산",
+    "latitude": 37.552201,
+    "longitude": 127.203897,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000556"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1007000731",
+    "name": "학동",
+    "apiName": "학동",
+    "latitude": 37.514262,
+    "longitude": 127.031738,
+    "lineNames": [
+      "7호선"
+    ],
+    "seoulStationIDs": {
+      "7호선": "1007000731"
+    },
+    "subwayIDs": {
+      "7호선": "1007"
+    }
+  },
+  {
+    "id": "seoul-1003000346",
+    "name": "학여울",
+    "apiName": "학여울",
+    "latitude": 37.496787,
+    "longitude": 127.0708601,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000346"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1006000631",
+    "name": "한강진",
+    "apiName": "한강진",
+    "latitude": 37.53956,
+    "longitude": 127.001729,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000631"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1063075318",
+    "name": "한국항공대",
+    "apiName": "한국항공대",
+    "latitude": 37.603102,
+    "longitude": 126.868291,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075318"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1063075113",
+    "name": "한남",
+    "apiName": "한남",
+    "latitude": 37.529361,
+    "longitude": 127.008984,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075113"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1004000449",
+    "name": "한대앞",
+    "apiName": "한대앞",
+    "latitude": 37.30976,
+    "longitude": 126.8536185,
+    "lineNames": [
+      "4호선",
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000449",
+      "수인분당선": "1075075251"
+    },
+    "subwayIDs": {
+      "4호선": "1004",
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1004000419",
+    "name": "한성대입구",
+    "apiName": "한성대입구",
+    "latitude": 37.58838,
+    "longitude": 127.005951,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000419"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1009000935",
+    "name": "한성백제",
+    "apiName": "한성백제",
+    "latitude": 37.516369,
+    "longitude": 127.116211,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000935"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  },
+  {
+    "id": "seoul-1002000209",
+    "name": "한양대",
+    "apiName": "한양대",
+    "latitude": 37.555758,
+    "longitude": 127.0436594,
+    "lineNames": [
+      "2호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000209"
+    },
+    "subwayIDs": {
+      "2호선": "1002"
+    }
+  },
+  {
+    "id": "seoul-1075075216",
+    "name": "한티",
+    "apiName": "한티",
+    "latitude": 37.496208,
+    "longitude": 127.052883,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075216"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1002000238",
+    "name": "합정",
+    "apiName": "합정",
+    "latitude": 37.549529,
+    "longitude": 126.9140515,
+    "lineNames": [
+      "2호선",
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000238",
+      "6호선": "1006000622"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1005000539",
+    "name": "행당",
+    "apiName": "행당",
+    "latitude": 37.557297,
+    "longitude": 127.029482,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000539"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1063075320",
+    "name": "행신",
+    "apiName": "행신",
+    "latitude": 37.612125,
+    "longitude": 126.834063,
+    "lineNames": [
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "경의중앙선": "1063075320"
+    },
+    "subwayIDs": {
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1004000420",
+    "name": "혜화",
+    "apiName": "혜화",
+    "latitude": 37.582116,
+    "longitude": 127.001929,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000420"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1075075263",
+    "name": "호구포",
+    "apiName": "호구포",
+    "latitude": 37.401622,
+    "longitude": 126.708682,
+    "lineNames": [
+      "수인분당선"
+    ],
+    "seoulStationIDs": {
+      "수인분당선": "1075075263"
+    },
+    "subwayIDs": {
+      "수인분당선": "1075"
+    }
+  },
+  {
+    "id": "seoul-1002000239",
+    "name": "홍대입구",
+    "apiName": "홍대입구",
+    "latitude": 37.5573563,
+    "longitude": 126.9256566,
+    "lineNames": [
+      "2호선",
+      "경의중앙선",
+      "공항철도"
+    ],
+    "seoulStationIDs": {
+      "2호선": "1002000239",
+      "경의중앙선": "1063075314",
+      "공항철도": "1065006503"
+    },
+    "subwayIDs": {
+      "2호선": "1002",
+      "경의중앙선": "1063",
+      "공항철도": "1065"
+    }
+  },
+  {
+    "id": "seoul-1003000324",
+    "name": "홍제",
+    "apiName": "홍제",
+    "latitude": 37.588851,
+    "longitude": 126.944092,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000324"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1092004705",
+    "name": "화계",
+    "apiName": "화계",
+    "latitude": 37.63428,
+    "longitude": 127.0175,
+    "lineNames": [
+      "우이신설선"
+    ],
+    "seoulStationIDs": {
+      "우이신설선": "1092004705"
+    },
+    "subwayIDs": {
+      "우이신설선": "1092"
+    }
+  },
+  {
+    "id": "seoul-1005000517",
+    "name": "화곡",
+    "apiName": "화곡",
+    "latitude": 37.541585,
+    "longitude": 126.840436,
+    "lineNames": [
+      "5호선"
+    ],
+    "seoulStationIDs": {
+      "5호선": "1005000517"
+    },
+    "subwayIDs": {
+      "5호선": "1005"
+    }
+  },
+  {
+    "id": "seoul-1006000646",
+    "name": "화랑대(서울여대입구)",
+    "apiName": "화랑대(서울여대입구)",
+    "latitude": 37.619875,
+    "longitude": 127.084106,
+    "lineNames": [
+      "6호선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000646"
+    },
+    "subwayIDs": {
+      "6호선": "1006"
+    }
+  },
+  {
+    "id": "seoul-1001080154",
+    "name": "화서",
+    "apiName": "화서",
+    "latitude": 37.28399,
+    "longitude": 126.989581,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001080154"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1003000315",
+    "name": "화정",
+    "apiName": "화정",
+    "latitude": 37.634708,
+    "longitude": 126.832503,
+    "lineNames": [
+      "3호선"
+    ],
+    "seoulStationIDs": {
+      "3호선": "1003000315"
+    },
+    "subwayIDs": {
+      "3호선": "1003"
+    }
+  },
+  {
+    "id": "seoul-1001000123",
+    "name": "회기",
+    "apiName": "회기",
+    "latitude": 37.589702,
+    "longitude": 127.057936,
+    "lineNames": [
+      "1호선",
+      "경의중앙선",
+      "경춘선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000123",
+      "경의중앙선": "1063075118",
+      "경춘선": "1067080117"
+    },
+    "subwayIDs": {
+      "1호선": "1001",
+      "경의중앙선": "1063",
+      "경춘선": "1067"
+    }
+  },
+  {
+    "id": "seoul-1001000111",
+    "name": "회룡",
+    "apiName": "회룡",
+    "latitude": 37.724037,
+    "longitude": 127.047319,
+    "lineNames": [
+      "1호선"
+    ],
+    "seoulStationIDs": {
+      "1호선": "1001000111"
+    },
+    "subwayIDs": {
+      "1호선": "1001"
+    }
+  },
+  {
+    "id": "seoul-1004000425",
+    "name": "회현",
+    "apiName": "회현",
+    "latitude": 37.558698,
+    "longitude": 126.978346,
+    "lineNames": [
+      "4호선"
+    ],
+    "seoulStationIDs": {
+      "4호선": "1004000425"
+    },
+    "subwayIDs": {
+      "4호선": "1004"
+    }
+  },
+  {
+    "id": "seoul-1006000627",
+    "name": "효창공원앞",
+    "apiName": "효창공원앞",
+    "latitude": 37.539034,
+    "longitude": 126.9618435,
+    "lineNames": [
+      "6호선",
+      "경의중앙선"
+    ],
+    "seoulStationIDs": {
+      "6호선": "1006000627",
+      "경의중앙선": "1063075826"
+    },
+    "subwayIDs": {
+      "6호선": "1006",
+      "경의중앙선": "1063"
+    }
+  },
+  {
+    "id": "seoul-1009000919",
+    "name": "흑석",
+    "apiName": "흑석",
+    "latitude": 37.508889,
+    "longitude": 126.963611,
+    "lineNames": [
+      "9호선"
+    ],
+    "seoulStationIDs": {
+      "9호선": "1009000919"
+    },
+    "subwayIDs": {
+      "9호선": "1009"
+    }
+  }
 ]

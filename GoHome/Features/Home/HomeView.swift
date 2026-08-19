@@ -7,7 +7,6 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                developmentNotice
                 locationSection
                 nearbyStationSection
                 arrivalSection
@@ -20,18 +19,6 @@ struct HomeView: View {
                 viewModel.refreshLocation()
                 await viewModel.refreshArrivals()
             }
-        }
-    }
-
-    private var developmentNotice: some View {
-        Section {
-            Label {
-                Text("현재 번들에는 서울·시청·종각역만 포함된 개발용 데이터가 들어 있습니다.")
-                    .font(.footnote)
-            } icon: {
-                Image(systemName: "hammer.fill")
-            }
-            .foregroundStyle(.orange)
         }
     }
 
@@ -125,6 +112,12 @@ struct HomeView: View {
                         Text(arrival.direction)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                        if arrival.isExpress {
+                            arrivalBadge("급행", color: .blue)
+                        }
+                        if arrival.isLastTrain {
+                            arrivalBadge("막차", color: .red)
+                        }
                         Spacer()
                         if let seconds = arrival.remainingSeconds {
                             Text("\(seconds / 60)분 \(seconds % 60)초")
@@ -138,8 +131,26 @@ struct HomeView: View {
         } header: {
             Text("실시간 도착")
         } footer: {
-            Text("실시간 정보는 원천 데이터 수신·가공 과정에서 지연될 수 있습니다.")
+            VStack(alignment: .leading, spacing: 4) {
+                if let receivedAt = viewModel.latestArrivalReceivedAt {
+                    Text("데이터 기준 \(receivedAt.formatted(date: .omitted, time: .standard))")
+                }
+                if viewModel.hasStaleArrivalData {
+                    Text("2분 이상 지난 도착정보가 포함되어 있습니다.")
+                        .foregroundStyle(.orange)
+                }
+                Text("실시간 정보는 원천 데이터 수신·가공 과정에서 지연될 수 있습니다.")
+            }
         }
+    }
+
+    private func arrivalBadge(_ text: String, color: Color) -> some View {
+        Text(text)
+            .font(.caption2.weight(.semibold))
+            .foregroundStyle(color)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 2)
+            .background(color.opacity(0.12), in: Capsule())
     }
 
     private var authorizationText: String {

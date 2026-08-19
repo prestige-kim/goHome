@@ -4,6 +4,8 @@ import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
+    static let supportedRangeMeters: CLLocationDistance = 5_000
+
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
     @Published private(set) var nearbyStations: [NearbyStation] = []
     @Published var selectedStation: Station?
@@ -11,7 +13,6 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var isLoadingArrivals = false
     @Published private(set) var locationMessage: String?
     @Published private(set) var arrivalMessage: String?
-    @Published private(set) var isUsingSeedData = true
 
     private let locationService: LocationService
     private let stationRepository: StationRepository
@@ -20,10 +21,21 @@ final class HomeViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     private var hasStarted = false
 
+    var latestArrivalReceivedAt: Date? {
+        arrivals.compactMap(\.receivedAt).max()
+    }
+
+    var hasStaleArrivalData: Bool {
+        arrivals.contains { $0.isStale() }
+    }
+
     init(
         locationService: LocationService = LocationService(),
         stationRepository: StationRepository = BundledStationRepository(),
-        transitClient: TransitAPIClient = DirectSeoulTransitAPIClient(apiKey: AppConfiguration.seoulAPIKey)
+        transitClient: TransitAPIClient = DirectSeoulTransitAPIClient(
+            baseURL: AppConfiguration.transitProxyBaseURL,
+            clientToken: AppConfiguration.transitProxyClientToken
+        )
     ) {
         self.locationService = locationService
         self.stationRepository = stationRepository
@@ -110,9 +122,9 @@ final class HomeViewModel: ObservableObject {
             return
         }
 
-        guard first.distance <= 5_000 else {
+        guard first.distance <= Self.supportedRangeMeters else {
             selectedStation = nil
-            locationMessage = "현재 개발용 역 데이터 범위 밖입니다. Phase 1에서 전체 역 데이터를 추가합니다."
+            locationMessage = "지원되는 지하철역에서 5km 이상 떨어져 있습니다. 위치를 다시 확인해 주세요."
             return
         }
 

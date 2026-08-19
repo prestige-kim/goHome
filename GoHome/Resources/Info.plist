@@ -24,8 +24,10 @@
     <string>현재 위치에서 가까운 지하철역과 도착정보를 찾기 위해 위치를 사용합니다.</string>
     <key>PublicDataAPIKey</key>
     <string>$(PUBLIC_DATA_API_KEY)</string>
-    <key>SeoulAPIKey</key>
-    <string>$(SEOUL_API_KEY)</string>
+    <key>TransitProxyBaseURL</key>
+    <string>$(TRANSIT_PROXY_BASE_URL)</string>
+    <key>TransitProxyClientToken</key>
+    <string>$(TRANSIT_PROXY_CLIENT_TOKEN)</string>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
     <key>UILaunchScreen</key>
