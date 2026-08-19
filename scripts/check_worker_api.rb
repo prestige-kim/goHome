@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "json"
+require "fileutils"
 require "net/http"
 require "uri"
 
@@ -8,6 +9,7 @@ PROJECT_ROOT = File.expand_path("..", __dir__)
 SECRETS_PATH = File.join(PROJECT_ROOT, "Config", "Secrets.xcconfig")
 DEFAULT_STATION = "시청"
 DEFAULT_LINE = "2호선"
+SAMPLE_DIRECTORY = File.join(PROJECT_ROOT, "tmp", "api-samples")
 
 def abort_with(message)
   warn "오류: #{message}"
@@ -78,6 +80,11 @@ arrivals = arrival_payload.fetch("realtimeArrivalList", [])
 
 position_uri = URI.join(base_url.delete_suffix("/") + "/", "v1/positions")
 position_uri.query = URI.encode_www_form(line: line_name)
+unauthorized_position_response, unauthorized_position_payload = get_json(position_uri)
+unless unauthorized_position_response.code.to_i == 401 &&
+       unauthorized_position_payload["error"] == "unauthorized"
+  abort_with("열차 위치 경로의 Bearer 인증 차단 확인 실패")
+end
 position_response, position_payload = get_json(
   position_uri,
   authorization: "Bearer #{client_token}"
@@ -99,6 +106,13 @@ missing_position_fields = expected_position_fields - position_fields
 position_status_counts = positions.each_with_object(Hash.new(0)) do |position, counts|
   counts[position["trainSttus"] || "없음"] += 1
 end
+FileUtils.mkdir_p(SAMPLE_DIRECTORY)
+safe_line_name = line_name.gsub(/[^0-9A-Za-z가-힣_-]/, "_")
+position_sample_path = File.join(
+  SAMPLE_DIRECTORY,
+  "worker-realtime-position-#{safe_line_name}.json"
+)
+File.write(position_sample_path, JSON.pretty_generate(position_payload))
 
 puts "Cloudflare Worker 종단간 점검"
 puts "- HTTPS 상태: 정상"
@@ -111,6 +125,7 @@ puts "- 위치 API 상태: #{position_status_code} / #{position_status_message}"
 puts "- 열차 위치 건수: #{positions.length}"
 puts "- 위치 DTO 필드: #{missing_position_fields.empty? ? '모두 확인됨' : "미확인 #{missing_position_fields.join(', ')}"}"
 puts "- 위치 상태 코드별 건수: #{position_status_counts.sort.to_h}"
+puts "- 위치 응답 저장: #{position_sample_path.delete_prefix(PROJECT_ROOT + File::SEPARATOR)}"
 
 success = status_code == "INFO-000" && !arrivals.empty? &&
   position_status_code == "INFO-000" && !positions.empty?

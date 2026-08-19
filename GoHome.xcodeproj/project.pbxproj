@@ -21,6 +21,10 @@
 		B1000000000000000000000C /* stations.seed.json in Resources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000000C /* stations.seed.json */; };
 		B1000000000000000000000D /* StationDistanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000000E /* StationDistanceTests.swift */; };
 		B1000000000000000000000E /* ArrivalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000012 /* ArrivalTests.swift */; };
+		B1000000000000000000000F /* TrainPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000013 /* TrainPosition.swift */; };
+		B10000000000000000000010 /* LineRouteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000014 /* LineRouteRepository.swift */; };
+		B10000000000000000000011 /* line_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000015 /* line_routes.json */; };
+		B10000000000000000000012 /* PositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000016 /* PositionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		C10000000000000000000010 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
 		C10000000000000000000011 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
 		C10000000000000000000012 /* ArrivalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalTests.swift; sourceTree = "<group>"; };
+		C10000000000000000000013 /* TrainPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainPosition.swift; sourceTree = "<group>"; };
+		C10000000000000000000014 /* LineRouteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRouteRepository.swift; sourceTree = "<group>"; };
+		C10000000000000000000015 /* line_routes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = line_routes.json; sourceTree = "<group>"; };
+		C10000000000000000000016 /* PositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				C10000000000000000000007 /* StationRepository.swift */,
+				C10000000000000000000014 /* LineRouteRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -168,6 +177,7 @@
 			children = (
 				C10000000000000000000005 /* Station.swift */,
 				C10000000000000000000006 /* TrainArrival.swift */,
+				C10000000000000000000013 /* TrainPosition.swift */,
 			);
 			path = "Domain/Models";
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 			children = (
 				C1000000000000000000000E /* StationDistanceTests.swift */,
 				C10000000000000000000012 /* ArrivalTests.swift */,
+				C10000000000000000000016 /* PositionTests.swift */,
 			);
 			path = GoHomeTests;
 			sourceTree = "<group>";
@@ -222,6 +233,7 @@
 				C1000000000000000000000B /* Assets.xcassets */,
 				C1000000000000000000000D /* Info.plist */,
 				C1000000000000000000000C /* stations.seed.json */,
+				C10000000000000000000015 /* line_routes.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -310,6 +322,7 @@
 			files = (
 				B1000000000000000000000B /* Assets.xcassets in Resources */,
 				B1000000000000000000000C /* stations.seed.json in Resources */,
+				B10000000000000000000011 /* line_routes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +350,8 @@
 				B10000000000000000000008 /* DirectSeoulTransitAPIClient.swift in Sources */,
 				B10000000000000000000009 /* HomeViewModel.swift in Sources */,
 				B1000000000000000000000A /* HomeView.swift in Sources */,
+				B1000000000000000000000F /* TrainPosition.swift in Sources */,
+				B10000000000000000000010 /* LineRouteRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +361,7 @@
 			files = (
 				B1000000000000000000000D /* StationDistanceTests.swift in Sources */,
 				B1000000000000000000000E /* ArrivalTests.swift in Sources */,
+				B10000000000000000000012 /* PositionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

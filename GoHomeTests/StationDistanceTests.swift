@@ -74,6 +74,14 @@ final class StationDistanceTests: XCTestCase {
         XCTAssertEqual(station.lineNames, ["1호선"])
     }
 
+    func testYangwonCoordinateRemainsInSeoul() throws {
+        let stations = try BundledStationRepository().loadStations()
+        let station = try XCTUnwrap(stations.first { $0.name == "양원" })
+
+        XCTAssertTrue((37.5...37.7).contains(station.latitude))
+        XCTAssertTrue((127.0...127.2).contains(station.longitude))
+    }
+
     func testSameNameNonTransferStationsRemainSeparate() throws {
         let stations = try BundledStationRepository().loadStations()
         let yangpyeong = stations.filter { $0.name == "양평" }

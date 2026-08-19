@@ -39,6 +39,20 @@ DISTINCT_SAME_NAME_LINES = {
 FORCED_TRANSFER_NAMES = {"이촌"}
 PHYSICAL_STATION_COORDINATE_OVERRIDES = {
     "이촌": (37.522476, 126.973816),
+    # The official 2026-06-30 workbook contains a known bad Yangwon coordinate
+    # near Yeongju even though its address is in Seoul. Rail.Blue is used as an
+    # audited correction, consistent with the existing GTX-A supplements.
+    "양원": (37.606656838, 127.108080981),
+}
+PHYSICAL_STATION_COORDINATE_OVERRIDE_SOURCES = {
+    "이촌": {
+        "source": "kric_metro_stations_20260630.xlsx",
+        "reason": "KRIC 경원선 좌표 채택; 동일 환승역의 4호선 좌표 이상치 보정",
+    },
+    "양원": {
+        "source": "https://rail.blue/railroad/logis/stationinfo.aspx?id=609",
+        "reason": "KRIC 원본의 알려진 좌표 오류 보정",
+    },
 }
 
 LINE_ALIASES: dict[str, tuple[str, ...]] = {
@@ -397,7 +411,7 @@ def validate_stations(stations: list[dict[str, Any]], source_rows: int) -> dict[
             name: {
                 "latitude": coordinate[0],
                 "longitude": coordinate[1],
-                "reason": "KRIC 경원선 좌표 채택; 동일 환승역의 4호선 좌표 이상치 보정",
+                **PHYSICAL_STATION_COORDINATE_OVERRIDE_SOURCES[name],
             }
             for name, coordinate in PHYSICAL_STATION_COORDINATE_OVERRIDES.items()
         },

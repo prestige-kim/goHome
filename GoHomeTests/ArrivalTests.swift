@@ -31,6 +31,25 @@ final class DirectSeoulTransitAPIClientTests: XCTestCase {
         }
     }
 
+    func testPositionResponseMapsStatusDirectionAndServiceFlags() async throws {
+        URLProtocolStub.requestHandler = successResponse(
+            #"{"errorMessage":{"code":"INFO-000","message":"정상 처리되었습니다."},"realtimePositionList":[{"subwayId":"1002","subwayNm":"2호선","statnId":"1002000202","statnNm":"을지로입구","trainNo":"2259","recptnDt":"2026-08-19 14:48:35","updnLine":"0","statnTid":"1002000211","statnTnm":"성수종착","trainSttus":"3","directAt":"7","lstcarAt":"1"}]}"#
+        )
+
+        let positions = try await makeClient().positions(on: "2호선")
+        let position = try XCTUnwrap(positions.first)
+
+        XCTAssertEqual(position.lineName, "2호선")
+        XCTAssertEqual(position.currentStation, "을지로입구")
+        XCTAssertEqual(position.status, .departedPreviousStation)
+        XCTAssertEqual(position.direction, .upOrInner)
+        XCTAssertEqual(position.directionText, "내선")
+        XCTAssertEqual(position.serviceType, .limitedExpress)
+        XCTAssertTrue(position.isLastTrain)
+        XCTAssertNotNil(position.receivedAt)
+        XCTAssertNil(position.remainingStationCount)
+    }
+
     func testWorkerHTTPFailuresAreClassified() async {
         let cases: [(Int, String, TransitAPIError)] = [
             (401, #"{"error":"unauthorized"}"#, .invalidProxyToken),
@@ -211,13 +230,33 @@ final class HomeViewModelArrivalTests: XCTestCase {
         )
     }
 
+    func testFailedPositionRefreshKeepsLastSuccessfulPosition() async {
+        let receivedAt = Date(timeIntervalSince1970: 1_000)
+        let position = makePosition(receivedAt: receivedAt)
+        let client = SequencedTransitClient(
+            responses: [.success([]), .success([])],
+            positionResponses: [.success([position]), .failure(.workerUnavailable)]
+        )
+        let viewModel = makeViewModel(client: client)
+        viewModel.select(testStation)
+
+        await viewModel.refreshArrivals()
+        await viewModel.refreshArrivals()
+
+        XCTAssertEqual(viewModel.positions.first?.id, position.id)
+        XCTAssertEqual(viewModel.positions.first?.remainingStationCount, 1)
+        XCTAssertTrue(viewModel.isShowingLastSuccessfulPositionData)
+        XCTAssertTrue(viewModel.hasStalePositionData(at: receivedAt.addingTimeInterval(121)))
+    }
+
     private var testStation: Station {
         Station(
             id: "test",
             name: "시청",
             latitude: 37.566,
             longitude: 126.978,
-            lineNames: ["1호선"]
+            lineNames: ["1호선"],
+            seoulStationIDs: ["1호선": "b"]
         )
     }
 
@@ -227,6 +266,14 @@ final class HomeViewModelArrivalTests: XCTestCase {
     ) -> HomeViewModel {
         HomeViewModel(
             stationRepository: StaticStationRepository(stations: [testStation]),
+            lineRouteRepository: StaticLineRouteRepository(
+                networks: [
+                    LineRouteNetwork(
+                        lineName: "1호선",
+                        routes: [LineRoute(id: "main", isCircular: false, stationIDs: ["a", "b", "c"])]
+                    )
+                ]
+            ),
             transitClient: client,
             automaticRefreshInterval: automaticRefreshInterval
         )
@@ -236,13 +283,16 @@ final class HomeViewModelArrivalTests: XCTestCase {
 private actor SequencedTransitClient: TransitAPIClient {
     private var responses: [Result<[TrainArrival], TransitAPIError>]
     private let delayNanoseconds: UInt64
+    private var positionResponses: [Result<[TrainPosition], TransitAPIError>]
     private(set) var requestCount = 0
 
     init(
         responses: [Result<[TrainArrival], TransitAPIError>],
+        positionResponses: [Result<[TrainPosition], TransitAPIError>] = [],
         delayNanoseconds: UInt64 = 0
     ) {
         self.responses = responses
+        self.positionResponses = positionResponses
         self.delayNanoseconds = delayNanoseconds
     }
 
@@ -253,6 +303,11 @@ private actor SequencedTransitClient: TransitAPIClient {
         }
         return try responses.removeFirst().get()
     }
+
+    func positions(on lineName: String) async throws -> [TrainPosition] {
+        guard !positionResponses.isEmpty else { return [] }
+        return try positionResponses.removeFirst().get()
+    }
 }
 
 private struct StaticStationRepository: StationRepository {
@@ -260,6 +315,14 @@ private struct StaticStationRepository: StationRepository {
 
     func loadStations() throws -> [Station] {
         stations
+    }
+}
+
+private struct StaticLineRouteRepository: LineRouteRepository {
+    let networks: [LineRouteNetwork]
+
+    func loadLineRoutes() throws -> [LineRouteNetwork] {
+        networks
     }
 }
 
@@ -303,5 +366,23 @@ private func makeArrival(receivedAt: Date?) -> TrainArrival {
         isExpress: false,
         isLastTrain: false,
         receivedAt: receivedAt
+    )
+}
+
+private func makePosition(receivedAt: Date?) -> TrainPosition {
+    TrainPosition(
+        id: "position",
+        lineName: "1호선",
+        stationID: "a",
+        currentStation: "출발역",
+        trainNumber: "1001",
+        direction: .downOrOuter,
+        destinationStationID: "c",
+        destination: "종착역",
+        status: .departed,
+        serviceType: .regular,
+        isLastTrain: false,
+        receivedAt: receivedAt,
+        remainingStationCount: nil
     )
 }

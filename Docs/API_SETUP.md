@@ -53,13 +53,29 @@ ruby scripts/check_seoul_api.rb --allow-insecure-http 시청
 ### 실시간 열차 위치
 
 - 데이터셋: https://www.data.go.kr/data/15058569/openapi.do
-- 추후 사용할 요청 형식:
+- 원본 요청 형식:
 
 ```text
 http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/100/{호선명}
 ```
 
 `{호선명}` 예시는 `1호선`, `2호선`, `수인분당선`이다. 이 API는 실제 GPS 좌표가 아니라 현재 역과 진입·도착·출발 상태를 제공한다.
+
+공식 명세의 상태값은 `trainSttus` 0/1/2/3 = 진입/도착/출발/전역 출발이다.
+`updnLine` 0/1은 상행·내선/하행·외선, `directAt` 0/1/7은 일반/급행/특급,
+`lstcarAt` 0/1은 일반/막차를 뜻한다.
+
+2026-08-19 배포된 Worker의 `GET /v1/positions?line=2호선`을 통해 HTTPS 종단간 호출을
+실행했다. 최종 재검증에서 HTTP 200, 서울시 `INFO-000`, 시청 도착 14건, 2호선 위치 35건,
+DTO 필드 13개를 확인했으며 해당 시점에는
+상태 코드 0·1·2가 관측됐다. 코드 3은 공식 명세와 단위 테스트로 매핑을 고정했다. 응답 샘플은
+Git에서 제외된 `tmp/api-samples/`에만 저장한다.
+
+원본 키를 로컬에서 HTTP로 보내지 않고 다시 확인하려면 다음 명령을 사용한다.
+
+```sh
+ruby scripts/check_worker_api.rb 시청 2호선
+```
 
 ### 역명과 역코드 매핑
 
@@ -115,7 +131,7 @@ http://swopenapi.seoul.go.kr/api/subway/{SEOUL_API_KEY}/json/realtimePosition/0/
 - Worker가 분류한 원본 연결 실패: 서울시 실시간 API 연결 장애 안내
 - 서울시 `errorMessage`/`RESULT`의 비정상 코드: 코드와 원본 메시지를 포함한 서울시 API 오류
 
-오류가 발생해도 같은 역의 마지막 정상 도착 목록은 유지한다. 서울시 `recptnDt`가 현재보다 2분
-이상 오래됐거나 수신시각이 없으면 오래된 데이터 경고를 표시한다.
+오류가 발생해도 같은 역의 마지막 정상 도착 목록과 노선별 마지막 정상 위치는 유지한다. 서울시
+`recptnDt`가 현재보다 2분 이상 오래됐거나 수신시각이 없으면 오래된 데이터 경고를 표시한다.
 
 인증키를 GitHub Issue, 커밋, 스크린샷 또는 채팅에 붙여 넣지 않는다.

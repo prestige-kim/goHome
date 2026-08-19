@@ -10,13 +10,17 @@ iPhone -- HTTPS + 개인용 토큰 --> Cloudflare Worker -- HTTP + 서울시 키
 ```
 
 서울시 구간은 원본 서비스 제약 때문에 HTTP가 남지만, 사용자의 Wi-Fi·이동통신 구간에 서울시
-키가 노출되지 않고 앱을 분석해도 원본 키를 얻을 수 없다. Worker는 고정된 도착정보 API만
+키가 노출되지 않고 앱을 분석해도 원본 키를 얻을 수 없다. Worker는 고정된 도착정보·열차 위치 API만
 호출할 수 있으므로 임의 프록시로 악용할 수 없다.
 
 ## 현재 제공 경로
 
 - `GET /health`: 배포 상태 확인, 인증 불필요
 - `GET /v1/arrivals?station=시청`: 역별 실시간 도착정보, Bearer 토큰 필요
+- `GET /v1/positions?line=2호선`: 노선별 실시간 열차 위치, Bearer 토큰 필요
+
+위치 경로의 `line`은 앱이 지원하는 19개 노선 allowlist의 정확한 이름만 허용한다. URL이나 임의
+호스트를 받을 수 없으며 원본 서비스도 `realtimePosition`으로 고정되어 있다.
 
 도착정보 경로는 원본의 HTTP 429를 `upstream_rate_limited`/429로 전달하고, 원본 HTTP 오류·연결
 실패·JSON 형식 오류를 키나 원본 URL이 포함되지 않은 오류 코드로 정규화한다. 앱은 이 코드와
@@ -94,13 +98,17 @@ curl https://gohome-transit-proxy.<계정>.workers.dev/health
 ruby scripts/check_worker_api.rb 시청
 ```
 
-도착정보 요청은 `Authorization: Bearer <GOHOME_CLIENT_TOKEN>` 헤더가 있어야 한다. 토큰이나
+2026-08-19 위치 경로 배포 후 `/health`, 무인증 요청의 401 차단, Bearer 인증, 시청역 도착 14건,
+2호선 위치 35건,
+서울시 `INFO-000`과 위치 DTO 13개 필드를 종단간으로 확인했다.
+
+도착정보와 위치정보 요청은 `Authorization: Bearer <GOHOME_CLIENT_TOKEN>` 헤더가 있어야 한다. 토큰이나
 서울시 키를 명령 기록, GitHub Issue, 커밋, 스크린샷에 남기지 않는다.
 
 ## 로컬 테스트
 
 Worker 코드의 자동 테스트는 실제 키나 네트워크를 사용하지 않는다. 상태 확인, 인증, 입력 검증,
-허용 메서드·경로, 고정 원본 URL, Secret 누락, 원본 연결 실패, HTTP 429, 잘못된 JSON 응답을
+허용 메서드·경로, 위치 노선 allowlist, 두 고정 원본 URL, Secret 누락, 원본 연결 실패, HTTP 429, 잘못된 JSON 응답을
 회귀 테스트한다.
 
 ```sh

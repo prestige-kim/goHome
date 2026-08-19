@@ -76,6 +76,11 @@ def main() -> None:
         matches = station_named(stations, display_name)
         require(len(matches) == 1 and matches[0]["apiName"] == api_name, f"Rename mapping failed: {display_name}")
 
+    yangwon = station_named(stations, "양원")
+    require(len(yangwon) == 1, "Yangwon station match failed")
+    require(37.5 < yangwon[0]["latitude"] < 37.7, "Yangwon latitude regression")
+    require(127.0 < yangwon[0]["longitude"] < 127.2, "Yangwon longitude regression")
+
     print("Station bundle validation passed")
     print(f"- Physical stations: {len(stations)}")
     print(f"- Station-line mappings: {EXPECTED_STATION_LINE_COUNT}")

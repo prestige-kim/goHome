@@ -12,6 +12,7 @@ struct HomeView: View {
                 nearbyStationSection
                 stationSearchSection
                 arrivalSection
+                positionSection
             }
             .navigationTitle("GoHome")
             .task {
@@ -139,16 +140,16 @@ struct HomeView: View {
                     Task { await viewModel.refreshArrivals() }
                 } label: {
                     HStack {
-                        Text("\(station.name)역 도착정보 불러오기")
+                        Text("\(station.name)역 실시간 정보 불러오기")
                         Spacer()
-                        if viewModel.isLoadingArrivals {
+                        if viewModel.isLoadingTransitData {
                             ProgressView()
                         } else {
                             Image(systemName: "arrow.clockwise")
                         }
                     }
                 }
-                .disabled(viewModel.isLoadingArrivals)
+                .disabled(viewModel.isLoadingTransitData)
             }
 
             if let arrivalMessage = viewModel.arrivalMessage {
@@ -204,6 +205,86 @@ struct HomeView: View {
                         .foregroundStyle(.orange)
                 }
                 Text("실시간 정보는 원천 데이터 수신·가공 과정에서 지연될 수 있습니다.")
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var positionSection: some View {
+        Section {
+            if let positionMessage = viewModel.positionMessage {
+                Text(positionMessage)
+                    .font(.footnote)
+                    .foregroundStyle(
+                        viewModel.isShowingLastSuccessfulPositionData ? Color.orange : Color.secondary
+                    )
+            }
+
+            if viewModel.isShowingLastSuccessfulPositionData {
+                Label(
+                    "새 요청에 실패한 노선은 마지막 정상 위치를 표시하고 있습니다.",
+                    systemImage: "clock.arrow.circlepath"
+                )
+                .font(.footnote)
+                .foregroundStyle(.orange)
+            }
+
+            ForEach(viewModel.positions) { position in
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(position.lineName)
+                            .font(.headline)
+                        Text(position.directionText)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        if position.serviceType != .regular {
+                            arrivalBadge(position.serviceType.rawValue, color: .blue)
+                        }
+                        if position.isLastTrain {
+                            arrivalBadge("막차", color: .red)
+                        }
+                        Spacer()
+                        if let count = position.remainingStationCount {
+                            Text(count == 0 ? "이 역" : "\(count)역 전")
+                                .font(.subheadline.weight(.semibold).monospacedDigit())
+                        }
+                    }
+
+                    HStack(spacing: 8) {
+                        Label(
+                            "\(position.currentStation) \(position.status.rawValue)",
+                            systemImage: "tram.fill"
+                        )
+                        .lineLimit(1)
+                        Spacer(minLength: 4)
+                        Image(systemName: "arrow.right")
+                            .foregroundStyle(.secondary)
+                        Text(viewModel.selectedStation.map { "\($0.name)역" } ?? "선택 역")
+                            .lineLimit(1)
+                    }
+                    .font(.subheadline)
+
+                    Text("\(position.destination) · 열차 \(position.trainNumber)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityElement(children: .combine)
+            }
+        } header: {
+            Text("열차 위치")
+        } footer: {
+            VStack(alignment: .leading, spacing: 4) {
+                if let receivedAt = viewModel.latestPositionReceivedAt {
+                    Text("위치 데이터 기준 \(receivedAt.formatted(date: .omitted, time: .standard))")
+                }
+                if let refreshedAt = viewModel.lastSuccessfulPositionRefreshAt {
+                    Text("마지막 정상 갱신 \(refreshedAt.formatted(date: .omitted, time: .standard))")
+                }
+                if viewModel.hasStalePositionData {
+                    Text("2분 이상 지난 열차 위치가 포함되어 있습니다.")
+                        .foregroundStyle(.orange)
+                }
+                Text("GPS 좌표가 아니라 서울시가 제공한 현재 역과 진입·도착·출발 상태를 기준으로 계산한 정보입니다.")
             }
         }
     }

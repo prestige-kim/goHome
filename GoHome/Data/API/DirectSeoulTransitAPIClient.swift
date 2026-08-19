@@ -93,6 +93,84 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
         }
     }
 
+    func positions(on lineName: String) async throws -> [TrainPosition] {
+        guard let baseURL,
+              baseURL.scheme?.lowercased() == "https",
+              let clientToken,
+              !clientToken.isEmpty else {
+            throw TransitAPIError.missingProxyConfiguration
+        }
+
+        let endpoint = baseURL.appendingPathComponent("v1/positions")
+        guard var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false) else {
+            throw TransitAPIError.invalidURL
+        }
+        components.queryItems = [URLQueryItem(name: "line", value: lineName)]
+        guard let url = components.url else {
+            throw TransitAPIError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(clientToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.timeoutInterval = 15
+
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch let error as URLError where error.code == .cancelled {
+            throw CancellationError()
+        } catch {
+            throw TransitAPIError.workerUnavailable
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw TransitAPIError.invalidResponse
+        }
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            throw error(for: httpResponse.statusCode, data: data)
+        }
+
+        let payload: SeoulPositionResponse
+        do {
+            payload = try JSONDecoder().decode(SeoulPositionResponse.self, from: data)
+        } catch {
+            throw TransitAPIError.invalidResponse
+        }
+
+        guard let apiMessage = payload.apiMessage else {
+            throw TransitAPIError.invalidResponse
+        }
+        if apiMessage.code != "INFO-000" {
+            if Self.isRateLimitMessage(apiMessage.message) {
+                throw TransitAPIError.rateLimitExceeded
+            }
+            throw TransitAPIError.seoulAPI(code: apiMessage.code, message: apiMessage.message)
+        }
+
+        return (payload.realtimePositionList ?? []).map { item in
+            TrainPosition(
+                id: [item.subwayId, item.trainNo, item.recptnDt]
+                    .compactMap { $0 }
+                    .joined(separator: "-"),
+                lineName: item.subwayNm ?? item.subwayName,
+                stationID: item.statnId ?? "",
+                currentStation: item.statnNm ?? "현재 역 정보 없음",
+                trainNumber: item.trainNo ?? "열차번호 없음",
+                direction: item.direction,
+                destinationStationID: item.statnTid,
+                destination: item.statnTnm ?? "종착역 정보 없음",
+                status: item.positionStatus,
+                serviceType: item.serviceType,
+                isLastTrain: item.lstcarAt == "1",
+                receivedAt: item.receivedDate,
+                remainingStationCount: nil
+            )
+        }
+    }
+
     private func error(for statusCode: Int, data: Data) -> TransitAPIError {
         let proxyError = (try? JSONDecoder().decode(ProxyErrorResponse.self, from: data))?.error
 
@@ -140,6 +218,28 @@ private struct SeoulArrivalResponse: Decodable {
         case errorMessage
         case result = "RESULT"
         case realtimeArrivalList
+    }
+}
+
+private struct SeoulPositionResponse: Decodable {
+    let errorMessage: SeoulAPIMessage?
+    let result: SeoulAPIResult?
+    let realtimePositionList: [SeoulPositionDTO]?
+
+    var apiMessage: SeoulAPIMessage? {
+        if let errorMessage {
+            return errorMessage
+        }
+        if let result {
+            return SeoulAPIMessage(code: result.code, message: result.message)
+        }
+        return nil
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case errorMessage
+        case result = "RESULT"
+        case realtimePositionList
     }
 }
 
@@ -225,6 +325,84 @@ private struct SeoulArrivalDTO: Decodable {
         case "5": return .arrivedPreviousStation
         case "99": return .inTransit
         default: return .unknown
+        }
+    }
+
+    var receivedDate: Date? {
+        guard let recptnDt else { return nil }
+
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: recptnDt)
+    }
+}
+
+private struct SeoulPositionDTO: Decodable {
+    let subwayId: String?
+    let subwayNm: String?
+    let statnId: String?
+    let statnNm: String?
+    let trainNo: String?
+    let lastRecptnDt: String?
+    let recptnDt: String?
+    let updnLine: String?
+    let statnTid: String?
+    let statnTnm: String?
+    let trainSttus: String?
+    let directAt: String?
+    let lstcarAt: String?
+
+    var subwayName: String {
+        switch subwayId {
+        case "1001": return "1호선"
+        case "1002": return "2호선"
+        case "1003": return "3호선"
+        case "1004": return "4호선"
+        case "1005": return "5호선"
+        case "1006": return "6호선"
+        case "1007": return "7호선"
+        case "1008": return "8호선"
+        case "1009": return "9호선"
+        case "1063": return "경의중앙선"
+        case "1065": return "공항철도"
+        case "1067": return "경춘선"
+        case "1075": return "수인분당선"
+        case "1077": return "신분당선"
+        case "1081": return "경강선"
+        case "1092": return "우이신설선"
+        case "1093": return "서해선"
+        case "1094": return "신림선"
+        case "1032": return "GTX-A"
+        default: return subwayId ?? "노선 정보 없음"
+        }
+    }
+
+    var direction: TrainDirection {
+        switch updnLine {
+        case "0": return .upOrInner
+        case "1": return .downOrOuter
+        default: return .unknown
+        }
+    }
+
+    var positionStatus: TrainPositionStatus {
+        switch trainSttus {
+        case "0": return .approaching
+        case "1": return .arrived
+        case "2": return .departed
+        case "3": return .departedPreviousStation
+        default: return .unknown
+        }
+    }
+
+    var serviceType: TrainServiceType {
+        switch directAt {
+        case "1": return .express
+        case "7": return .limitedExpress
+        default: return .regular
         }
     }
 

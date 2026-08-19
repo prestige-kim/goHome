@@ -33,7 +33,14 @@
     "이촌": {
       "latitude": 37.522476,
       "longitude": 126.973816,
+      "source": "kric_metro_stations_20260630.xlsx",
       "reason": "KRIC 경원선 좌표 채택; 동일 환승역의 4호선 좌표 이상치 보정"
+    },
+    "양원": {
+      "latitude": 37.606656838,
+      "longitude": 127.108080981,
+      "source": "https://rail.blue/railroad/logis/stationinfo.aspx?id=609",
+      "reason": "KRIC 원본의 알려진 좌표 오류 보정"
     }
   },
   "distinctSameNameStations": [
