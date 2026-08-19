@@ -46,7 +46,7 @@ final class LocationService: NSObject, ObservableObject {
     }
 }
 
-extension LocationService: CLLocationManagerDelegate {
+extension LocationService: @preconcurrency CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
         accuracyAuthorization = manager.accuracyAuthorization

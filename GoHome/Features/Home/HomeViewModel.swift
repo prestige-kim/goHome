@@ -4,8 +4,8 @@ import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    static let supportedRangeMeters: CLLocationDistance = 5_000
-    static let automaticRefreshInterval: TimeInterval = 40
+    nonisolated static let supportedRangeMeters: CLLocationDistance = 5_000
+    nonisolated static let automaticRefreshInterval: TimeInterval = 40
 
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
     @Published private(set) var accuracyAuthorization: CLAccuracyAuthorization
@@ -68,7 +68,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     init(
-        locationService: LocationService = LocationService(),
+        locationService: LocationService? = nil,
         stationRepository: StationRepository = BundledStationRepository(),
         lineRouteRepository: LineRouteRepository = BundledLineRouteRepository(),
         transitClient: TransitAPIClient = DirectSeoulTransitAPIClient(
@@ -77,6 +77,7 @@ final class HomeViewModel: ObservableObject {
         ),
         automaticRefreshInterval: TimeInterval = HomeViewModel.automaticRefreshInterval
     ) {
+        let locationService = locationService ?? LocationService()
         self.locationService = locationService
         self.stationRepository = stationRepository
         self.lineRouteRepository = lineRouteRepository
