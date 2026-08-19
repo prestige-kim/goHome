@@ -23,11 +23,6 @@ final class LocationService: NSObject, ObservableObject {
     }
 
     func requestAccessAndLocation() {
-        guard CLLocationManager.locationServicesEnabled() else {
-            errorMessage = "기기의 위치 서비스가 꺼져 있습니다. 역을 직접 검색해 주세요."
-            return
-        }
-
         switch manager.authorizationStatus {
         case .notDetermined:
             manager.requestWhenInUseAuthorization()
