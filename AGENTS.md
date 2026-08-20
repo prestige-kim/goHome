@@ -54,8 +54,9 @@
 ## 2. 앱과 Worker 보안 경계
 
 - iOS 앱 번들에는 `TRANSIT_PROXY_BASE_URL`과 개인용 `TRANSIT_PROXY_CLIENT_TOKEN`만 포함한다.
-- `SEOUL_API_KEY`와 `PUBLIC_DATA_API_KEY`는 앱의 `Info.plist`, Swift 코드, 빌드 리소스에 절대
-  포함하지 않고 Worker Secret에만 둔다.
+- `SEOUL_API_KEY`와 `PUBLIC_DATA_API_KEY`는 Git에서 제외된 로컬 비밀 저장소와 배포 Worker
+  Secret에만 둔다. 앱의 `Info.plist`, Swift 코드, 빌드 리소스, Git 추적 파일에는 절대 포함하지
+  않는다.
 - Worker는 인증이 필요한 고정 경로와 allowlist만 제공한다. 사용자가 전달한 URL이나 host를
   호출하는 범용 프록시를 만들지 않는다.
 - Worker 오류는 원본 URL, 요청 경로, API 키, Bearer 토큰, 원본 응답 전문을 노출하지 않는다.
