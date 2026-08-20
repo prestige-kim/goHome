@@ -74,13 +74,32 @@ test("arrival endpoint reports missing worker secrets", async () => {
   const handler = createHandler(() => {
     throw new Error("upstream should not be called");
   });
-  const response = await handler(
+  const missingClientToken = await handler(
     new Request("https://proxy.example/v1/arrivals?station=시청"),
-    {},
+    { SEOUL_API_KEY: environment.SEOUL_API_KEY },
+  );
+  assert.equal(missingClientToken.status, 500);
+  assert.deepEqual(await missingClientToken.json(), { error: "missing_client_token" });
+
+  const missingSeoulKey = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    { GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN },
+  );
+  assert.equal(missingSeoulKey.status, 500);
+  assert.deepEqual(await missingSeoulKey.json(), { error: "missing_seoul_api_key" });
+});
+
+test("authorization is checked before route-specific secrets", async () => {
+  const handler = createHandler(() => {
+    throw new Error("upstream should not be called");
+  });
+  const response = await handler(
+    new Request("https://proxy.example/v1/service-day?date=2026-08-20"),
+    { GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN },
   );
 
-  assert.equal(response.status, 500);
-  assert.deepEqual(await response.json(), { error: "missing_seoul_api_key" });
+  assert.equal(response.status, 401);
+  assert.deepEqual(await response.json(), { error: "unauthorized" });
 });
 
 test("worker rejects unsupported methods and routes", async () => {

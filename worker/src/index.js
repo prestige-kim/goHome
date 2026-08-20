@@ -49,15 +49,18 @@ export function createHandler(fetchUpstream = fetch, holidayCache = new Map()) {
       return jsonResponse({ error: "not_found" }, 404);
     }
 
-    const configurationError = validateEnvironment(env, url.pathname);
-    if (configurationError) {
-      return jsonResponse({ error: configurationError }, 500);
+    if (!env?.GOHOME_CLIENT_TOKEN) {
+      return jsonResponse({ error: "missing_client_token" }, 500);
     }
-
     if (!isAuthorized(request, env.GOHOME_CLIENT_TOKEN)) {
       return jsonResponse({ error: "unauthorized" }, 401, {
         "www-authenticate": "Bearer",
       });
+    }
+
+    const configurationError = validateEnvironment(env, url.pathname);
+    if (configurationError) {
+      return jsonResponse({ error: configurationError }, 500);
     }
 
     if (url.pathname === "/v1/service-day") {
@@ -134,11 +137,9 @@ async function proxyJSON(upstreamURL, fetchUpstream) {
 function validateEnvironment(env, pathname) {
   if (pathname === "/v1/service-day") {
     if (!env?.PUBLIC_DATA_API_KEY) return "missing_public_data_api_key";
-    if (!env?.GOHOME_CLIENT_TOKEN) return "missing_client_token";
     return null;
   }
   if (!env?.SEOUL_API_KEY) return "missing_seoul_api_key";
-  if (!env?.GOHOME_CLIENT_TOKEN) return "missing_client_token";
   return null;
 }
 
