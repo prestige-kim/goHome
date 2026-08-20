@@ -107,9 +107,13 @@ D 하이브리드안입니다. 선택 역은 상단 버튼과 별도 역 선택 
 Worker 테스트는 전체 Xcode 없이 실행할 수 있습니다.
 
 ```sh
+ruby scripts/check_secret_hygiene.rb
 cd worker
 npm test
 ```
+
+비밀값 검사는 ignored 파일의 내용을 읽지 않고 보호 파일의 Git 제외 상태, 추적·untracked 소스의
+고엔트로피 키 대입, 앱 `Info.plist`의 금지된 원본 키 항목을 값 출력 없이 검사합니다.
 
 iOS 단위 테스트는 `GoHomeTests` 타깃에 거리·번들 검증과 도착정보 오류 분류, 중복 요청 방지,
 자동 갱신 취소, 위치 DTO·상태 코드, 분기·순환선 남은 역 계산, 위치 마지막 정상 데이터 유지,
