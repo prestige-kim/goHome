@@ -19,8 +19,11 @@
 - 열차 위치 오류 시 노선별 마지막 정상 데이터, 기준시각, 오래된 상태 유지
 - 노선 스트립을 우선하는 Home 대시보드와 가까운 열차 4대 요약·전체 펼치기
 - 노선 고유색, 큰 도착 예정시간, LIVE/지연 상태를 결합한 D 하이브리드 디자인
+- 1~9호선의 방향·종착역·급행별 막차 예정 시각과 현재 기준 남은 시간
+- 평일·토요일·일요일/공휴일 선택, 오전 4시 영업일 경계, 00·24·25시 시간 처리
+- 공휴일 확인 실패 시 요일 기준 폴백과 막차 갱신 실패 시 마지막 정상 시간표 유지
 - API 키를 Git에서 제외하는 `xcconfig` 구성
-- 역 데이터 생성·검증 스크립트, 도착정보 단위 테스트, Worker 회귀 테스트
+- 역 데이터 생성·검증 스크립트, iOS XCTest 40개, Worker 회귀 테스트 17개
 
 `stations.seed.json`은 파일명이 초기 골격의 흔적을 유지하고 있지만, 현재는 19개 지원 노선의
 563개 물리 역과 696개 노선별 역 ID를 포함한 전체 번들입니다. 국가철도공단 좌표와 서울시
@@ -53,14 +56,14 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
    cp Config/Secrets.xcconfig.example Config/Secrets.xcconfig
    ```
 
-2. `Config/Secrets.xcconfig`의 값을 채웁니다. 서울시 키는 로컬 API 점검용이고, 앱에서는
-   배포된 Worker 주소와 개인용 호출 토큰을 사용합니다.
+2. `Config/Secrets.xcconfig`의 값을 채웁니다. 서울시 키는 로컬 API 점검용이고, 앱 번들에는
+   배포된 Worker 주소와 개인용 호출 토큰만 들어갑니다. 공공데이터포털 키는 이 파일이 아니라
+   Git에서 제외된 `worker/.env.production`에만 둡니다.
 
    ```xcconfig
    SEOUL_API_KEY = 발급받은_인증키
    TRANSIT_PROXY_BASE_URL = https:/$()/gohome-transit-proxy.<계정>.workers.dev
    TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
-   PUBLIC_DATA_API_KEY = 발급받은_인증키
    ```
 
    `.xcconfig`에서는 `//`가 주석으로 해석되므로 Worker URL의 슬래시는 반드시
@@ -93,6 +96,12 @@ Home 디자인은 노선 스트립 중심의 정보 계층, 큰 도착 예정시
 D 하이브리드안입니다. 선택 역은 상단 버튼과 별도 역 선택 시트에서 바꾸며, 별도 탭이나 지도
 없이 한 화면에서 열차 위치와 도착정보를 이어서 읽도록 구성했습니다.
 
+막차 영역은 서울교통공사의 예정 운행시각표입니다. 실시간 열차 위치의 `막차` 표식과 구분해
+표시하며 1~9호선에서 방향·종착역·급행별 가장 늦은 출발을 보여줍니다. `오늘`은 한국천문연구원
+공휴일 정보로 평일·토요일·일요일/공휴일을 판정하고, 공휴일 API 설정이나 연결에 실패하면 화면에
+경고한 뒤 달력 요일 기준으로 동작합니다. 현재 서울교통공사 원본은 토요일과 일요일/공휴일에 같은
+`주말` 시간표를 제공한다는 한계도 화면에 안내합니다.
+
 ## 테스트
 
 Worker 테스트는 전체 Xcode 없이 실행할 수 있습니다.
@@ -105,11 +114,13 @@ npm test
 iOS 단위 테스트는 `GoHomeTests` 타깃에 거리·번들 검증과 도착정보 오류 분류, 중복 요청 방지,
 자동 갱신 취소, 위치 DTO·상태 코드, 분기·순환선 남은 역 계산, 위치 마지막 정상 데이터 유지,
 동일 열차 최신 스냅샷 선택, 위치 표시 제한, 일시적 Core Location 오류 처리, 역 검색·지원 범위
-판정 검증을 포함합니다. 전체 Xcode를 사용할 수 있는 환경에서 해당 타깃을 실행합니다.
+판정, 영업일 시계, 00·24시 파싱, 막차 DTO와 마지막 정상 시간표 유지 검증을 포함합니다.
+Xcode 26.6의 iPhone 17 Pro Simulator에서 전체 40개가 통과했습니다.
 Phase 0–2의 Simulator·실기기·전광판 최종
 검증 절차는 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md)를 따릅니다.
 Phase 3의 미실행 iOS 검증은 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에
-분리되어 있습니다. Xcode 26.6의 iPhone 17 Pro Simulator에서는 전면 약 40초 자동 갱신,
+분리되어 있고 Phase 4 막차 검증은 [`Docs/PHASE_4_ACCEPTANCE.md`](Docs/PHASE_4_ACCEPTANCE.md)에
+정리되어 있습니다. Xcode 26.6의 iPhone 17 Pro Simulator에서는 전면 약 40초 자동 갱신,
 백그라운드 중지, 전면 복귀 직후 재개까지 확인했습니다.
 
 ## 무료 개인 기기 테스트의 제한
@@ -127,3 +138,4 @@ Phase 3의 미실행 iOS 검증은 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_A
 - [Cloudflare Worker 설정](Docs/WORKER_SETUP.md)
 - [Phase 0–2 최종 승인 검증표](Docs/PHASE_0_2_ACCEPTANCE.md)
 - [Phase 3 최종 승인 검증표](Docs/PHASE_3_ACCEPTANCE.md)
+- [Phase 4 최종 승인 검증표](Docs/PHASE_4_ACCEPTANCE.md)

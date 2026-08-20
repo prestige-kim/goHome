@@ -12,10 +12,6 @@ enum AppConfiguration {
         value(for: "TransitProxyClientToken")
     }
 
-    static var publicDataAPIKey: String? {
-        value(for: "PublicDataAPIKey")
-    }
-
     private static func value(for key: String) -> String? {
         guard let rawValue = Bundle.main.object(forInfoDictionaryKey: key) as? String else {
             return nil

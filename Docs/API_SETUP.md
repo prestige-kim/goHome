@@ -2,7 +2,7 @@
 
 서울시 원본 응답을 로컬에서 점검할 때는 `SEOUL_API_KEY`를 사용한다. 실제 앱은 원본 키를
 포함하지 않고 `TRANSIT_PROXY_BASE_URL`과 `TRANSIT_PROXY_CLIENT_TOKEN`으로 Cloudflare
-Worker를 호출한다. `PUBLIC_DATA_API_KEY`는 막차의 공휴일 판정 기능을 구현하는 Phase 4에서 사용한다.
+Worker를 호출한다. `PUBLIC_DATA_API_KEY`도 앱에 포함하지 않고 Worker Secret으로만 사용한다.
 
 키는 `Config/Secrets.xcconfig`에만 저장한다. 이 파일은 `.gitignore`에 포함되어 GitHub에 올라가지 않는다. 값에 따옴표를 붙이지 않는다.
 
@@ -10,7 +10,6 @@ Worker를 호출한다. `PUBLIC_DATA_API_KEY`는 막차의 공휴일 판정 기�
 SEOUL_API_KEY = 발급받은_서울시_키
 TRANSIT_PROXY_BASE_URL = https:/$()/gohome-transit-proxy.<계정>.workers.dev
 TRANSIT_PROXY_CLIENT_TOKEN = 생성한_개인용_토큰
-PUBLIC_DATA_API_KEY = 발급받은_공공데이터포털_Encoding_키
 ```
 
 `.xcconfig`에서 `//`는 주석으로 처리되므로 Worker URL은 `https:/$()/` 형식으로 적는다.
@@ -90,9 +89,30 @@ ruby scripts/check_worker_api.rb 시청 2호선
 
 ### 막차 시간표
 
-- 역코드 기반 막차: https://www.data.go.kr/data/15056854/openapi.do
-- 호선별 첫차·막차: https://www.data.go.kr/data/15056647/openapi.do
-- Phase 4에서 방향·종착역별 막차를 구현할 때 사용한다.
+- 현재 사용 데이터셋: https://data.seoul.go.kr/dataList/OA-22750/A/1/datasetView.do
+- 이전 역코드 기반 막차 데이터셋: https://data.seoul.go.kr/dataList/OA-15492/A/1/datasetView.do
+
+2026-08-20 실제 점검에서 이전 `SearchLastTrainTimeByIDService`는 1호선 결과를 반환했지만 2호선은
+`INFO-200`이어서, 현재 앱은 서울교통공사의 새 `getTrainSch` 열차운행시각표를 사용한다. 시청역
+1호선 역코드는 `0151`, 2호선은 `0201`로 확인했다. 실시간 역 ID의 숫자 접미사와도 다르므로
+앱은 역 ID 숫자로 시간표 코드나 순서를 추정하지 않는다.
+
+배포된 Worker의 고정 요청 형식은 다음과 같다. `line`은 1~9호선, `direction`은
+`up`/`down`/`inner`/`outer`, `serviceDay`는 `weekday`/`saturday`/`sunday_holiday`만 허용한다.
+
+```text
+GET /v1/last-trains?station=시청&line=2호선&direction=inner&serviceDay=weekday&date=2026-08-20
+Authorization: Bearer <GOHOME_CLIENT_TOKEN>
+```
+
+같은 날 배포 Worker를 통한 종단간 호출에서 HTTP 200, 원본 정상 코드 `00`, 시청역 2호선 내선
+239개 운행시각 행을 확인했다. 원본 응답에는 `00:xx`, `24:xx`가 함께 나타날 수 있어 앱은 둘 다
+같은 영업일의 다음 달력 날짜로 변환하고 `25:xx`까지 처리한다. 오전 4시 이전에는 전날을
+영업일로 본다.
+
+서울교통공사 원본의 `wkndSe`는 평일/주말만 구분한다. 앱 UI는 평일·토요일·일요일/공휴일을
+구분하지만 토요일과 일요일/공휴일 요청은 현재 동일한 원본 `주말` 시간표로 매핑하며 이 한계를
+화면에 표시한다.
 
 서울시 실시간 지하철 OpenAPI는 기본적으로 하루 최대 1,000회 요청 제한이 안내되어 있다. 개인
 사용 단계에서는 선택 역을 앱 전면에서만 40초 간격으로 요청한다. 백그라운드 전환 시 자동 갱신을
@@ -104,7 +124,14 @@ ruby scripts/check_worker_api.rb 시청 2호선
 - 회원가입·로그인: https://www.data.go.kr
 - 한국천문연구원 특일 정보 활용신청: https://www.data.go.kr/data/15012690/openapi.do
 
-공공데이터포털에서 활용신청 후 마이페이지에 표시되는 일반 인증키 중 `Encoding` 키를 `PUBLIC_DATA_API_KEY`에 넣는다. 공휴일 정보는 Phase 4에서 평일·토요일·일요일/공휴일 막차표를 선택할 때 사용한다.
+공공데이터포털에서 활용신청 후 마이페이지에 표시되는 일반 인증키 중 `Encoding` 키를
+`worker/.env.production`의 `PUBLIC_DATA_API_KEY`에 넣는다. 이 파일은 Git에서 제외되며 앱의
+`Config/Secrets.xcconfig`나 `Info.plist`에는 넣지 않는다. Worker는 `getRestDeInfo` 결과를
+`YYYY-MM` 단위로 메모리 캐시해 `weekday`/`saturday`/`sunday_holiday`를 반환한다.
+
+현재 로컬·배포 환경에는 이 키가 설정되지 않아 실제 공휴일 API 종단간 검증은 남아 있다.
+이 경우 `/v1/service-day`는 원본 URL이나 키를 노출하지 않는 설정 오류를 반환하고 앱은 달력
+요일 기준으로 폴백하면서 경고를 표시한다.
 
 ## 3. 역 좌표 원본
 
@@ -136,6 +163,8 @@ ruby scripts/check_worker_api.rb 시청 2호선
 - Worker 5xx·연결 실패·시간 초과: Worker 연결 장애 안내
 - Worker가 분류한 원본 연결 실패: 서울시 실시간 API 연결 장애 안내
 - 서울시 `errorMessage`/`RESULT`의 비정상 코드: 코드와 원본 메시지를 포함한 서울시 API 오류
+- 공휴일 API 설정·연결 실패: 요일 기준 막차표로 폴백하고 공휴일 미검증 상태 안내
+- 막차표 갱신 실패: 같은 역의 마지막 정상 예정 시간표 유지
 
 오류가 발생해도 같은 역의 마지막 정상 도착 목록과 노선별 마지막 정상 위치는 유지한다. 서울시
 `recptnDt`가 현재보다 2분 이상 오래됐거나 수신시각이 없으면 오래된 데이터 경고를 표시한다.
