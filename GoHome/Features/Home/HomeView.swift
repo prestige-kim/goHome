@@ -15,6 +15,7 @@ struct HomeView: View {
                     statusMessages
                     positionSection
                     arrivalSection
+                    lastTrainSection
                     dataNotice
                 }
                 .padding(.horizontal, 16)
@@ -24,7 +25,7 @@ struct HomeView: View {
             .navigationBarHidden(true)
             .refreshable {
                 viewModel.refreshLocation()
-                await viewModel.refreshArrivals()
+                await viewModel.refreshAll()
             }
             .sheet(isPresented: $isStationPickerPresented) {
                 stationPicker
@@ -37,6 +38,10 @@ struct HomeView: View {
             .task(id: automaticRefreshID) {
                 guard scenePhase == .active else { return }
                 await viewModel.runAutomaticArrivalRefresh()
+            }
+            .task(id: lastTrainRefreshID) {
+                guard scenePhase == .active else { return }
+                await viewModel.refreshLastTrains()
             }
             .onChange(of: viewModel.selectedStation?.id) {
                 showsAllPositions = false
@@ -82,23 +87,23 @@ struct HomeView: View {
                 }
 
                 Button {
-                    Task { await viewModel.refreshArrivals() }
+                    Task { await viewModel.refreshAll() }
                 } label: {
                     Image(systemName: "arrow.clockwise")
                         .font(.body.weight(.semibold))
                         .frame(width: 44, height: 44)
                         .background(.thinMaterial, in: Circle())
-                        .rotationEffect(viewModel.isLoadingTransitData ? .degrees(360) : .zero)
+                        .rotationEffect(viewModel.isLoadingAnyData ? .degrees(360) : .zero)
                         .animation(
-                            viewModel.isLoadingTransitData
+                            viewModel.isLoadingAnyData
                                 ? .linear(duration: 1).repeatForever(autoreverses: false)
                                 : .default,
-                            value: viewModel.isLoadingTransitData
+                            value: viewModel.isLoadingAnyData
                         )
                 }
                 .buttonStyle(.plain)
-                .disabled(viewModel.selectedStation == nil || viewModel.isLoadingTransitData)
-                .accessibilityLabel(viewModel.isLoadingTransitData ? "실시간 정보 갱신 중" : "실시간 정보 새로고침")
+                .disabled(viewModel.selectedStation == nil || viewModel.isLoadingAnyData)
+                .accessibilityLabel(viewModel.isLoadingAnyData ? "교통 정보 갱신 중" : "교통 정보 새로고침")
             }
 
             if let station = viewModel.selectedStation {
@@ -131,7 +136,9 @@ struct HomeView: View {
 
     @ViewBuilder
     private var statusMessages: some View {
-        if viewModel.isShowingLastSuccessfulData || viewModel.isShowingLastSuccessfulPositionData {
+        if viewModel.isShowingLastSuccessfulData ||
+            viewModel.isShowingLastSuccessfulPositionData ||
+            viewModel.isShowingLastSuccessfulLastTrainData {
             StatusBanner(
                 title: "마지막 정상 데이터를 표시 중입니다",
                 detail: "새 요청에 실패했습니다. 연결이 회복되면 자동으로 갱신합니다.",
@@ -262,6 +269,66 @@ struct HomeView: View {
         .padding(16)
         .background(Color.secondary.opacity(0.06), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .padding(.bottom, 16)
+    }
+
+    @ViewBuilder
+    private var lastTrainSection: some View {
+        SectionHeading(
+            eyebrow: "SCHEDULED LAST TRAINS",
+            title: "막차 예정 시간",
+            trailing: lastTrainDayTitle
+        )
+
+        HStack(spacing: 12) {
+            Label("영업일", systemImage: "calendar")
+                .font(.subheadline.weight(.semibold))
+            Spacer()
+            Picker("막차 영업일", selection: $viewModel.lastTrainDaySelection) {
+                ForEach(LastTrainDaySelection.allCases) { selection in
+                    Text(selection.title).tag(selection)
+                }
+            }
+            .pickerStyle(.menu)
+        }
+        .padding(.horizontal, 16)
+        .frame(minHeight: 52)
+        .cardSurface()
+
+        if let message = viewModel.lastTrainMessage {
+            StatusBanner(
+                title: viewModel.lastTrains.isEmpty ? "막차 시간표를 확인하지 못했습니다" : "시간표 확인이 필요합니다",
+                detail: message,
+                systemImage: "calendar.badge.exclamationmark",
+                color: .orange
+            )
+        }
+
+        if viewModel.lastTrains.isEmpty {
+            EmptyTransitCard(
+                title: viewModel.isLoadingLastTrains ? "막차 시간표 확인 중" : "표시할 막차 시간표가 없습니다",
+                detail: viewModel.isLoadingLastTrains
+                    ? "선택 역의 방향·종착역별 마지막 열차를 찾고 있습니다."
+                    : "현재 서울교통공사 1~9호선 예정 시간표를 제공합니다.",
+                systemImage: viewModel.isLoadingLastTrains ? "arrow.triangle.2.circlepath" : "moon.stars"
+            )
+        } else {
+            VStack(spacing: 0) {
+                ForEach(Array(viewModel.lastTrains.enumerated()), id: \.element.id) { index, train in
+                    LastTrainRow(train: train)
+                    if index < viewModel.lastTrains.count - 1 {
+                        Divider()
+                            .padding(.leading, 50)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .cardSurface()
+
+            Text("예정 시간표이며 실제 운행·도착 시각과 다를 수 있습니다. 토요일과 일·공휴일은 원천 API의 동일한 주말 시간표를 사용합니다.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 4)
+        }
     }
 
     private var stationPicker: some View {
@@ -408,6 +475,14 @@ struct HomeView: View {
             .max()
     }
 
+    private var lastTrainDayTitle: String? {
+        guard let info = viewModel.lastTrainServiceDayInfo else { return nil }
+        if let holidayName = info.holidayName {
+            return "\(info.type.title) · \(holidayName)"
+        }
+        return info.type.title
+    }
+
     private var latestReceivedAt: Date? {
         [viewModel.latestArrivalReceivedAt, viewModel.latestPositionReceivedAt]
             .compactMap { $0 }
@@ -462,6 +537,10 @@ struct HomeView: View {
     private var automaticRefreshID: String {
         let lifecycle = scenePhase == .active ? "active" : "inactive"
         return "\(lifecycle):\(viewModel.selectedStation?.id ?? "no-station")"
+    }
+
+    private var lastTrainRefreshID: String {
+        "\(automaticRefreshID):\(viewModel.lastTrainDaySelection.rawValue)"
     }
 
     private var locationUnavailable: Bool {
@@ -631,6 +710,72 @@ private struct ArrivalRow: View {
         arrival.destination.hasSuffix("행")
             ? arrival.destination
             : "\(arrival.destination)행"
+    }
+}
+
+private struct LastTrainRow: View {
+    let train: LastTrain
+
+    private var lineColor: Color { SubwayLineStyle.color(for: train.lineName) }
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 12) {
+            LineBadge(lineName: train.lineName, compact: true)
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    Text(destinationText)
+                        .font(.body.weight(.semibold))
+                    if train.isExpress {
+                        TransitBadge(text: "급행", color: .blue)
+                    }
+                }
+                Text("\(train.direction.title) · 예정 시간표 · 열차 \(train.trainNumber)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+
+            Spacer(minLength: 8)
+
+            VStack(alignment: .trailing, spacing: 3) {
+                Text(departureTimeText)
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(lineColor)
+                Text(remainingText)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 14)
+        .accessibilityElement(children: .combine)
+    }
+
+    private var departureTimeText: String {
+        let calendar = TransitServiceClock.seoulCalendar
+        let nextDay = !calendar.isDate(train.departureAt, inSameDayAs: train.serviceDate)
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = calendar.timeZone
+        formatter.dateFormat = "a h:mm"
+        let time = formatter.string(from: train.departureAt)
+        return nextDay ? "\(time) (+1일)" : time
+    }
+
+    private var destinationText: String {
+        train.destination.hasSuffix("행")
+            ? train.destination
+            : "\(train.destination)행"
+    }
+
+    private var remainingText: String {
+        let remaining = train.remainingTime(at: Date())
+        guard remaining > 0 else { return "운행 종료" }
+        let minutes = Int(remaining / 60)
+        if minutes >= 60 {
+            return "\(minutes / 60)시간 \(minutes % 60)분 남음"
+        }
+        return "\(max(1, minutes))분 남음"
     }
 }
 

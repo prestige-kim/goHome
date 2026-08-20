@@ -17,13 +17,20 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var stationSearchResults: [Station] = []
     @Published private(set) var arrivals: [TrainArrival] = []
     @Published private(set) var positions: [TrainPosition] = []
+    @Published private(set) var lastTrains: [LastTrain] = []
+    @Published var lastTrainDaySelection: LastTrainDaySelection = .automatic
     @Published private(set) var isLoadingArrivals = false
     @Published private(set) var isLoadingPositions = false
+    @Published private(set) var isLoadingLastTrains = false
     @Published private(set) var locationMessage: String?
     @Published private(set) var arrivalMessage: String?
     @Published private(set) var positionMessage: String?
+    @Published private(set) var lastTrainMessage: String?
     @Published private(set) var lastSuccessfulArrivalRefreshAt: Date?
     @Published private(set) var lastSuccessfulPositionRefreshAt: Date?
+    @Published private(set) var lastSuccessfulLastTrainRefreshAt: Date?
+    @Published private(set) var lastTrainServiceDayInfo: LastTrainServiceDayInfo?
+    @Published private(set) var isUsingRetainedLastTrainData = false
 
     private let locationService: LocationService
     private let stationRepository: StationRepository
@@ -65,6 +72,14 @@ final class HomeViewModel: ObservableObject {
 
     var isLoadingTransitData: Bool {
         isLoadingArrivals || isLoadingPositions
+    }
+
+    var isLoadingAnyData: Bool {
+        isLoadingTransitData || isLoadingLastTrains
+    }
+
+    var isShowingLastSuccessfulLastTrainData: Bool {
+        isUsingRetainedLastTrainData
     }
 
     var displayedPositions: [TrainPosition] {
@@ -159,11 +174,16 @@ final class HomeViewModel: ObservableObject {
         selectedStation = station
         arrivals = []
         positions = []
+        lastTrains = []
         positionsByLine = [:]
         arrivalMessage = nil
         positionMessage = lineRouteLoadMessage
+        lastTrainMessage = nil
         lastSuccessfulArrivalRefreshAt = nil
         lastSuccessfulPositionRefreshAt = nil
+        lastSuccessfulLastTrainRefreshAt = nil
+        lastTrainServiceDayInfo = nil
+        isUsingRetainedLastTrainData = false
         lastTransitRequest = nil
     }
 
@@ -263,6 +283,81 @@ final class HomeViewModel: ObservableObject {
             positionMessage = "현재 선택 역으로 접근 중인 열차 위치가 없습니다."
         } else {
             positionMessage = nil
+        }
+    }
+
+    func refreshAll(now: Date = Date()) async {
+        await refreshArrivals(now: now)
+        await refreshLastTrains(now: now)
+    }
+
+    func refreshLastTrains(now: Date = Date()) async {
+        guard let selectedStation else {
+            lastTrainMessage = "먼저 가까운 역을 선택해 주세요."
+            return
+        }
+        guard !isLoadingLastTrains else { return }
+
+        let supportedLines = selectedStation.lineNames.filter(Self.timetableLines.contains)
+        guard !supportedLines.isEmpty else {
+            lastTrains = []
+            lastTrainMessage = "예정 막차 시간표는 현재 서울교통공사 1~9호선에서 제공합니다."
+            lastTrainServiceDayInfo = nil
+            isUsingRetainedLastTrainData = false
+            return
+        }
+
+        isLoadingLastTrains = true
+        lastTrainMessage = nil
+        defer { isLoadingLastTrains = false }
+
+        let serviceDate = TransitServiceClock.serviceDate(containing: now)
+        let serviceDayInfo: LastTrainServiceDayInfo
+        if let fixed = lastTrainDaySelection.fixedServiceDay {
+            serviceDayInfo = LastTrainServiceDayInfo(
+                date: serviceDate,
+                type: fixed,
+                holidayName: nil,
+                isHolidayVerified: false
+            )
+        } else {
+            do {
+                serviceDayInfo = try await transitClient.serviceDay(for: now)
+            } catch is CancellationError {
+                return
+            } catch {
+                serviceDayInfo = LastTrainServiceDayInfo(
+                    date: serviceDate,
+                    type: TransitServiceClock.localServiceDay(for: serviceDate),
+                    holidayName: nil,
+                    isHolidayVerified: false
+                )
+                lastTrainMessage = "공휴일 확인에 실패해 요일 기준 시간표를 표시합니다."
+            }
+        }
+
+        do {
+            let updated = try await transitClient.lastTrains(
+                at: selectedStation,
+                serviceDay: serviceDayInfo.type,
+                serviceDate: serviceDate
+            )
+            try Task.checkCancellation()
+            guard self.selectedStation?.id == selectedStation.id else { return }
+
+            lastTrains = updated
+            lastTrainServiceDayInfo = serviceDayInfo
+            lastSuccessfulLastTrainRefreshAt = Date()
+            isUsingRetainedLastTrainData = false
+            if updated.isEmpty {
+                lastTrainMessage = "선택한 영업일의 막차 예정 시간표가 없습니다."
+            }
+        } catch is CancellationError {
+            return
+        } catch {
+            guard self.selectedStation?.id == selectedStation.id else { return }
+            lastTrainMessage = error.localizedDescription
+            isUsingRetainedLastTrainData = !lastTrains.isEmpty
         }
     }
 
@@ -366,13 +461,22 @@ final class HomeViewModel: ObservableObject {
         selectedStation = nil
         arrivals = []
         positions = []
+        lastTrains = []
         positionsByLine = [:]
         arrivalMessage = nil
         positionMessage = lineRouteLoadMessage
+        lastTrainMessage = nil
         lastSuccessfulArrivalRefreshAt = nil
         lastSuccessfulPositionRefreshAt = nil
+        lastSuccessfulLastTrainRefreshAt = nil
+        lastTrainServiceDayInfo = nil
+        isUsingRetainedLastTrainData = false
         lastTransitRequest = nil
     }
+
+    private static let timetableLines: Set<String> = [
+        "1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선",
+    ]
 }
 
 private struct PositionLineResult: Sendable {

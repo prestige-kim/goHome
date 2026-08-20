@@ -25,6 +25,7 @@
 		B10000000000000000000010 /* LineRouteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000014 /* LineRouteRepository.swift */; };
 		B10000000000000000000011 /* line_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000015 /* line_routes.json */; };
 		B10000000000000000000012 /* PositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000016 /* PositionTests.swift */; };
+		B10000000000000000000013 /* LastTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000017 /* LastTrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		C10000000000000000000014 /* LineRouteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineRouteRepository.swift; sourceTree = "<group>"; };
 		C10000000000000000000015 /* line_routes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = line_routes.json; sourceTree = "<group>"; };
 		C10000000000000000000016 /* PositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTests.swift; sourceTree = "<group>"; };
+		C10000000000000000000017 /* LastTrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				C10000000000000000000005 /* Station.swift */,
 				C10000000000000000000006 /* TrainArrival.swift */,
 				C10000000000000000000013 /* TrainPosition.swift */,
+				C10000000000000000000017 /* LastTrain.swift */,
 			);
 			path = "Domain/Models";
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				B1000000000000000000000A /* HomeView.swift in Sources */,
 				B1000000000000000000000F /* TrainPosition.swift in Sources */,
 				B10000000000000000000010 /* LineRouteRepository.swift in Sources */,
+				B10000000000000000000013 /* LastTrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,6 +3,26 @@ import Foundation
 protocol TransitAPIClient: Sendable {
     func arrivals(at station: Station) async throws -> [TrainArrival]
     func positions(on lineName: String) async throws -> [TrainPosition]
+    func serviceDay(for date: Date) async throws -> LastTrainServiceDayInfo
+    func lastTrains(
+        at station: Station,
+        serviceDay: LastTrainServiceDay,
+        serviceDate: Date
+    ) async throws -> [LastTrain]
+}
+
+extension TransitAPIClient {
+    func serviceDay(for date: Date) async throws -> LastTrainServiceDayInfo {
+        throw TransitAPIError.timetableUnavailable
+    }
+
+    func lastTrains(
+        at station: Station,
+        serviceDay: LastTrainServiceDay,
+        serviceDate: Date
+    ) async throws -> [LastTrain] {
+        throw TransitAPIError.timetableUnavailable
+    }
 }
 
 enum TransitAPIError: LocalizedError, Equatable, Sendable {
@@ -13,6 +33,9 @@ enum TransitAPIError: LocalizedError, Equatable, Sendable {
     case workerConfiguration
     case workerUnavailable
     case seoulAPIUnavailable
+    case timetableUnavailable
+    case holidayConfiguration
+    case holidayAPIUnavailable
     case invalidResponse
     case seoulAPI(code: String, message: String)
 
@@ -32,6 +55,12 @@ enum TransitAPIError: LocalizedError, Equatable, Sendable {
             return "실시간 정보 Worker에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요."
         case .seoulAPIUnavailable:
             return "서울시 실시간 API에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요."
+        case .timetableUnavailable:
+            return "막차 예정 시간표를 불러올 수 없습니다. 잠시 후 다시 시도해 주세요."
+        case .holidayConfiguration:
+            return "공휴일 확인 설정이 없습니다. Worker의 공공데이터포털 키를 확인해 주세요."
+        case .holidayAPIUnavailable:
+            return "공휴일 정보를 확인할 수 없습니다. 요일 기준 시간표를 표시합니다."
         case .invalidResponse:
             return "실시간 정보 응답 형식이 예상과 다릅니다. 잠시 후 다시 시도해 주세요."
         case let .seoulAPI(code, message):

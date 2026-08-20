@@ -17,6 +17,52 @@ final class TrainArrivalFreshnessTests: XCTestCase {
     }
 }
 
+final class TransitServiceClockTests: XCTestCase {
+    func testEarlyMorningBelongsToPreviousServiceDate() throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let earlyMorning = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20, hour: 1, minute: 10))
+        )
+
+        let serviceDate = TransitServiceClock.serviceDate(containing: earlyMorning)
+
+        XCTAssertEqual(TransitServiceClock.isoDateString(from: serviceDate), "2026-08-19")
+    }
+
+    func testZeroAndTwentyFourHourTimesResolveToNextCalendarDay() throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+        let zeroHour = try XCTUnwrap(
+            TransitServiceClock.departureDate(time: "00:58:30", serviceDate: serviceDate)
+        )
+        let twentyFourHour = try XCTUnwrap(
+            TransitServiceClock.departureDate(time: "24:58:30", serviceDate: serviceDate)
+        )
+
+        XCTAssertEqual(zeroHour, twentyFourHour)
+        XCTAssertEqual(
+            calendar.dateComponents([.day, .hour, .minute], from: zeroHour),
+            DateComponents(day: 21, hour: 0, minute: 58)
+        )
+    }
+
+    func testCompactBusinessHourTimeIsSupported() throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+        let departure = try XCTUnwrap(
+            TransitServiceClock.departureDate(time: "245830", serviceDate: serviceDate)
+        )
+
+        XCTAssertEqual(calendar.component(.day, from: departure), 21)
+        XCTAssertEqual(calendar.component(.hour, from: departure), 0)
+        XCTAssertEqual(calendar.component(.minute, from: departure), 58)
+    }
+}
+
 final class DirectSeoulTransitAPIClientTests: XCTestCase {
     override func tearDown() {
         URLProtocolStub.requestHandler = nil
@@ -107,6 +153,57 @@ final class DirectSeoulTransitAPIClientTests: XCTestCase {
         await assertTransitError(.rateLimitExceeded) {
             try await self.makeClient().arrivals(at: self.testStation)
         }
+    }
+
+    func testServiceDayResponseMapsHolidayMetadata() async throws {
+        URLProtocolStub.requestHandler = successResponse(
+            #"{"date":"2026-08-15","type":"sunday_holiday","holidayName":"광복절"}"#
+        )
+        let calendar = TransitServiceClock.seoulCalendar
+        let date = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 15, hour: 12))
+        )
+
+        let result = try await makeClient().serviceDay(for: date)
+
+        XCTAssertEqual(result.type, .sundayHoliday)
+        XCTAssertEqual(result.holidayName, "광복절")
+        XCTAssertTrue(result.isHolidayVerified)
+    }
+
+    func testTimetableResponseKeepsLastDeparturePerDirectionAndDestination() async throws {
+        URLProtocolStub.requestHandler = { request in
+            let url = try XCTUnwrap(request.url)
+            let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
+            let direction = components.queryItems?.first { $0.name == "direction" }?.value
+            let rowDirection = direction == "up" ? "상행" : "하행"
+            let destination = direction == "up" ? "청량리" : "인천"
+            let body = #"{"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_CODE"},"body":{"items":{"item":[{"trainno":"100","trainKnd":null,"upbdnbSe":"\#(rowDirection)","lineNm":"1호선","stnNm":"시청","arvlStnNm":"\#(destination)","trainDptreTm":"23:50:00","etrnYn":"N"},{"trainno":"101","trainKnd":null,"upbdnbSe":"\#(rowDirection)","lineNm":"1호선","stnNm":"시청","arvlStnNm":"\#(destination)","trainDptreTm":"24:10:00","etrnYn":"N"}]}}}}"#
+            let response = HTTPURLResponse(
+                url: url,
+                statusCode: 200,
+                httpVersion: nil,
+                headerFields: ["Content-Type": "application/json"]
+            )!
+            return (response, Data(body.utf8))
+        }
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+
+        let trains = try await makeClient().lastTrains(
+            at: testStation,
+            serviceDay: .weekday,
+            serviceDate: serviceDate
+        )
+
+        XCTAssertEqual(trains.count, 2)
+        XCTAssertEqual(Set(trains.map(\.direction)), Set([.up, .down]))
+        XCTAssertTrue(trains.allSatisfy { $0.trainNumber == "101" })
+        XCTAssertTrue(trains.allSatisfy {
+            calendar.component(.day, from: $0.departureAt) == 21
+        })
     }
 
     private var testStation: Station {
@@ -314,6 +411,59 @@ final class HomeViewModelArrivalTests: XCTestCase {
     }
 }
 
+@MainActor
+final class HomeViewModelLastTrainTests: XCTestCase {
+    func testHolidayFailureFallsBackToCalendarAndStillLoadsTimetable() async throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+        let train = makeLastTrain(serviceDate: serviceDate)
+        let client = LastTrainTransitClient(
+            serviceDayResult: .failure(.holidayConfiguration),
+            timetableResults: [.success([train])]
+        )
+        let viewModel = makeLastTrainViewModel(client: client)
+        viewModel.select(lastTrainTestStation)
+
+        await viewModel.refreshLastTrains(now: serviceDate.addingTimeInterval(12 * 60 * 60))
+
+        XCTAssertEqual(viewModel.lastTrains, [train])
+        XCTAssertEqual(viewModel.lastTrainServiceDayInfo?.type, .weekday)
+        XCTAssertFalse(viewModel.lastTrainServiceDayInfo?.isHolidayVerified ?? true)
+        XCTAssertNotNil(viewModel.lastTrainMessage)
+        XCTAssertFalse(viewModel.isShowingLastSuccessfulLastTrainData)
+    }
+
+    func testTimetableFailureKeepsLastSuccessfulRows() async throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+        let train = makeLastTrain(serviceDate: serviceDate)
+        let client = LastTrainTransitClient(
+            serviceDayResult: .success(
+                LastTrainServiceDayInfo(
+                    date: serviceDate,
+                    type: .weekday,
+                    holidayName: nil,
+                    isHolidayVerified: true
+                )
+            ),
+            timetableResults: [.success([train]), .failure(.timetableUnavailable)]
+        )
+        let viewModel = makeLastTrainViewModel(client: client)
+        viewModel.select(lastTrainTestStation)
+
+        await viewModel.refreshLastTrains(now: serviceDate.addingTimeInterval(12 * 60 * 60))
+        await viewModel.refreshLastTrains(now: serviceDate.addingTimeInterval(13 * 60 * 60))
+
+        XCTAssertEqual(viewModel.lastTrains, [train])
+        XCTAssertTrue(viewModel.isShowingLastSuccessfulLastTrainData)
+        XCTAssertEqual(viewModel.lastTrainMessage, TransitAPIError.timetableUnavailable.localizedDescription)
+    }
+}
+
 private actor SequencedTransitClient: TransitAPIClient {
     private var responses: [Result<[TrainArrival], TransitAPIError>]
     private let delayNanoseconds: UInt64
@@ -341,6 +491,34 @@ private actor SequencedTransitClient: TransitAPIClient {
     func positions(on lineName: String) async throws -> [TrainPosition] {
         guard !positionResponses.isEmpty else { return [] }
         return try positionResponses.removeFirst().get()
+    }
+}
+
+private actor LastTrainTransitClient: TransitAPIClient {
+    let serviceDayResult: Result<LastTrainServiceDayInfo, TransitAPIError>
+    var timetableResults: [Result<[LastTrain], TransitAPIError>]
+
+    init(
+        serviceDayResult: Result<LastTrainServiceDayInfo, TransitAPIError>,
+        timetableResults: [Result<[LastTrain], TransitAPIError>]
+    ) {
+        self.serviceDayResult = serviceDayResult
+        self.timetableResults = timetableResults
+    }
+
+    func arrivals(at station: Station) async throws -> [TrainArrival] { [] }
+    func positions(on lineName: String) async throws -> [TrainPosition] { [] }
+
+    func serviceDay(for date: Date) async throws -> LastTrainServiceDayInfo {
+        try serviceDayResult.get()
+    }
+
+    func lastTrains(
+        at station: Station,
+        serviceDay: LastTrainServiceDay,
+        serviceDate: Date
+    ) async throws -> [LastTrain] {
+        try timetableResults.removeFirst().get()
     }
 }
 
@@ -418,5 +596,39 @@ private func makePosition(receivedAt: Date?) -> TrainPosition {
         isLastTrain: false,
         receivedAt: receivedAt,
         remainingStationCount: nil
+    )
+}
+
+private let lastTrainTestStation = Station(
+    id: "last-train-test",
+    name: "시청",
+    latitude: 37.566,
+    longitude: 126.978,
+    lineNames: ["1호선"]
+)
+
+@MainActor
+private func makeLastTrainViewModel(client: LastTrainTransitClient) -> HomeViewModel {
+    HomeViewModel(
+        stationRepository: StaticStationRepository(stations: [lastTrainTestStation]),
+        lineRouteRepository: StaticLineRouteRepository(networks: []),
+        transitClient: client
+    )
+}
+
+private func makeLastTrain(serviceDate: Date) -> LastTrain {
+    LastTrain(
+        id: "last-train",
+        lineName: "1호선",
+        direction: .up,
+        destination: "청량리",
+        trainNumber: "101",
+        departureAt: TransitServiceClock.departureDate(
+            time: "24:10:00",
+            serviceDate: serviceDate
+        )!,
+        serviceDate: serviceDate,
+        serviceDay: .weekday,
+        isExpress: false
     )
 }
