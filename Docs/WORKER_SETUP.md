@@ -109,7 +109,7 @@ curl https://gohome-transit-proxy.<계정>.workers.dev/health
 확인했다.
 
 ```sh
-ruby scripts/check_worker_api.rb 시청
+ruby scripts/check_worker_api.rb 시청 2호선
 ```
 
 2026-08-19 위치 경로 배포 후 `/health`, 무인증 요청의 401 차단, Bearer 인증, 시청역 도착 14건,
@@ -119,6 +119,11 @@ ruby scripts/check_worker_api.rb 시청
 2026-08-20 막차 경로 배포 후 `/health` 200, 무인증 요청 401, Bearer 인증, 서울시 정상 코드
 `00`, 시청역 2호선 내선 시간표 239건을 종단간으로 확인했다. 공휴일 경로는 키 미설정 상태에서
 원본 정보를 노출하지 않는 `missing_public_data_api_key`로 닫히며 앱 폴백으로 연결되는 것을 확인했다.
+
+같은 날 서울시 키 교체 후 기존 Workers Free 플랜에 다시 배포했다. 비밀값을 출력하지 않는
+점검기로 시청·강남 2호선의 내선 239행·외선 240행과 고속터미널 3호선의 상·하행 각 192행을
+확인했다. 모든 시간표 응답은 원본 코드 `00`, 필수 필드 누락 0행, 시간 형식 오류 0행이었다.
+공공데이터포털 키는 별도 Secret이므로 아직 미설정 상태이며 요일 폴백을 유지한다.
 
 모든 `/v1/*` 요청은 `Authorization: Bearer <GOHOME_CLIENT_TOKEN>` 헤더가 있어야 한다. 토큰이나
 서울시 키를 명령 기록, GitHub Issue, 커밋, 스크린샷에 남기지 않는다.

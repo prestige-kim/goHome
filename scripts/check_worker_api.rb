@@ -21,6 +21,10 @@ def read_setting(contents, name)
   match&.captures&.first.to_s.strip
 end
 
+def normalize_xcconfig_url(value)
+  value.sub(%r{\Ahttps:/\$\(\)/}, "https://")
+end
+
 def get_json(uri, authorization: nil)
   request = Net::HTTP::Get.new(uri)
   request["Accept"] = "application/json"
@@ -44,7 +48,7 @@ end
 abort_with("Config/Secrets.xcconfig 파일이 없습니다.") unless File.file?(SECRETS_PATH)
 
 contents = File.read(SECRETS_PATH)
-base_url = read_setting(contents, "TRANSIT_PROXY_BASE_URL")
+base_url = normalize_xcconfig_url(read_setting(contents, "TRANSIT_PROXY_BASE_URL"))
 client_token = read_setting(contents, "TRANSIT_PROXY_CLIENT_TOKEN")
 station = ARGV.first.to_s.strip
 station = DEFAULT_STATION if station.empty?
@@ -106,6 +110,82 @@ missing_position_fields = expected_position_fields - position_fields
 position_status_counts = positions.each_with_object(Hash.new(0)) do |position, counts|
   counts[position["trainSttus"] || "없음"] += 1
 end
+
+seoul_now = Time.now.getlocal("+09:00")
+service_date = seoul_now.strftime("%Y-%m-%d")
+calendar_service_day = case seoul_now.wday
+                       when 0 then "sunday_holiday"
+                       when 6 then "saturday"
+                       else "weekday"
+                       end
+service_day_uri = URI.join(base_url.delete_suffix("/") + "/", "v1/service-day")
+service_day_uri.query = URI.encode_www_form(date: service_date)
+service_day_response, service_day_payload = get_json(
+  service_day_uri,
+  authorization: "Bearer #{client_token}"
+)
+allowed_service_days = %w[weekday saturday sunday_holiday]
+if service_day_response.is_a?(Net::HTTPSuccess) &&
+   allowed_service_days.include?(service_day_payload["type"])
+  service_day = service_day_payload["type"]
+  service_day_state = service_day
+elsif service_day_response.code.to_i == 500 &&
+      service_day_payload["error"] == "missing_public_data_api_key"
+  service_day = calendar_service_day
+  service_day_state = "공공데이터 키 미설정 (요일 폴백)"
+else
+  service_day = calendar_service_day
+  service_day_state = "검증 실패 (HTTP #{service_day_response.code})"
+end
+directions = line_name == "2호선" ? %w[inner outer] : %w[up down]
+last_train_uri = URI.join(base_url.delete_suffix("/") + "/", "v1/last-trains")
+last_train_uri.query = URI.encode_www_form(
+  station: station,
+  line: line_name,
+  direction: directions.first,
+  serviceDay: service_day,
+  date: service_date
+)
+unauthorized_last_train_response, unauthorized_last_train_payload = get_json(last_train_uri)
+unless unauthorized_last_train_response.code.to_i == 401 &&
+       unauthorized_last_train_payload["error"] == "unauthorized"
+  abort_with("막차 시간표 경로의 Bearer 인증 차단 확인 실패")
+end
+
+last_train_results = directions.to_h do |direction|
+  direction_uri = URI(last_train_uri.to_s)
+  direction_uri.query = URI.encode_www_form(
+    station: station,
+    line: line_name,
+    direction: direction,
+    serviceDay: service_day,
+    date: service_date
+  )
+  response, payload = get_json(
+    direction_uri,
+    authorization: "Bearer #{client_token}"
+  )
+  unless response.is_a?(Net::HTTPSuccess)
+    abort_with("막차 시간표 중계 실패 (#{direction}, HTTP #{response.code})")
+  end
+  status_code = payload.dig("response", "header", "resultCode") || "확인 불가"
+  items = payload.dig("response", "body", "items", "item")
+  rows = items.is_a?(Array) ? items : Array(items).compact
+  required_fields = %w[upbdnbSe lineNm stnNm trainDptreTm]
+  invalid_field_rows = rows.count do |row|
+    required_fields.any? { |field| row[field].to_s.strip.empty? }
+  end
+  invalid_time_rows = rows.count do |row|
+    !row["trainDptreTm"].to_s.match?(/\A\d{2}:?\d{2}(?::?\d{2})?\z/)
+  end
+  [direction, {
+    status_code: status_code,
+    row_count: rows.length,
+    invalid_field_rows: invalid_field_rows,
+    invalid_time_rows: invalid_time_rows,
+  }]
+end
+
 FileUtils.mkdir_p(SAMPLE_DIRECTORY)
 safe_line_name = line_name.gsub(/[^0-9A-Za-z가-힣_-]/, "_")
 position_sample_path = File.join(
@@ -126,7 +206,18 @@ puts "- 열차 위치 건수: #{positions.length}"
 puts "- 위치 DTO 필드: #{missing_position_fields.empty? ? '모두 확인됨' : "미확인 #{missing_position_fields.join(', ')}"}"
 puts "- 위치 상태 코드별 건수: #{position_status_counts.sort.to_h}"
 puts "- 위치 응답 저장: #{position_sample_path.delete_prefix(PROJECT_ROOT + File::SEPARATOR)}"
+puts "- 막차 시간표 인증: 정상"
+last_train_results.each do |direction, result|
+  puts "- 막차 시간표 #{direction}: 원본 코드 #{result[:status_code]}, #{result[:row_count]}행"
+  puts "  필수 필드 누락 #{result[:invalid_field_rows]}행, 시간 형식 오류 #{result[:invalid_time_rows]}행"
+end
+puts "- 공휴일 판정: #{service_day_state}"
 
-success = status_code == "INFO-000" && !arrivals.empty? &&
-  position_status_code == "INFO-000" && !positions.empty?
+success = %w[INFO-000 00].include?(status_code) && !arrivals.empty? &&
+  position_status_code == "INFO-000" && !positions.empty? &&
+  last_train_results.values.all? { |result|
+    result[:status_code] == "00" && result[:row_count].positive? &&
+      result[:invalid_field_rows].zero? && result[:invalid_time_rows].zero?
+  } &&
+  !service_day_state.start_with?("검증 실패")
 exit(success ? 0 : 2)

@@ -119,13 +119,16 @@ iOS 단위 테스트는 `GoHomeTests` 타깃에 거리·번들 검증과 도착�
 자동 갱신 취소, 위치 DTO·상태 코드, 분기·순환선 남은 역 계산, 위치 마지막 정상 데이터 유지,
 동일 열차 최신 스냅샷 선택, 위치 표시 제한, 일시적 Core Location 오류 처리, 역 검색·지원 범위
 판정, 영업일 시계, 00·24시 파싱, 막차 DTO와 마지막 정상 시간표 유지 검증을 포함합니다.
-Xcode 26.6의 iPhone 17 Pro Simulator에서 전체 40개가 통과했습니다.
+Xcode 26.6의 iPhone 17 Pro Simulator에서 전체 40개가 통과했으며, 2026-08-20 키 교체와 Worker
+재배포 뒤에도 다시 40개가 통과했습니다.
 Phase 0–2의 Simulator·실기기·전광판 최종
 검증 절차는 [`Docs/PHASE_0_2_ACCEPTANCE.md`](Docs/PHASE_0_2_ACCEPTANCE.md)를 따릅니다.
 Phase 3의 미실행 iOS 검증은 [`Docs/PHASE_3_ACCEPTANCE.md`](Docs/PHASE_3_ACCEPTANCE.md)에
 분리되어 있고 Phase 4 막차 검증은 [`Docs/PHASE_4_ACCEPTANCE.md`](Docs/PHASE_4_ACCEPTANCE.md)에
 정리되어 있습니다. Xcode 26.6의 iPhone 17 Pro Simulator에서는 전면 약 40초 자동 갱신,
-백그라운드 중지, 전면 복귀 직후 재개까지 확인했습니다.
+백그라운드 중지, 전면 복귀 직후 재개를 확인했습니다. Phase 4 막차 영역도 실제 시청역 데이터로
+방향·종착역·예정 시각·남은 시간·자정 이후 `(+1일)` 표시와 GPS 위치가 아니라는 안내를
+확인했습니다. 영업일 선택 전환·오류 UI와 실기기 검증은 승인표의 미완료 항목으로 남아 있습니다.
 
 ## 무료 개인 기기 테스트의 제한
 
