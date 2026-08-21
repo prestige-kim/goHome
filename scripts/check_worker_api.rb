@@ -25,6 +25,30 @@ def normalize_xcconfig_url(value)
   value.sub(%r{\Ahttps:/\$\(\)/}, "https://")
 end
 
+def timetable_time_parts(value)
+  digits = value.to_s.gsub(/\D/, "")
+  return unless digits.length == 6
+
+  hour, minute, second = digits.scan(/../).map(&:to_i)
+  return unless (0..29).cover?(hour) && (0..59).cover?(minute) && (0..59).cover?(second)
+
+  service_hour = hour < 4 ? hour + 24 : hour
+  [service_hour, minute, second]
+end
+
+def timetable_display_time(value)
+  parts = timetable_time_parts(value)
+  return "시간 형식 오류" unless parts
+
+  service_hour, minute, = parts
+  clock_hour = service_hour % 24
+  period = clock_hour < 12 ? "오전" : "오후"
+  display_hour = clock_hour % 12
+  display_hour = 12 if display_hour.zero?
+  next_day = service_hour >= 24 ? " (+1일)" : ""
+  format("%s %d:%02d%s", period, display_hour, minute, next_day)
+end
+
 def get_json(uri, authorization: nil)
   request = Net::HTTP::Get.new(uri)
   request["Accept"] = "application/json"
@@ -54,6 +78,7 @@ station = ARGV.first.to_s.strip
 station = DEFAULT_STATION if station.empty?
 line_name = ARGV[1].to_s.strip
 line_name = DEFAULT_LINE if line_name.empty?
+show_display_rows = ARGV.include?("--display")
 
 abort_with("TRANSIT_PROXY_BASE_URL이 비어 있습니다.") if base_url.empty?
 abort_with("TRANSIT_PROXY_CLIENT_TOKEN이 비어 있습니다.") if client_token.empty?
@@ -183,7 +208,46 @@ last_train_results = directions.to_h do |direction|
     row_count: rows.length,
     invalid_field_rows: invalid_field_rows,
     invalid_time_rows: invalid_time_rows,
+    rows: rows,
   }]
+end
+
+direction_titles = {
+  "up" => "상행",
+  "down" => "하행",
+  "inner" => "내선",
+  "outer" => "외선",
+}
+latest_display_rows = {}
+last_train_results.each do |direction, result|
+  result[:rows].each do |row|
+    next unless row["lineNm"] == line_name &&
+                row["stnNm"] == station &&
+                row["upbdnbSe"] == direction_titles.fetch(direction)
+
+    time_parts = timetable_time_parts(row["trainDptreTm"])
+    next unless time_parts
+
+    destination = row["arvlStnNm"].to_s.strip
+    destination = "종착역 정보 없음" if destination.empty?
+    express = row["etrnYn"] == "Y" || row["trainKnd"].to_s.include?("급행")
+    key = [direction, destination, express]
+    service_seconds = time_parts[0] * 3600 + time_parts[1] * 60 + time_parts[2]
+    existing = latest_display_rows[key]
+    next if existing && existing[:service_seconds] >= service_seconds
+
+    latest_display_rows[key] = {
+      direction: direction,
+      destination: destination,
+      express: express,
+      train_number: row["trainno"].to_s.strip,
+      display_time: timetable_display_time(row["trainDptreTm"]),
+      service_seconds: service_seconds,
+    }
+  end
+end
+sorted_display_rows = latest_display_rows.values.sort_by do |row|
+  [row[:service_seconds], row[:direction], row[:destination]]
 end
 
 FileUtils.mkdir_p(SAMPLE_DIRECTORY)
@@ -211,6 +275,16 @@ last_train_results.each do |direction, result|
   puts "- 막차 시간표 #{direction}: 원본 코드 #{result[:status_code]}, #{result[:row_count]}행"
   puts "  필수 필드 누락 #{result[:invalid_field_rows]}행, 시간 형식 오류 #{result[:invalid_time_rows]}행"
 end
+puts "- 앱 표시 대조 행 수: #{sorted_display_rows.length}"
+if show_display_rows
+  sorted_display_rows.each do |row|
+    destination = row[:destination].end_with?("행") ? row[:destination] : "#{row[:destination]}행"
+    service = row[:express] ? " · 급행" : ""
+    train_number = row[:train_number].empty? ? "열차번호 없음" : row[:train_number]
+    puts "  - #{line_name} #{direction_titles.fetch(row[:direction])} · #{destination}#{service} · " \
+         "#{row[:display_time]} · 열차 #{train_number}"
+  end
+end
 puts "- 공휴일 판정: #{service_day_state}"
 
 success = %w[INFO-000 00].include?(status_code) && !arrivals.empty? &&
@@ -219,5 +293,6 @@ success = %w[INFO-000 00].include?(status_code) && !arrivals.empty? &&
     result[:status_code] == "00" && result[:row_count].positive? &&
       result[:invalid_field_rows].zero? && result[:invalid_time_rows].zero?
   } &&
+  !sorted_display_rows.empty? &&
   !service_day_state.start_with?("검증 실패")
 exit(success ? 0 : 2)

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @StateObject private var viewModel = HomeViewModel()
     @State private var isStationPickerPresented = false
     @State private var showsAllPositions = false
@@ -51,60 +52,7 @@ struct HomeView: View {
 
     private var stationHeader: some View {
         VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top, spacing: 12) {
-                Button {
-                    isStationPickerPresented = true
-                } label: {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("GoHome")
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.secondary)
-
-                        HStack(spacing: 6) {
-                            Image(systemName: "tram.fill")
-                                .font(.headline)
-                                .foregroundStyle(Color.accentColor)
-                            Text(selectedStationTitle)
-                                .font(.title2.bold())
-                                .foregroundStyle(.primary)
-                            Image(systemName: "chevron.down")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("선택 역, \(selectedStationTitle), 변경")
-
-                Spacer(minLength: 8)
-
-                VStack(alignment: .trailing, spacing: 6) {
-                    liveStatus
-                    Text(lastUpdatedText)
-                        .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-
-                Button {
-                    Task { await viewModel.refreshAll() }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.body.weight(.semibold))
-                        .frame(width: 44, height: 44)
-                        .background(.thinMaterial, in: Circle())
-                        .rotationEffect(viewModel.isLoadingAnyData ? .degrees(360) : .zero)
-                        .animation(
-                            viewModel.isLoadingAnyData
-                                ? .linear(duration: 1).repeatForever(autoreverses: false)
-                                : .default,
-                            value: viewModel.isLoadingAnyData
-                        )
-                }
-                .buttonStyle(.plain)
-                .disabled(viewModel.selectedStation == nil || viewModel.isLoadingAnyData)
-                .accessibilityLabel(viewModel.isLoadingAnyData ? "교통 정보 갱신 중" : "교통 정보 새로고침")
-            }
+            stationHeaderControls
 
             if let station = viewModel.selectedStation {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -132,6 +80,86 @@ struct HomeView: View {
         }
         .padding(18)
         .cardSurface()
+    }
+
+    @ViewBuilder
+    private var stationHeaderControls: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 14) {
+                stationSelectionButton
+                HStack(alignment: .center, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        liveStatus
+                        Text(lastUpdatedText)
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer(minLength: 8)
+                    refreshButton
+                }
+            }
+        } else {
+            HStack(alignment: .top, spacing: 12) {
+                stationSelectionButton
+                Spacer(minLength: 8)
+                VStack(alignment: .trailing, spacing: 6) {
+                    liveStatus
+                    Text(lastUpdatedText)
+                        .font(.caption2.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                }
+                refreshButton
+            }
+        }
+    }
+
+    private var stationSelectionButton: some View {
+        Button {
+            isStationPickerPresented = true
+        } label: {
+            VStack(alignment: .leading, spacing: 5) {
+                Text("GoHome")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                HStack(spacing: 6) {
+                    Image(systemName: "tram.fill")
+                        .font(.headline)
+                        .foregroundStyle(Color.accentColor)
+                    Text(selectedStationTitle)
+                        .font(.title2.bold())
+                        .foregroundStyle(.primary)
+                    Image(systemName: "chevron.down")
+                        .font(.caption.bold())
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("선택 역, \(selectedStationTitle), 변경")
+    }
+
+    private var refreshButton: some View {
+        Button {
+            Task { await viewModel.refreshAll() }
+        } label: {
+            Image(systemName: "arrow.clockwise")
+                .font(.body.weight(.semibold))
+                .frame(width: 44, height: 44)
+                .background(.thinMaterial, in: Circle())
+                .rotationEffect(viewModel.isLoadingAnyData ? .degrees(360) : .zero)
+                .animation(
+                    viewModel.isLoadingAnyData
+                        ? .linear(duration: 1).repeatForever(autoreverses: false)
+                        : .default,
+                    value: viewModel.isLoadingAnyData
+                )
+        }
+        .buttonStyle(.plain)
+        .disabled(viewModel.selectedStation == nil || viewModel.isLoadingAnyData)
+        .accessibilityLabel(viewModel.isLoadingAnyData ? "교통 정보 갱신 중" : "교통 정보 새로고침")
     }
 
     @ViewBuilder
@@ -715,10 +743,23 @@ private struct ArrivalRow: View {
 
 private struct LastTrainRow: View {
     let train: LastTrain
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private var lineColor: Color { SubwayLineStyle.color(for: train.lineName) }
 
     var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                accessibleBody
+            } else {
+                regularBody
+            }
+        }
+        .padding(.vertical, 14)
+        .accessibilityElement(children: .combine)
+    }
+
+    private var regularBody: some View {
         HStack(alignment: .center, spacing: 12) {
             LineBadge(lineName: train.lineName, compact: true)
 
@@ -747,8 +788,33 @@ private struct LastTrainRow: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(.vertical, 14)
-        .accessibilityElement(children: .combine)
+    }
+
+    private var accessibleBody: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                LineBadge(lineName: train.lineName, compact: true)
+                Text(destinationText)
+                    .font(.body.weight(.semibold))
+                if train.isExpress {
+                    TransitBadge(text: "급행", color: .blue)
+                }
+            }
+
+            Text("\(train.direction.title) · 예정 시간표 · 열차 \(train.trainNumber)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
+                Text(departureTimeText)
+                    .font(.title3.bold().monospacedDigit())
+                    .foregroundStyle(lineColor)
+                Spacer(minLength: 8)
+                Text(remainingText)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
 
     private var departureTimeText: String {
@@ -783,25 +849,43 @@ private struct SectionHeading: View {
     let eyebrow: String
     let title: String
     let trailing: String?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
-        HStack(alignment: .bottom) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(eyebrow)
-                    .font(.caption2.bold())
-                    .tracking(0.8)
-                    .foregroundStyle(.secondary)
-                Text(title)
-                    .font(.title3.bold())
-            }
-            Spacer()
-            if let trailing {
-                Text(trailing)
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 8) {
+                    titleBlock
+                    if let trailing {
+                        Text(trailing)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } else {
+                HStack(alignment: .bottom) {
+                    titleBlock
+                    Spacer()
+                    if let trailing {
+                        Text(trailing)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
         }
         .accessibilityElement(children: .combine)
+    }
+
+    private var titleBlock: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(eyebrow)
+                .font(.caption2.bold())
+                .tracking(0.8)
+                .foregroundStyle(.secondary)
+            Text(title)
+                .font(.title3.bold())
+        }
     }
 }
 
