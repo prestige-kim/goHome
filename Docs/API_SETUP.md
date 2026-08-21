@@ -138,11 +138,14 @@ Authorization: Bearer <GOHOME_CLIENT_TOKEN>
 공공데이터포털에서 활용신청 후 마이페이지에 표시되는 일반 인증키 중 `Encoding` 키를
 `worker/.env.production`의 `PUBLIC_DATA_API_KEY`에 넣는다. 이 파일은 Git에서 제외되며 앱의
 `Config/Secrets.xcconfig`나 `Info.plist`에는 넣지 않는다. Worker는 `getRestDeInfo` 결과를
-`YYYY-MM` 단위로 메모리 캐시해 `weekday`/`saturday`/`sunday_holiday`를 반환한다.
+`YYYY-MM` 단위로 메모리 캐시해 `weekday`/`saturday`/`sunday_holiday`를 반환한다. 포털의
+`Encoding` 키는 Worker에서 한 번만 URL 인코딩되도록 정규화한다.
 
-현재 로컬·배포 환경에는 이 키가 설정되지 않아 실제 공휴일 API 종단간 검증은 남아 있다.
-이 경우 `/v1/service-day`는 원본 URL이나 키를 노출하지 않는 설정 오류를 반환하고 앱은 달력
-요일 기준으로 폴백하면서 경고를 표시한다.
+2026-08-21 기존 Free 플랜 Worker에 키를 반영한 뒤 `scripts/check_service_day_api.rb`로 HTTPS,
+무인증 401, 평일과 법정공휴일을 검증했다. 2026-08-21은 `weekday`, 2026-08-15는
+`sunday_holiday / 광복절`로 확인됐다. 점검기는 비밀값과 원본 응답 전문을 출력하지 않는다.
+키가 없거나 원본 호출이 실패하면 `/v1/service-day`는 원본 URL이나 키를 노출하지 않는 오류를
+반환하고 앱은 달력 요일 기준으로 폴백하면서 경고를 표시한다.
 
 ## 3. 역 좌표 원본
 

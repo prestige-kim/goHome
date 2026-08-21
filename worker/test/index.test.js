@@ -301,6 +301,30 @@ test("service-day endpoint classifies and caches a holiday month", async () => {
   assert.equal(holidayURL.searchParams.get("solMonth"), "08");
 });
 
+test("service-day endpoint encodes a portal Encoding key exactly once", async () => {
+  let requestedURL;
+  const handler = createHandler((url) => {
+    requestedURL = url;
+    return Promise.resolve(new Response(JSON.stringify({
+      response: {
+        header: { resultCode: "00", resultMsg: "NORMAL SERVICE" },
+        body: { items: "" },
+      },
+    }), { status: 200 }));
+  });
+  const encodedKey = "test%2Bpublic%2Fdata%3D";
+
+  const response = await handler(
+    authorizedRequest("/v1/service-day?date=2026-08-21"),
+    { ...environment, PUBLIC_DATA_API_KEY: encodedKey },
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(new URL(requestedURL).searchParams.get("serviceKey"), "test+public/data=");
+  assert.equal(requestedURL.includes("%252B"), false);
+  assert.equal(requestedURL.includes("%253D"), false);
+});
+
 test("service-day endpoint requires the public-data key and sanitizes failures", async () => {
   const missingKeyResponse = await createHandler(() => {
     throw new Error("upstream should not be called");

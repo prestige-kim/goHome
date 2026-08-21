@@ -243,7 +243,7 @@ async function fetchHolidayMonth(month, apiKey, fetchUpstream) {
     "/B090041/openapi/service/SpcdeInfoService/getRestDeInfo",
     HOLIDAY_API_ORIGIN,
   );
-  url.searchParams.set("serviceKey", apiKey);
+  url.searchParams.set("serviceKey", decodePublicDataApiKey(apiKey));
   url.searchParams.set("solYear", year);
   url.searchParams.set("solMonth", monthNumber);
   url.searchParams.set("numOfRows", "100");
@@ -271,6 +271,14 @@ async function fetchHolidayMonth(month, apiKey, fetchUpstream) {
       const itemDate = `${compact.slice(0, 4)}-${compact.slice(4, 6)}-${compact.slice(6, 8)}`;
       return [itemDate, item.dateName ?? "공휴일"];
     }));
+}
+
+function decodePublicDataApiKey(apiKey) {
+  try {
+    return decodeURIComponent(apiKey);
+  } catch {
+    return apiKey;
+  }
 }
 
 function jsonResponse(payload, status = 200, extraHeaders = {}) {
