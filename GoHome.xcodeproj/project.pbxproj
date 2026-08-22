@@ -26,6 +26,13 @@
 		B10000000000000000000011 /* line_routes.json in Resources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000015 /* line_routes.json */; };
 		B10000000000000000000012 /* PositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000016 /* PositionTests.swift */; };
 		B10000000000000000000013 /* LastTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000017 /* LastTrain.swift */; };
+		B10000000000000000000014 /* TransitTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000018 /* TransitTheme.swift */; };
+		B10000000000000000000015 /* StationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000019 /* StationPreferences.swift */; };
+		B10000000000000000000016 /* TransitComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000001A /* TransitComponents.swift */; };
+		B10000000000000000000017 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000001B /* LiveView.swift */; };
+		B10000000000000000000018 /* LastTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000001C /* LastTrainView.swift */; };
+		B10000000000000000000019 /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000001D /* StationsView.swift */; };
+		B1000000000000000000001A /* StationPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1000000000000000000001E /* StationPreferencesTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +70,13 @@
 		C10000000000000000000015 /* line_routes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = line_routes.json; sourceTree = "<group>"; };
 		C10000000000000000000016 /* PositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTests.swift; sourceTree = "<group>"; };
 		C10000000000000000000017 /* LastTrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTrain.swift; sourceTree = "<group>"; };
+		C10000000000000000000018 /* TransitTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitTheme.swift; sourceTree = "<group>"; };
+		C10000000000000000000019 /* StationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPreferences.swift; sourceTree = "<group>"; };
+		C1000000000000000000001A /* TransitComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitComponents.swift; sourceTree = "<group>"; };
+		C1000000000000000000001B /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
+		C1000000000000000000001C /* LastTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTrainView.swift; sourceTree = "<group>"; };
+		C1000000000000000000001D /* StationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsView.swift; sourceTree = "<group>"; };
+		C1000000000000000000001E /* StationPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPreferencesTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +134,8 @@
 				F10000000000000000000004 /* Configuration */,
 				F10000000000000000000005 /* Location */,
 				F10000000000000000000006 /* Networking */,
+				F10000000000000000000011 /* Design */,
+				F10000000000000000000012 /* Persistence */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -189,6 +205,10 @@
 			isa = PBXGroup;
 			children = (
 				F1000000000000000000000F /* Home */,
+				F10000000000000000000013 /* Shared */,
+				F10000000000000000000014 /* Live */,
+				F10000000000000000000015 /* LastTrain */,
+				F10000000000000000000016 /* Stations */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -199,6 +219,7 @@
 				C1000000000000000000000E /* StationDistanceTests.swift */,
 				C10000000000000000000012 /* ArrivalTests.swift */,
 				C10000000000000000000016 /* PositionTests.swift */,
+				C1000000000000000000001E /* StationPreferencesTests.swift */,
 			);
 			path = GoHomeTests;
 			sourceTree = "<group>";
@@ -228,6 +249,54 @@
 				C1000000000000000000000A /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000011 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000018 /* TransitTheme.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000012 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				C10000000000000000000019 /* StationPreferences.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000013 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C1000000000000000000001A /* TransitComponents.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000014 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				C1000000000000000000001B /* LiveView.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000015 /* LastTrain */ = {
+			isa = PBXGroup;
+			children = (
+				C1000000000000000000001C /* LastTrainView.swift */,
+			);
+			path = LastTrain;
+			sourceTree = "<group>";
+		};
+		F10000000000000000000016 /* Stations */ = {
+			isa = PBXGroup;
+			children = (
+				C1000000000000000000001D /* StationsView.swift */,
+			);
+			path = Stations;
 			sourceTree = "<group>";
 		};
 		F10000000000000000000010 /* Resources */ = {
@@ -356,6 +425,12 @@
 				B1000000000000000000000F /* TrainPosition.swift in Sources */,
 				B10000000000000000000010 /* LineRouteRepository.swift in Sources */,
 				B10000000000000000000013 /* LastTrain.swift in Sources */,
+				B10000000000000000000014 /* TransitTheme.swift in Sources */,
+				B10000000000000000000015 /* StationPreferences.swift in Sources */,
+				B10000000000000000000016 /* TransitComponents.swift in Sources */,
+				B10000000000000000000017 /* LiveView.swift in Sources */,
+				B10000000000000000000018 /* LastTrainView.swift in Sources */,
+				B10000000000000000000019 /* StationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +441,7 @@
 				B1000000000000000000000D /* StationDistanceTests.swift in Sources */,
 				B1000000000000000000000E /* ArrivalTests.swift in Sources */,
 				B10000000000000000000012 /* PositionTests.swift in Sources */,
+				B1000000000000000000001A /* StationPreferencesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
