@@ -6,6 +6,9 @@ import Foundation
 final class HomeViewModel: ObservableObject {
     nonisolated static let supportedRangeMeters: CLLocationDistance = 5_000
     nonisolated static let automaticRefreshInterval: TimeInterval = 40
+    nonisolated static let maximumAutomaticRefreshInterval: TimeInterval = 5 * 60
+    nonisolated static let automaticRefreshSessionDuration: TimeInterval = 30 * 60
+    nonisolated static let lastTrainCacheTTL: TimeInterval = 6 * 60 * 60
 
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
     @Published private(set) var accuracyAuthorization: CLAccuracyAuthorization
@@ -31,12 +34,14 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var lastSuccessfulLastTrainRefreshAt: Date?
     @Published private(set) var lastTrainServiceDayInfo: LastTrainServiceDayInfo?
     @Published private(set) var isUsingRetainedLastTrainData = false
+    @Published private(set) var isAutomaticRefreshPaused = false
 
     private let locationService: LocationService
     private let stationRepository: StationRepository
     private let lineRouteRepository: LineRouteRepository
     private let transitClient: TransitAPIClient
     private let refreshInterval: TimeInterval
+    private let refreshSessionDuration: TimeInterval
     private var stations: [Station] = []
     private var lineRouteNetworks: [LineRouteNetwork] = []
     private var lineRouteLoadMessage: String?
@@ -45,6 +50,9 @@ final class HomeViewModel: ObservableObject {
     private var hasStarted = false
     private var hasUserSelectedStation = false
     private var lastTransitRequest: (stationID: String, startedAt: Date)?
+    private var consecutiveTransitFailures = 0
+    private var automaticRefreshSessionDeadline: Date?
+    private var lastTrainCacheKey: String?
 
     var latestArrivalReceivedAt: Date? {
         arrivals.compactMap(\.receivedAt).max()
@@ -98,7 +106,8 @@ final class HomeViewModel: ObservableObject {
             baseURL: AppConfiguration.transitProxyBaseURL,
             clientToken: AppConfiguration.transitProxyClientToken
         ),
-        automaticRefreshInterval: TimeInterval = HomeViewModel.automaticRefreshInterval
+        automaticRefreshInterval: TimeInterval = HomeViewModel.automaticRefreshInterval,
+        automaticRefreshSessionDuration: TimeInterval = HomeViewModel.automaticRefreshSessionDuration
     ) {
         let locationService = locationService ?? LocationService()
         self.locationService = locationService
@@ -106,6 +115,7 @@ final class HomeViewModel: ObservableObject {
         self.lineRouteRepository = lineRouteRepository
         self.transitClient = transitClient
         refreshInterval = automaticRefreshInterval
+        refreshSessionDuration = automaticRefreshSessionDuration
         authorizationStatus = locationService.authorizationStatus
         accuracyAuthorization = locationService.accuracyAuthorization
 
@@ -185,9 +195,16 @@ final class HomeViewModel: ObservableObject {
         lastTrainServiceDayInfo = nil
         isUsingRetainedLastTrainData = false
         lastTransitRequest = nil
+        consecutiveTransitFailures = 0
+        automaticRefreshSessionDeadline = nil
+        isAutomaticRefreshPaused = false
+        lastTrainCacheKey = nil
     }
 
     func refreshArrivals(isAutomatic: Bool = false, now: Date = Date()) async {
+        if !isAutomatic {
+            resumeAutomaticRefreshSession(now: now)
+        }
         guard let selectedStation else {
             if !isAutomatic {
                 arrivalMessage = "먼저 가까운 역을 선택해 주세요."
@@ -215,12 +232,15 @@ final class HomeViewModel: ObservableObject {
             isLoadingPositions = false
         }
 
+        var arrivalSucceeded = false
+
         do {
             let updatedArrivals = try await transitClient.arrivals(at: selectedStation)
             try Task.checkCancellation()
             guard self.selectedStation?.id == selectedStation.id else { return }
 
             arrivals = updatedArrivals
+            arrivalSucceeded = true
             lastSuccessfulArrivalRefreshAt = Date()
             if updatedArrivals.isEmpty {
                 arrivalMessage = "현재 제공되는 도착정보가 없습니다."
@@ -284,20 +304,24 @@ final class HomeViewModel: ObservableObject {
         } else {
             positionMessage = nil
         }
+
+        if arrivalSucceeded && failedLines.isEmpty {
+            consecutiveTransitFailures = 0
+        } else {
+            consecutiveTransitFailures = min(consecutiveTransitFailures + 1, 8)
+        }
     }
 
     func refreshAll(now: Date = Date()) async {
         await refreshArrivals(now: now)
-        await refreshLastTrains(now: now)
+        await refreshLastTrains(force: true, now: now)
     }
 
-    func refreshLastTrains(now: Date = Date()) async {
+    func refreshLastTrains(force: Bool = false, now: Date = Date()) async {
         guard let selectedStation else {
             lastTrainMessage = "먼저 가까운 역을 선택해 주세요."
             return
         }
-        guard !isLoadingLastTrains else { return }
-
         let supportedLines = selectedStation.lineNames.filter(Self.timetableLines.contains)
         guard !supportedLines.isEmpty else {
             lastTrains = []
@@ -307,11 +331,24 @@ final class HomeViewModel: ObservableObject {
             return
         }
 
+        let serviceDate = TransitServiceClock.serviceDate(containing: now)
+        let cacheKey = [
+            selectedStation.id,
+            lastTrainDaySelection.rawValue,
+            TransitServiceClock.isoDateString(from: serviceDate),
+        ].joined(separator: ":")
+        if !force,
+           cacheKey == lastTrainCacheKey,
+           let lastSuccessfulLastTrainRefreshAt,
+           now.timeIntervalSince(lastSuccessfulLastTrainRefreshAt) < Self.lastTrainCacheTTL {
+            return
+        }
+        guard !isLoadingLastTrains else { return }
+
         isLoadingLastTrains = true
         lastTrainMessage = nil
         defer { isLoadingLastTrains = false }
 
-        let serviceDate = TransitServiceClock.serviceDate(containing: now)
         let serviceDayInfo: LastTrainServiceDayInfo
         if let fixed = lastTrainDaySelection.fixedServiceDay {
             serviceDayInfo = LastTrainServiceDayInfo(
@@ -347,7 +384,8 @@ final class HomeViewModel: ObservableObject {
 
             lastTrains = updated
             lastTrainServiceDayInfo = serviceDayInfo
-            lastSuccessfulLastTrainRefreshAt = Date()
+            lastSuccessfulLastTrainRefreshAt = now
+            lastTrainCacheKey = cacheKey
             isUsingRetainedLastTrainData = false
             if updated.isEmpty {
                 lastTrainMessage = "선택한 영업일의 막차 예정 시간표가 없습니다."
@@ -363,12 +401,23 @@ final class HomeViewModel: ObservableObject {
 
     func runAutomaticArrivalRefresh() async {
         guard selectedStation != nil else { return }
+        resumeAutomaticRefreshSession(now: Date())
 
         while !Task.isCancelled {
+            if let deadline = automaticRefreshSessionDeadline, Date() >= deadline {
+                isAutomaticRefreshPaused = true
+                do {
+                    try await Task.sleep(nanoseconds: 5_000_000_000)
+                } catch {
+                    return
+                }
+                continue
+            }
+
             if let lastTransitRequest,
                lastTransitRequest.stationID == selectedStation?.id {
                 let elapsed = Date().timeIntervalSince(lastTransitRequest.startedAt)
-                let remainingDelay = max(0, refreshInterval - elapsed)
+                let remainingDelay = max(0, currentAutomaticRefreshInterval - elapsed)
                 if remainingDelay > 0 {
                     do {
                         try await Task.sleep(
@@ -394,6 +443,26 @@ final class HomeViewModel: ObservableObject {
 
     func hasStalePositionData(at date: Date) -> Bool {
         positions.contains { $0.isStale(comparedTo: date) }
+    }
+
+    nonisolated static func automaticRefreshInterval(
+        base: TimeInterval,
+        consecutiveFailures: Int
+    ) -> TimeInterval {
+        let exponent = min(max(consecutiveFailures, 0), 3)
+        return min(base * pow(2, Double(exponent)), maximumAutomaticRefreshInterval)
+    }
+
+    private var currentAutomaticRefreshInterval: TimeInterval {
+        Self.automaticRefreshInterval(
+            base: refreshInterval,
+            consecutiveFailures: consecutiveTransitFailures
+        )
+    }
+
+    private func resumeAutomaticRefreshSession(now: Date) {
+        automaticRefreshSessionDeadline = now.addingTimeInterval(refreshSessionDuration)
+        isAutomaticRefreshPaused = false
     }
 
     private func fetchPositions(for lineNames: [String]) async -> [PositionLineResult] {
@@ -472,6 +541,10 @@ final class HomeViewModel: ObservableObject {
         lastTrainServiceDayInfo = nil
         isUsingRetainedLastTrainData = false
         lastTransitRequest = nil
+        consecutiveTransitFailures = 0
+        automaticRefreshSessionDeadline = nil
+        isAutomaticRefreshPaused = false
+        lastTrainCacheKey = nil
     }
 
     private static let timetableLines: Set<String> = [

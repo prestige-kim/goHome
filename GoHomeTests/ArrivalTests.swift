@@ -206,6 +206,51 @@ final class DirectSeoulTransitAPIClientTests: XCTestCase {
         })
     }
 
+    func testLineTwoTimetableRequestsOnlyInnerAndOuterDirections() async throws {
+        let lock = NSLock()
+        var requestedDirections: [String] = []
+        URLProtocolStub.requestHandler = { request in
+            let url = try XCTUnwrap(request.url)
+            let components = try XCTUnwrap(URLComponents(url: url, resolvingAgainstBaseURL: false))
+            let direction = try XCTUnwrap(
+                components.queryItems?.first { $0.name == "direction" }?.value
+            )
+            lock.withLock { requestedDirections.append(direction) }
+            let body = #"{"response":{"header":{"resultCode":"00","resultMsg":"NORMAL_CODE"},"body":{"items":{"item":[]}}}}"#
+            return (
+                HTTPURLResponse(
+                    url: url,
+                    statusCode: 200,
+                    httpVersion: nil,
+                    headerFields: ["Content-Type": "application/json"]
+                )!,
+                Data(body.utf8)
+            )
+        }
+        let serviceDate = try XCTUnwrap(
+            TransitServiceClock.seoulCalendar.date(
+                from: DateComponents(year: 2026, month: 8, day: 20)
+            )
+        )
+        let lineTwoStation = Station(
+            id: "line-two",
+            name: "시청",
+            latitude: 37.566,
+            longitude: 126.978,
+            lineNames: ["2호선"],
+            seoulStationIDs: ["2호선": "1002000201"]
+        )
+
+        _ = try await makeClient().lastTrains(
+            at: lineTwoStation,
+            serviceDay: .weekday,
+            serviceDate: serviceDate
+        )
+
+        XCTAssertEqual(Set(lock.withLock { requestedDirections }), Set(["inner", "outer"]))
+        XCTAssertEqual(lock.withLock { requestedDirections.count }, 2)
+    }
+
     private var testStation: Station {
         Station(
             id: "test",
@@ -283,6 +328,21 @@ final class HomeViewModelArrivalTests: XCTestCase {
         XCTAssertTrue((30...45).contains(HomeViewModel.automaticRefreshInterval))
     }
 
+    func testAutomaticRefreshBackoffIsBounded() {
+        XCTAssertEqual(
+            HomeViewModel.automaticRefreshInterval(base: 40, consecutiveFailures: 0),
+            40
+        )
+        XCTAssertEqual(
+            HomeViewModel.automaticRefreshInterval(base: 40, consecutiveFailures: 3),
+            300
+        )
+        XCTAssertEqual(
+            HomeViewModel.automaticRefreshInterval(base: 40, consecutiveFailures: 20),
+            300
+        )
+    }
+
     func testAutomaticRefreshDoesNotDuplicateRecentRequest() async {
         let client = SequencedTransitClient(responses: [.success([]), .success([])])
         let viewModel = makeViewModel(client: client)
@@ -336,6 +396,27 @@ final class HomeViewModelArrivalTests: XCTestCase {
         let finalCount = await client.requestCount
         XCTAssertGreaterThan(countAfterCancellation, 0)
         XCTAssertEqual(finalCount, countAfterCancellation)
+    }
+
+    func testAutomaticRefreshPausesAfterForegroundSessionLimit() async throws {
+        let client = SequencedTransitClient(
+            responses: Array(repeating: .success([]), count: 10)
+        )
+        let viewModel = HomeViewModel(
+            stationRepository: StaticStationRepository(stations: [testStation]),
+            lineRouteRepository: StaticLineRouteRepository(networks: []),
+            transitClient: client,
+            automaticRefreshInterval: 0.01,
+            automaticRefreshSessionDuration: 0.03
+        )
+        viewModel.select(testStation)
+
+        let automaticRefresh = Task { await viewModel.runAutomaticArrivalRefresh() }
+        try await Task.sleep(nanoseconds: 80_000_000)
+
+        XCTAssertTrue(viewModel.isAutomaticRefreshPaused)
+        automaticRefresh.cancel()
+        await automaticRefresh.value
     }
 
     func testFailedRefreshKeepsLastSuccessfulDataAndMarksItStale() async {
@@ -456,11 +537,45 @@ final class HomeViewModelLastTrainTests: XCTestCase {
         viewModel.select(lastTrainTestStation)
 
         await viewModel.refreshLastTrains(now: serviceDate.addingTimeInterval(12 * 60 * 60))
-        await viewModel.refreshLastTrains(now: serviceDate.addingTimeInterval(13 * 60 * 60))
+        await viewModel.refreshLastTrains(
+            force: true,
+            now: serviceDate.addingTimeInterval(13 * 60 * 60)
+        )
 
         XCTAssertEqual(viewModel.lastTrains, [train])
         XCTAssertTrue(viewModel.isShowingLastSuccessfulLastTrainData)
         XCTAssertEqual(viewModel.lastTrainMessage, TransitAPIError.timetableUnavailable.localizedDescription)
+    }
+
+    func testTimetableIsReusedWithinCacheTTLUnlessForced() async throws {
+        let calendar = TransitServiceClock.seoulCalendar
+        let serviceDate = try XCTUnwrap(
+            calendar.date(from: DateComponents(year: 2026, month: 8, day: 20))
+        )
+        let train = makeLastTrain(serviceDate: serviceDate)
+        let client = LastTrainTransitClient(
+            serviceDayResult: .success(
+                LastTrainServiceDayInfo(
+                    date: serviceDate,
+                    type: .weekday,
+                    holidayName: nil,
+                    isHolidayVerified: true
+                )
+            ),
+            timetableResults: [.success([train]), .success([train])]
+        )
+        let viewModel = makeLastTrainViewModel(client: client)
+        viewModel.select(lastTrainTestStation)
+        let noon = serviceDate.addingTimeInterval(12 * 60 * 60)
+
+        await viewModel.refreshLastTrains(now: noon)
+        await viewModel.refreshLastTrains(now: noon.addingTimeInterval(60 * 60))
+        let cachedCount = await client.timetableRequestCount
+        XCTAssertEqual(cachedCount, 1)
+
+        await viewModel.refreshLastTrains(force: true, now: noon.addingTimeInterval(2 * 60 * 60))
+        let forcedCount = await client.timetableRequestCount
+        XCTAssertEqual(forcedCount, 2)
     }
 }
 
@@ -497,6 +612,7 @@ private actor SequencedTransitClient: TransitAPIClient {
 private actor LastTrainTransitClient: TransitAPIClient {
     let serviceDayResult: Result<LastTrainServiceDayInfo, TransitAPIError>
     var timetableResults: [Result<[LastTrain], TransitAPIError>]
+    private(set) var timetableRequestCount = 0
 
     init(
         serviceDayResult: Result<LastTrainServiceDayInfo, TransitAPIError>,
@@ -518,7 +634,8 @@ private actor LastTrainTransitClient: TransitAPIClient {
         serviceDay: LastTrainServiceDay,
         serviceDate: Date
     ) async throws -> [LastTrain] {
-        try timetableResults.removeFirst().get()
+        timetableRequestCount += 1
+        return try timetableResults.removeFirst().get()
     }
 }
 

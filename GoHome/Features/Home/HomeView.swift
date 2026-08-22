@@ -164,6 +164,15 @@ struct HomeView: View {
 
     @ViewBuilder
     private var statusMessages: some View {
+        if viewModel.isAutomaticRefreshPaused {
+            StatusBanner(
+                title: "자동 갱신을 쉬고 있습니다",
+                detail: "전면 실행 30분 후 호출량 보호를 위해 멈췄습니다. 새로고침하면 다시 시작합니다.",
+                systemImage: "pause.circle.fill",
+                color: .orange
+            )
+        }
+
         if viewModel.isShowingLastSuccessfulData ||
             viewModel.isShowingLastSuccessfulPositionData ||
             viewModel.isShowingLastSuccessfulLastTrainData {

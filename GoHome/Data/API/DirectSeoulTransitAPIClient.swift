@@ -215,7 +215,7 @@ struct DirectSeoulTransitAPIClient: TransitAPIClient {
 
         let requests = supportedLines.flatMap { lineName in
             let directions: [LastTrainDirection] = lineName == "2호선"
-                ? [.inner, .outer, .up, .down]
+                ? [.inner, .outer]
                 : [.up, .down]
             return directions.map { (lineName, $0) }
         }

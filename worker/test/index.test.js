@@ -3,10 +3,17 @@ import test from "node:test";
 
 import worker, { createHandler } from "../src/index.js";
 
+function allowingLimiter() {
+  return { limit: () => Promise.resolve({ success: true }) };
+}
+
 const environment = {
   SEOUL_API_KEY: "test-seoul-key",
   PUBLIC_DATA_API_KEY: "test-public-data-key",
   GOHOME_CLIENT_TOKEN: "test-client-token",
+  HEALTH_RATE_LIMITER: allowingLimiter(),
+  REALTIME_RATE_LIMITER: allowingLimiter(),
+  TIMETABLE_RATE_LIMITER: allowingLimiter(),
 };
 
 function authorizedRequest(path) {
@@ -18,7 +25,7 @@ function authorizedRequest(path) {
 test("health check does not require secrets", async () => {
   const response = await worker.fetch(
     new Request("https://proxy.example/health"),
-    {},
+    environment,
   );
 
   assert.equal(response.status, 200);
@@ -83,7 +90,10 @@ test("arrival endpoint reports missing worker secrets", async () => {
 
   const missingSeoulKey = await handler(
     authorizedRequest("/v1/arrivals?station=시청"),
-    { GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN },
+    {
+      GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN,
+      REALTIME_RATE_LIMITER: allowingLimiter(),
+    },
   );
   assert.equal(missingSeoulKey.status, 500);
   assert.deepEqual(await missingSeoulKey.json(), { error: "missing_seoul_api_key" });
@@ -100,6 +110,69 @@ test("authorization is checked before route-specific secrets", async () => {
 
   assert.equal(response.status, 401);
   assert.deepEqual(await response.json(), { error: "unauthorized" });
+});
+
+test("rate limiting fails closed after authentication", async () => {
+  let upstreamCalls = 0;
+  const handler = createHandler(() => {
+    upstreamCalls += 1;
+    throw new Error("upstream should not be called");
+  });
+  const deniedEnvironment = {
+    ...environment,
+    REALTIME_RATE_LIMITER: { limit: () => Promise.resolve({ success: false }) },
+  };
+
+  const response = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    deniedEnvironment,
+  );
+
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get("retry-after"), "60");
+  assert.deepEqual(await response.json(), { error: "rate_limited" });
+  assert.equal(upstreamCalls, 0);
+});
+
+test("missing rate-limit binding fails closed", async () => {
+  const handler = createHandler(() => {
+    throw new Error("upstream should not be called");
+  });
+  const response = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    {
+      SEOUL_API_KEY: environment.SEOUL_API_KEY,
+      GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN,
+      TIMETABLE_RATE_LIMITER: allowingLimiter(),
+    },
+  );
+
+  assert.equal(response.status, 500);
+  assert.deepEqual(await response.json(), { error: "missing_rate_limiter" });
+});
+
+test("local realtime limit blocks an immediate burst", async () => {
+  let upstreamCalls = 0;
+  const handler = createHandler(() => {
+    upstreamCalls += 1;
+    return Promise.resolve(new Response(JSON.stringify({ realtimeArrivalList: [] })));
+  });
+
+  for (let index = 0; index < 12; index += 1) {
+    const response = await handler(
+      authorizedRequest("/v1/arrivals?station=시청"),
+      environment,
+    );
+    assert.equal(response.status, 200);
+  }
+  const limited = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    environment,
+  );
+
+  assert.equal(limited.status, 429);
+  assert.deepEqual(await limited.json(), { error: "rate_limited" });
+  assert.equal(upstreamCalls, 1);
 });
 
 test("worker rejects unsupported methods and routes", async () => {
@@ -192,6 +265,39 @@ test("position endpoint proxies only the fixed Seoul API operation", async () =>
     requestedURL,
     "http://swopenapi.seoul.go.kr/api/subway/test-seoul-key/json/realtimePosition/0/100/2%ED%98%B8%EC%84%A0",
   );
+});
+
+test("realtime responses are cached and concurrent requests are coalesced", async () => {
+  let upstreamCalls = 0;
+  let resolveUpstream;
+  const upstreamPayload = {
+    errorMessage: { code: "INFO-000", message: "정상 처리되었습니다." },
+    realtimeArrivalList: [{ statnNm: "시청", subwayId: "1001" }],
+  };
+  const handler = createHandler(() => {
+    upstreamCalls += 1;
+    return new Promise((resolve) => {
+      resolveUpstream = () => resolve(
+        new Response(JSON.stringify(upstreamPayload), { status: 200 }),
+      );
+    });
+  });
+
+  const first = handler(authorizedRequest("/v1/arrivals?station=시청"), environment);
+  const second = handler(authorizedRequest("/v1/arrivals?station=시청"), environment);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  resolveUpstream();
+  const [firstResponse, secondResponse] = await Promise.all([first, second]);
+  const cachedResponse = await handler(
+    authorizedRequest("/v1/arrivals?station=시청"),
+    environment,
+  );
+
+  assert.equal(firstResponse.status, 200);
+  assert.equal(secondResponse.status, 200);
+  assert.equal(cachedResponse.status, 200);
+  assert.deepEqual(await cachedResponse.json(), upstreamPayload);
+  assert.equal(upstreamCalls, 1);
 });
 
 test("last-train endpoint validates every fixed timetable input", async () => {
@@ -335,6 +441,7 @@ test("service-day endpoint requires the public-data key and sanitizes failures",
     {
       SEOUL_API_KEY: environment.SEOUL_API_KEY,
       GOHOME_CLIENT_TOKEN: environment.GOHOME_CLIENT_TOKEN,
+      TIMETABLE_RATE_LIMITER: allowingLimiter(),
     },
   );
   assert.equal(missingKeyResponse.status, 500);

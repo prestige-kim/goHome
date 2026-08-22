@@ -29,6 +29,17 @@ iPhone -- HTTPS + 개인용 토큰 --> Cloudflare Worker -- HTTP + 서울시 키
 모든 보호 경로는 원본별 Secret 존재 여부보다 Bearer 인증을 먼저 검사한다. 오류 응답에는 원본
 URL, 서울시 키, 공공데이터포털 키를 포함하지 않는다.
 
+Worker는 Free 플랜의 Rate Limiting binding으로 `/health` 30회/분, 실시간 도착·위치 합계
+12회/분, 시간표·영업일 합계 16회/분을 허용한다. 분산 binding의 짧은 burst 반영 지연을 보완하기
+위해 각 Worker isolate에도 같은 한도의 즉시 카운터를 둔다. 인증 경로는 binding이 없거나 동작하지
+않으면 요청을 원본으로 보내지 않는 실패-폐쇄 방식이다. 같은 isolate의 동일 실시간 요청은 20초 동안
+재사용하고 동시에 들어온 요청은 하나로 합친다. 막차 원본 응답은 6시간 재사용한다. 이 캐시는
+정확한 전역 저장소가 아닌 요청량 완화 장치이며 새 유료 데이터베이스를 사용하지 않는다.
+
+`wrangler.jsonc`의 `observability.enabled`는 `false`다. 선택 역명이 URL query에 들어가므로
+Cloudflare Workers invocation logging을 명시적으로 끄고, 앱이나 Worker에서도 요청 URL·인증
+헤더·원본 응답 전문을 기록하지 않는다.
+
 도착정보 경로는 원본의 HTTP 429를 `upstream_rate_limited`/429로 전달하고, 원본 HTTP 오류·연결
 실패·JSON 형식 오류를 키나 원본 URL이 포함되지 않은 오류 코드로 정규화한다. 앱은 이 코드와
 HTTP 상태를 사용해 토큰 오류, 호출 한도, Worker 장애, 서울시 API 장애를 구분한다.
@@ -87,6 +98,14 @@ TRANSIT_PROXY_CLIENT_TOKEN = 위에서_생성한_GOHOME_CLIENT_TOKEN
 `TRANSIT_PROXY_CLIENT_TOKEN`은 개인 테스트의 무단 호출 방지용이며,
 정식 공개 앱의 완전한 사용자 인증 수단은 아니다.
 
+개인용 토큰을 회전할 때는 값을 화면에 출력하지 않는 아래 도구를 사용한다. 이 작업은 로컬 앱
+설정과 Worker 배포용 Secret 파일을 함께 바꾸므로, 재배포 후 iPhone 앱도 다시 빌드·설치해야 한다.
+
+```sh
+ruby scripts/prepare_worker_secrets.rb --rotate-client-token
+npx wrangler deploy --secrets-file worker/.env.production
+```
+
 ## 확인
 
 배포 주소의 상태를 확인한다.
@@ -134,7 +153,13 @@ ruby scripts/check_worker_api.rb 시청 2호선
 
 ```sh
 ruby scripts/check_service_day_api.rb
+ruby scripts/check_worker_rate_limit.rb
 ```
+
+2026-08-22 보안·호출량 보강 배포에서는 회전된 개인용 토큰으로 `/health`, 무인증 401,
+시청역 도착 12건, 2호선 위치 38건, 2호선 내·외선 시간표, 평일·광복절 판정을 다시 확인했다.
+별도 속도 제한 점검은 같은 HTTPS 연결의 인증된 실시간 요청 12건을 허용하고 13번째를 HTTP 429로
+차단했다. 동일 URL 응답은 20초 캐시되어 이 점검 중 원본 호출이 반복되지 않았다.
 
 모든 `/v1/*` 요청은 `Authorization: Bearer <GOHOME_CLIENT_TOKEN>` 헤더가 있어야 한다. 토큰이나
 서울시 키를 명령 기록, GitHub Issue, 커밋, 스크린샷에 남기지 않는다.
@@ -143,7 +168,8 @@ ruby scripts/check_service_day_api.rb
 
 Worker 코드의 자동 테스트는 실제 키나 네트워크를 사용하지 않는다. 상태 확인, 인증, 입력 검증,
 허용 메서드·경로, 위치·시간표 allowlist, 네 고정 원본 연산, 인증 우선순위, Secret 누락,
-공휴일 월 캐시, Encoding 키 단일 인코딩, 원본 연결 실패, HTTP 429, 잘못된 JSON 응답을 18개
+공휴일 월 캐시, 속도 제한 실패-폐쇄, 실시간 캐시·동시 요청 합치기, Encoding 키 단일 인코딩,
+원본 연결 실패, HTTP 429, 잘못된 JSON 응답을 22개
 테스트로 회귀 검증한다.
 
 ```sh

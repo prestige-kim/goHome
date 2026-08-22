@@ -40,8 +40,12 @@ existing_worker_secrets = if File.file?(WORKER_SECRETS_PATH)
                           end
 public_data_api_key = read_setting(existing_worker_secrets, "PUBLIC_DATA_API_KEY").to_s.strip
 
+rotate_client_token = ARGV.delete("--rotate-client-token")
+abort_with("알 수 없는 옵션이 있습니다.") if ARGV.any? { |argument| argument.start_with?("-") }
+abort_with("Worker 주소는 하나만 지정할 수 있습니다.") if ARGV.length > 1
+
 client_token = read_setting(xcconfig, "TRANSIT_PROXY_CLIENT_TOKEN").to_s.strip
-client_token = SecureRandom.hex(32) if client_token.empty?
+client_token = SecureRandom.hex(32) if client_token.empty? || rotate_client_token
 
 updated_xcconfig = upsert_setting(xcconfig, "TRANSIT_PROXY_CLIENT_TOKEN", client_token)
 proxy_base_url = ARGV.first.to_s.strip
@@ -69,7 +73,7 @@ File.chmod(0o600, WORKER_SECRETS_PATH)
 
 puts "Worker 배포용 Secret 준비 완료"
 puts "- 서울시 키: 설정됨 (값 비공개)"
-puts "- 개인용 토큰: 설정됨 (값 비공개)"
+puts "- 개인용 토큰: #{rotate_client_token ? '회전됨' : '설정됨'} (값 비공개)"
 puts "- 공공데이터 키: #{public_data_api_key.empty? ? '미설정' : '설정됨'} (값 비공개)"
 puts "- Worker 주소: 설정됨" unless proxy_base_url.empty?
 puts "- 배포 파일 권한: 0600"

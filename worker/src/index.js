@@ -5,6 +5,14 @@ const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store",
 };
+const REALTIME_CACHE_TTL_MS = 20_000;
+const TIMETABLE_CACHE_TTL_MS = 6 * 60 * 60 * 1_000;
+const MAX_RESPONSE_CACHE_ENTRIES = 256;
+const LOCAL_RATE_LIMITS = {
+  health: { limit: 30, periodMs: 60_000 },
+  realtime: { limit: 12, periodMs: 60_000 },
+  timetable: { limit: 16, periodMs: 60_000 },
+};
 const SUPPORTED_LINES = new Set([
   "1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선",
   "경의중앙선", "공항철도", "경춘선", "수인분당선", "신분당선", "경강선",
@@ -31,11 +39,24 @@ const TRANSIT_PATHS = new Set([
   "/v1/service-day",
 ]);
 
-export function createHandler(fetchUpstream = fetch, holidayCache = new Map()) {
+export function createHandler(
+  fetchUpstream = fetch,
+  holidayCache = new Map(),
+  responseCache = new Map(),
+  inFlightRequests = new Map(),
+  localRateLimitCounters = new Map(),
+) {
   return async function handleRequest(request, env) {
     const url = new URL(request.url);
 
     if (request.method === "GET" && url.pathname === "/health") {
+      const limited = await enforceRateLimit(
+        env?.HEALTH_RATE_LIMITER,
+        "health",
+        localRateLimitCounters,
+        LOCAL_RATE_LIMITS.health,
+      );
+      if (limited) return limited;
       return jsonResponse({ status: "ok" });
     }
 
@@ -58,6 +79,17 @@ export function createHandler(fetchUpstream = fetch, holidayCache = new Map()) {
       });
     }
 
+    const isRealtime = url.pathname === "/v1/arrivals" || url.pathname === "/v1/positions";
+    const rateLimiter = isRealtime ? env.REALTIME_RATE_LIMITER : env.TIMETABLE_RATE_LIMITER;
+    const rateLimitName = isRealtime ? "realtime" : "timetable";
+    const limited = await enforceRateLimit(
+      rateLimiter,
+      rateLimitName,
+      localRateLimitCounters,
+      LOCAL_RATE_LIMITS[rateLimitName],
+    );
+    if (limited) return limited;
+
     const configurationError = validateEnvironment(env, url.pathname);
     if (configurationError) {
       return jsonResponse({ error: configurationError }, 500);
@@ -72,18 +104,24 @@ export function createHandler(fetchUpstream = fetch, holidayCache = new Map()) {
     }
 
     let upstreamURL;
+    let cacheKey;
+    let cacheTTL;
     if (url.pathname === "/v1/arrivals") {
       const station = normalizeStation(url.searchParams.get("station"));
       if (!station) {
         return jsonResponse({ error: "invalid_station" }, 400);
       }
       upstreamURL = buildArrivalURL(env.SEOUL_API_KEY, station);
+      cacheKey = `arrivals:${station}`;
+      cacheTTL = REALTIME_CACHE_TTL_MS;
     } else if (url.pathname === "/v1/positions") {
       const line = normalizeLine(url.searchParams.get("line"));
       if (!line) {
         return jsonResponse({ error: "invalid_line" }, 400);
       }
       upstreamURL = buildPositionURL(env.SEOUL_API_KEY, line);
+      cacheKey = `positions:${line}`;
+      cacheTTL = REALTIME_CACHE_TTL_MS;
     } else {
       const station = normalizeStation(url.searchParams.get("station"));
       const line = normalizeTimetableLine(url.searchParams.get("line"));
@@ -101,13 +139,76 @@ export function createHandler(fetchUpstream = fetch, holidayCache = new Map()) {
         serviceDay,
         date,
       );
+      cacheKey = `last-trains:${station}:${line}:${direction}:${serviceDay}:${date}`;
+      cacheTTL = TIMETABLE_CACHE_TTL_MS;
     }
 
-    return proxyJSON(upstreamURL, fetchUpstream);
+    return proxyJSON(upstreamURL, fetchUpstream, {
+      cacheKey,
+      cacheTTL,
+      responseCache,
+      inFlightRequests,
+    });
   };
 }
 
-async function proxyJSON(upstreamURL, fetchUpstream) {
+async function enforceRateLimit(limiter, key, localCounters, policy) {
+  if (!limiter?.limit) {
+    return jsonResponse({ error: "missing_rate_limiter" }, 500);
+  }
+
+  const now = Date.now();
+  const counter = localCounters.get(key);
+  if (counter && counter.resetAt > now && counter.count >= policy.limit) {
+    return jsonResponse({ error: "rate_limited" }, 429, { "retry-after": "60" });
+  }
+
+  try {
+    const result = await limiter.limit({ key });
+    if (!result.success) {
+      return jsonResponse({ error: "rate_limited" }, 429, { "retry-after": "60" });
+    }
+    if (!counter || counter.resetAt <= now) {
+      localCounters.set(key, { count: 1, resetAt: now + policy.periodMs });
+    } else {
+      counter.count += 1;
+    }
+    return null;
+  } catch {
+    return jsonResponse({ error: "rate_limiter_unavailable" }, 503);
+  }
+}
+
+async function proxyJSON(upstreamURL, fetchUpstream, cacheOptions) {
+  const { cacheKey, cacheTTL, responseCache, inFlightRequests } = cacheOptions;
+  const now = Date.now();
+  const cached = responseCache.get(cacheKey);
+  if (cached && cached.expiresAt > now) {
+    return snapshotResponse(cached);
+  }
+  if (cached) responseCache.delete(cacheKey);
+
+  let pending = inFlightRequests.get(cacheKey);
+  if (!pending) {
+    pending = fetchJSONSnapshot(upstreamURL, fetchUpstream);
+    inFlightRequests.set(cacheKey, pending);
+  }
+
+  try {
+    const snapshot = await pending;
+    if (snapshot.status === 200) {
+      pruneResponseCache(responseCache, now);
+      responseCache.set(cacheKey, { ...snapshot, expiresAt: now + cacheTTL });
+    }
+    return snapshotResponse(snapshot);
+  } finally {
+    if (inFlightRequests.get(cacheKey) === pending) {
+      inFlightRequests.delete(cacheKey);
+    }
+  }
+}
+
+async function fetchJSONSnapshot(upstreamURL, fetchUpstream) {
   try {
     const upstreamResponse = await fetchUpstream(upstreamURL, {
       method: "GET",
@@ -116,21 +217,38 @@ async function proxyJSON(upstreamURL, fetchUpstream) {
     });
 
     if (upstreamResponse.status === 429) {
-      return jsonResponse({ error: "upstream_rate_limited" }, 429);
+      return jsonSnapshot({ error: "upstream_rate_limited" }, 429);
     }
     if (!upstreamResponse.ok) {
-      return jsonResponse({ error: "upstream_http_error" }, 502);
+      return jsonSnapshot({ error: "upstream_http_error" }, 502);
     }
 
     const body = await upstreamResponse.text();
     try {
       JSON.parse(body);
     } catch {
-      return jsonResponse({ error: "invalid_upstream_response" }, 502);
+      return jsonSnapshot({ error: "invalid_upstream_response" }, 502);
     }
-    return new Response(body, { status: 200, headers: JSON_HEADERS });
+    return { body, status: 200 };
   } catch {
-    return jsonResponse({ error: "upstream_unavailable" }, 502);
+    return jsonSnapshot({ error: "upstream_unavailable" }, 502);
+  }
+}
+
+function jsonSnapshot(payload, status) {
+  return { body: JSON.stringify(payload), status };
+}
+
+function snapshotResponse(snapshot) {
+  return new Response(snapshot.body, { status: snapshot.status, headers: JSON_HEADERS });
+}
+
+function pruneResponseCache(responseCache, now) {
+  for (const [key, value] of responseCache) {
+    if (value.expiresAt <= now) responseCache.delete(key);
+  }
+  while (responseCache.size >= MAX_RESPONSE_CACHE_ENTRIES) {
+    responseCache.delete(responseCache.keys().next().value);
   }
 }
 
