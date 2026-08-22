@@ -99,7 +99,7 @@
 				F10000000000000000000002 /* App */,
 				F10000000000000000000003 /* Core */,
 				F10000000000000000000007 /* Data */,
-				F1000000000000000000000A /* Domain */,
+				F1000000000000000000000A /* Domain/Models */,
 				F1000000000000000000000B /* Features */,
 				F10000000000000000000010 /* Resources */,
 			);
@@ -174,7 +174,7 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-		F1000000000000000000000A /* Domain */ = {
+		F1000000000000000000000A /* Domain/Models */ = {
 			isa = PBXGroup;
 			children = (
 				C10000000000000000000005 /* Station.swift */,
@@ -182,7 +182,7 @@
 				C10000000000000000000013 /* TrainPosition.swift */,
 				C10000000000000000000017 /* LastTrain.swift */,
 			);
-			path = "Domain/Models";
+			path = Domain/Models;
 			sourceTree = "<group>";
 		};
 		F1000000000000000000000B /* Features */ = {
@@ -501,7 +501,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6G8Q4WDXCA;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GoHome/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -527,7 +527,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6G8Q4WDXCA;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GoHome/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
