@@ -12,6 +12,7 @@ final class HomeViewModel: ObservableObject {
 
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
     @Published private(set) var accuracyAuthorization: CLAccuracyAuthorization
+    @Published private(set) var stations: [Station] = []
     @Published private(set) var nearbyStations: [NearbyStation] = []
     @Published var selectedStation: Station?
     @Published var stationSearchText = "" {
@@ -42,7 +43,6 @@ final class HomeViewModel: ObservableObject {
     private let transitClient: TransitAPIClient
     private let refreshInterval: TimeInterval
     private let refreshSessionDuration: TimeInterval
-    private var stations: [Station] = []
     private var lineRouteNetworks: [LineRouteNetwork] = []
     private var lineRouteLoadMessage: String?
     private var positionsByLine: [String: [TrainPosition]] = [:]
